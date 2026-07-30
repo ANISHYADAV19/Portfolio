@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 707" width="1000" height="707" style="background:#ffffff;">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&amp;family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&amp;family=Inter:wght@400;500;600;700&amp;display=swap');
+      .ibm-blue { fill: #054ada; }
+      .text-dark { fill: #1f2937; }
+      .text-muted { fill: #4b5563; }
+      .text-link { fill: #0284c7; }
+      .serif-title { font-family: 'Merriweather', Georgia, serif; }
+      .sans-body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    </style>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1000" height="707" fill="#f8fafc"/>
+  <rect x="25" y="25" width="950" height="657" fill="#ffffff" stroke="#1e293b" stroke-width="1.5"/>
+  <rect x="33" y="33" width="934" height="641" fill="none" stroke="#64748b" stroke-width="0.75"/>
+
+  <!-- Watermark Graphic in Background -->
+  <g opacity="0.08" transform="translate(150, 120)">
+    <!-- Node network background blur bubbles -->
+    <circle cx="350" cy="180" r="40" fill="#ef4444" opacity="0.5"/>
+    <circle cx="280" cy="220" r="35" fill="#f59e0b" opacity="0.5"/>
+    <circle cx="420" cy="230" r="30" fill="#10b981" opacity="0.5"/>
+    <!-- U-shaped ribbon arches -->
+    <path d="M 100,50 L 100,280 C 100,380 200,420 350,420 C 500,420 600,380 600,280 L 600,50 L 550,50 L 550,280 C 550,350 470,380 350,380 C 230,380 150,350 150,280 L 150,50 Z" fill="#0f172a"/>
+    <path d="M 180,50 L 180,260 C 180,330 250,360 350,360 C 450,360 520,330 520,260 L 520,50 L 480,50 L 480,260 C 480,310 430,330 350,330 C 270,330 220,310 220,260 L 220,50 Z" fill="#0f172a"/>
+  </g>
+
+  <!-- IBM Logo Top Left (8 stripes) -->
+  <g transform="translate(55, 50) scale(0.85)">
+    <!-- I -->
+    <path d="M0,0 H30 V6 H0 Z M0,9 H30 V15 H0 Z M0,18 H30 V24 H0 Z M0,27 H30 V33 H0 Z M0,36 H30 V42 H0 Z M0,45 H30 V51 H0 Z M0,54 H30 V60 H0 Z M0,63 H30 V69 H0 Z" class="ibm-blue"/>
+    <!-- B -->
+    <path d="M40,0 H90 V6 H40 Z M40,9 H95 V15 H40 Z M40,18 H70 V24 H40 Z M40,27 H92 V33 H40 Z M40,36 H92 V42 H40 Z M40,45 H70 V51 H40 Z M40,54 H95 V60 H40 Z M40,63 H90 V69 H40 Z" class="ibm-blue"/>
+    <!-- M -->
+    <path d="M105,0 H125 L135,25 L145,0 H165 V6 H150 L140,30 H130 L120,6 H105 Z M105,9 H118 L135,50 L152,9 H165 V15 H155 L139,55 H131 L115,15 H105 Z M105,18 H115 V24 H105 Z M155,18 H165 V24 H155 Z M105,27 H115 V33 H105 Z M155,27 H165 V33 H155 Z M105,36 H115 V42 H105 Z M155,36 H165 V42 H155 Z M105,45 H115 V51 H105 Z M155,45 H165 V51 H155 Z M105,54 H115 V60 H105 Z M155,54 H165 V60 H155 Z M105,63 H115 V69 H105 Z M155,63 H165 V69 H155 Z" class="ibm-blue"/>
+  </g>
+
+  <!-- QR Code Top Right -->
+  <g transform="translate(850, 42)">
+    <rect width="90" height="90" fill="#ffffff" stroke="#1e293b" stroke-width="1"/>
+    <!-- QR Position Detection Patterns -->
+    <rect x="8" y="8" width="24" height="24" fill="#0f172a"/>
+    <rect x="12" y="12" width="16" height="16" fill="#ffffff"/>
+    <rect x="16" y="16" width="8" height="8" fill="#0f172a"/>
+
+    <rect x="58" y="8" width="24" height="24" fill="#0f172a"/>
+    <rect x="62" y="12" width="16" height="16" fill="#ffffff"/>
+    <rect x="66" y="16" width="8" height="8" fill="#0f172a"/>
+
+    <rect x="8" y="58" width="24" height="24" fill="#0f172a"/>
+    <rect x="12" y="62" width="16" height="16" fill="#ffffff"/>
+    <rect x="16" y="66" width="8" height="8" fill="#0f172a"/>
+
+    <!-- Random QR Data Bits -->
+    <rect x="36" y="10" width="6" height="6" fill="#0f172a"/>
+    <rect x="44" y="10" width="6" height="6" fill="#0f172a"/>
+    <rect x="38" y="22" width="10" height="4" fill="#0f172a"/>
+    <rect x="10" y="38" width="18" height="4" fill="#0f172a"/>
+    <rect x="34" y="36" width="20" height="18" fill="#0f172a"/>
+    <rect x="60" y="38" width="18" height="6" fill="#0f172a"/>
+    <rect x="38" y="60" width="12" height="20" fill="#0f172a"/>
+    <rect x="56" y="58" width="22" height="8" fill="#0f172a"/>
+    <rect x="68" y="72" width="10" height="10" fill="#0f172a"/>
+  </g>
+
+  <!-- Certificate Body Text -->
+  <text x="500" y="160" text-anchor="middle" class="serif-title text-dark" font-size="20">This is to certify that</text>
+
+  <!-- Candidate Name -->
+  <text x="500" y="225" text-anchor="middle" class="serif-title text-dark" font-size="44" font-weight="700" letter-spacing="1">Anish</text>
+
+  <!-- Completion Text -->
+  <text x="500" y="275" text-anchor="middle" class="serif-title text-dark" font-size="18">successfully completed and received a passing grade in</text>
+
+  <!-- Course Title -->
+  <text x="500" y="335" text-anchor="middle" class="serif-title text-dark" font-size="34" font-weight="700">GEN AI Using IBM Watsonx</text>
+
+  <!-- Course Code -->
+  <text x="500" y="370" text-anchor="middle" class="sans-body text-muted" font-size="16">(CEWXAI1IN, provided by <tspan font-weight="700">IBMCE</tspan>)</text>
+
+  <!-- Provider Details -->
+  <text x="500" y="410" text-anchor="middle" class="serif-title text-dark" font-size="16">A course on <tspan font-weight="700">adroitprolearn.skillsnetwork.site</tspan></text>
+  <text x="500" y="435" text-anchor="middle" class="serif-title text-dark" font-size="16">Powered by <tspan font-weight="700">IBM Developer Skills Network.</tspan></text>
+
+  <!-- Issuer -->
+  <text x="500" y="475" text-anchor="middle" class="sans-body text-muted" font-size="15">Issued by</text>
+  <text x="500" y="498" text-anchor="middle" class="serif-title text-dark" font-size="20" font-weight="700">IBM Career Education Program</text>
+
+  <!-- Signature Area -->
+  <g transform="translate(500, 525)">
+    <!-- Signature Line Art -->
+    <path d="M-30,-5 C-10,-25 10,5 25,-15 C35,-25 -5,10 40,-5" fill="none" stroke="#034ea2" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="0" y="18" text-anchor="middle" class="sans-body text-dark" font-size="14" font-weight="600">Jagadisha Bhat</text>
+    <text x="0" y="35" text-anchor="middle" class="sans-body text-muted" font-size="12">Country Manager - Software Services</text>
+    <text x="0" y="50" text-anchor="middle" class="sans-body text-muted" font-size="12">IBM India Pvt Ltd</text>
+  </g>
+
+  <!-- Issue Date -->
+  <text x="500" y="618" text-anchor="middle" class="sans-body text-dark" font-size="16" font-weight="700">June 13, 2025</text>
+
+  <!-- Validation Footer -->
+  <text x="500" y="645" text-anchor="middle" class="sans-body text-muted" font-size="12">Authenticity of this certificate can be validated by going to:</text>
+  <text x="500" y="663" text-anchor="middle" class="sans-body text-link" font-size="12" font-weight="600">https://courses.adroitprolearn.skillsnetwork.site/certificates/28396b863c9e4525ad32bfb9508fdc69</text>
+
+</svg>
