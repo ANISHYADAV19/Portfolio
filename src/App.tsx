@@ -85,8 +85,12 @@ export default function App() {
             onClick={() => scrollToSection("hero")}
             className="flex items-center space-x-2.5 group cursor-pointer"
           >
-            <div className="w-8 h-8 rounded bg-cyber-blue flex items-center justify-center text-dark-bg font-mono font-bold text-sm tracking-wider shadow-lg shadow-cyber-blue/20">
-              A
+            <div className="w-8 h-8 rounded overflow-hidden flex items-center justify-center border border-white/10 shadow-lg shadow-cyber-blue/20 group-hover:border-cyber-blue/50 transition-all duration-300">
+              <img 
+                src="/logo.jpg" 
+                alt="AY" 
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="text-left font-mono">
               <span className="text-white font-semibold text-sm group-hover:text-cyber-blue transition">Anish Yadav</span>
