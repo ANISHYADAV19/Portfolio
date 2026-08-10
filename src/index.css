@@ -38,6 +38,33 @@ body {
   font-family: var(--font-sans);
 }
 
+/* Anchor navigation should not land content underneath the fixed 4rem navbar. */
+html {
+  scroll-padding-top: 5rem;
+}
+
+/* Respect the OS-level "reduce motion" preference: strip animation, keep layout. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Visible keyboard focus everywhere, without showing a ring on mouse clicks. */
+:focus-visible {
+  outline: 2px solid var(--color-cyber-blue);
+  outline-offset: 2px;
+}
+
 /* Custom scrollbars for a cleaner visual interface */
 ::-webkit-scrollbar {
   width: 6px;

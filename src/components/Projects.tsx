@@ -22,8 +22,7 @@ export default function Projects() {
       bullets: [
         "Developed AI-powered story generation application using Python/Flask with modern web frontend",
         "Integrated artificial intelligence algorithms for creative content generation with customizable parameters",
-        "Built responsive user interface for seamless story creation and management experience",
-        "Technologies Used: Python, Flask, Artificial Intelligence, HTML, CSS, JavaScript"
+        "Built responsive user interface for seamless story creation and management experience"
       ],
       technologies: ["Python", "Flask", "Artificial Intelligence", "HTML", "CSS", "JavaScript"],
       githubUrl: "https://github.com/ANISHYADAV19/AI-Story-Generator",
@@ -36,8 +35,7 @@ export default function Projects() {
       bullets: [
         "Implements a Convolutional Neural Network (CNN) for object recognition using the CIFAR-10 dataset",
         "Designed to classify images across ten distinct categories with high accuracy and parameter efficiency",
-        "Utilized deep learning methodologies including custom convolution kernels, max-pooling, and dropout grids",
-        "Technologies Used: Python, TensorFlow, CNN, OpenCV, Matplotlib, NumPy"
+        "Utilized deep learning methodologies including custom convolution kernels, max-pooling, and dropout grids"
       ],
       technologies: ["Python", "TensorFlow", "CNN", "OpenCV", "NumPy", "Matplotlib"],
       githubUrl: "https://github.com/ANISHYADAV19/Object-Recognition-in-Images",
@@ -50,8 +48,7 @@ export default function Projects() {
       bullets: [
         "Developed an automated computer vision pipeline using OpenCV and object detection (YOLO) to analyze vehicle movement",
         "Estimates vehicle count and density per lane in real-time to compute dynamic signal control logic and reduce congestion",
-        "Features visual bounding box tracking, lane queue analysis, and traffic flow monitoring across multi-lane camera feeds",
-        "Technologies Used: Python, OpenCV, YOLO, Computer Vision, Deep Learning, NumPy"
+        "Features visual bounding box tracking, lane queue analysis, and traffic flow monitoring across multi-lane camera feeds"
       ],
       technologies: ["Python", "OpenCV", "YOLO", "Computer Vision", "Deep Learning", "NumPy"],
       githubUrl: "https://github.com/ANISHYADAV19/Smart-Traffic-Density-Estimator",
@@ -64,7 +61,7 @@ export default function Projects() {
     : projects.filter(p => p.category === (activeTab === "ai" ? "AI" : "Computer Vision"));
 
   return (
-    <section id="projects" className="py-24 px-6 bg-dark-bg border-t border-white/10 relative">
+    <section id="projects" aria-labelledby="projects-heading" className="py-24 px-6 bg-dark-bg border-t border-white/10 relative">
       <div className="absolute top-1/4 right-10 w-80 h-80 bg-cyber-blue/5 rounded-full blur-3xl -z-10" />
 
       <div className="w-full max-w-6xl mx-auto">
@@ -72,7 +69,7 @@ export default function Projects() {
         {/* Header */}
         <div className="mb-12 text-center">
           <p className="text-xs font-mono text-cyber-blue tracking-wider uppercase mb-2">My Craft</p>
-          <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
+          <h2 id="projects-heading" className="text-3xl md:text-5xl font-light text-white tracking-tight">
             Featured <span className="font-serif italic text-cyber-blue">Projects</span>
           </h2>
           <p className="text-sm text-gray-400 mt-2 max-w-xl mx-auto">
@@ -87,6 +84,7 @@ export default function Projects() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
+              aria-pressed={activeTab === tab}
               className={`px-4 py-1.5 rounded-full text-xs font-mono border uppercase tracking-wider cursor-pointer transition-all duration-300 ${
                 activeTab === tab
                   ? "bg-cyber-blue/10 border-cyber-blue text-cyber-blue"
@@ -120,9 +118,10 @@ export default function Projects() {
                       referrerPolicy="no-referrer"
                       rel="noreferrer"
                       className="text-gray-500 hover:text-white transition"
-                      title="GitHub Repository"
+                      title={`${project.title} on GitHub`}
+                      aria-label={`${project.title} source code on GitHub`}
                     >
-                      <Github className="w-5 h-5" />
+                      <Github className="w-5 h-5" aria-hidden="true" />
                     </a>
                   </div>
 
@@ -137,8 +136,8 @@ export default function Projects() {
                   <ul className="space-y-2 mb-8">
                     {project.bullets.map((b, idx) => (
                       <li key={idx} className="text-xs text-gray-400 flex items-start space-x-2">
-                        <span className="text-cyber-blue mt-1">▪</span>
-                        <span>{b.split("Used:")[0]}</span>
+                        <span className="text-cyber-blue mt-1" aria-hidden="true">▪</span>
+                        <span>{b}</span>
                       </li>
                     ))}
                   </ul>

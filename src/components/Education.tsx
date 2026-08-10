@@ -27,7 +27,7 @@ export default function Education() {
   ];
 
   return (
-    <section id="education" className="py-24 px-6 bg-dark-bg border-t border-white/10 relative">
+    <section id="education" aria-labelledby="education-heading" className="py-24 px-6 bg-dark-bg border-t border-white/10 relative">
       <div className="absolute top-1/3 left-1/3 w-80 h-80 bg-cyber-blue/5 rounded-full blur-3xl -z-10" />
 
       <div className="w-full max-w-6xl mx-auto">
@@ -35,7 +35,7 @@ export default function Education() {
         {/* Section Header */}
         <div className="mb-16 text-center">
           <p className="text-xs font-mono text-cyber-blue tracking-wider uppercase mb-2">My Foundation</p>
-          <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
+          <h2 id="education-heading" className="text-3xl md:text-5xl font-light text-white tracking-tight">
             Education <span className="font-serif italic text-cyber-blue">Timeline</span>
           </h2>
           <div className="h-0.5 w-16 bg-cyber-blue mt-4 mx-auto" />

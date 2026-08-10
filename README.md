@@ -1,6 +1,6 @@
-# Anish - AI & ML Portfolio
+# Anish Yadav — AI & ML Portfolio
 
-An interactive personal portfolio showcasing projects, certifications, and technical expertise in Artificial Intelligence and Machine Learning.
+An interactive personal portfolio showcasing projects, certifications, and technical expertise in Artificial Intelligence and Machine Learning. Built with React, TypeScript, and Vite.
 
 ## Run Locally
 
@@ -11,18 +11,17 @@ An interactive personal portfolio showcasing projects, certifications, and techn
    npm install
    ```
 
-2. **Configure environment variables:**
-   Create a `.env.local` file in the root directory and add your API keys:
-   ```env
-   GEMINI_API_KEY="your-gemini-api-key"
-   ```
-
-3. **Run the development server:**
+2. **Run the development server:**
    ```bash
    npm run dev
    ```
 
-4. **Build for production:**
+3. **Build for production:**
    ```bash
    npm run build
+   ```
+
+4. **Preview the production build:**
+   ```bash
+   npm run preview
    ```

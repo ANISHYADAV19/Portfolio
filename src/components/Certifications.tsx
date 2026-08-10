@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { Sparkles, Cpu, Calendar, Award, Cloud, Wifi, Brain, Eye, ExternalLink, X } from "lucide-react";
@@ -15,10 +15,15 @@ interface CertificateItem {
 
 export default function Certifications() {
   const [selectedCertImage, setSelectedCertImage] = useState<{ title: string; url: string } | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (selectedCertImage) {
+      const previouslyFocused = document.activeElement as HTMLElement | null;
       document.body.style.overflow = "hidden";
+      // Move focus into the dialog so keyboard users are not left behind it.
+      closeButtonRef.current?.focus();
+
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === "Escape") {
           setSelectedCertImage(null);
@@ -28,6 +33,7 @@ export default function Certifications() {
       return () => {
         document.body.style.overflow = "";
         window.removeEventListener("keydown", handleKeyDown);
+        previouslyFocused?.focus();
       };
     }
   }, [selectedCertImage]);
@@ -95,7 +101,7 @@ export default function Certifications() {
   ];
 
   return (
-    <section id="certifications" className="py-24 px-6 bg-dark-bg border-t border-white/10 relative">
+    <section id="certifications" aria-labelledby="certifications-heading" className="py-24 px-6 bg-dark-bg border-t border-white/10 relative">
       <div className="absolute bottom-10 left-10 w-96 h-96 bg-cyber-blue/5 rounded-full blur-3xl -z-10" />
 
       <div className="w-full max-w-6xl mx-auto">
@@ -103,7 +109,7 @@ export default function Certifications() {
         {/* Section Header */}
         <div className="mb-16 text-center">
           <p className="text-xs font-mono text-cyber-blue tracking-wider uppercase mb-2">Credentials & Certifications</p>
-          <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
+          <h2 id="certifications-heading" className="text-3xl md:text-5xl font-light text-white tracking-tight">
             Professional <span className="font-serif italic text-cyber-blue">Certifications</span>
           </h2>
           <div className="h-0.5 w-16 bg-cyber-blue mt-4 mx-auto" />
@@ -119,7 +125,7 @@ export default function Certifications() {
               <div>
                 <div className="flex items-start justify-between gap-4 mb-6 pb-4 border-b border-white/10">
                   <div className="flex items-start space-x-3.5">
-                    <div className="p-2.5 rounded bg-dark-bg border border-white/10 text-gray-400 group-hover:text-cyber-blue transition duration-300">
+                    <div className="p-2.5 rounded bg-dark-bg border border-white/10 text-gray-400 group-hover:text-cyber-blue transition duration-300" aria-hidden="true">
                       {cert.id.startsWith("ibm") ? (
                         <Sparkles className="w-5 h-5 text-cyber-blue" />
                       ) : cert.id.includes("ml") ? (
@@ -143,7 +149,7 @@ export default function Certifications() {
                   </div>
 
                   <div className="flex items-center space-x-1.5 px-2.5 py-1 rounded bg-dark-bg border border-white/10 text-xs font-mono text-gray-400 shrink-0">
-                    <Calendar className="w-3.5 h-3.5 text-cyber-blue" />
+                    <Calendar className="w-3.5 h-3.5 text-cyber-blue" aria-hidden="true" />
                     <span>{cert.year}</span>
                   </div>
                 </div>
@@ -191,6 +197,9 @@ export default function Certifications() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
+              role="dialog"
+              aria-modal="true"
+              aria-label={`${selectedCertImage.title} certificate`}
               className="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-xl flex flex-col justify-between p-3 sm:p-6 w-screen h-screen overflow-y-auto"
               onClick={() => setSelectedCertImage(null)}
             >
@@ -201,7 +210,7 @@ export default function Certifications() {
               >
                 <div className="flex items-center space-x-3 overflow-hidden">
                   <div className="p-2 rounded-lg bg-cyber-blue/10 border border-cyber-blue/30 text-cyber-blue shrink-0">
-                    <Award className="w-5 h-5" />
+                    <Award className="w-5 h-5" aria-hidden="true" />
                   </div>
                   <div className="truncate">
                     <h3 className="text-sm sm:text-base md:text-lg font-display font-medium text-white truncate">
@@ -221,16 +230,19 @@ export default function Certifications() {
                     className="flex items-center space-x-1.5 px-3.5 py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-gray-300 hover:text-white transition"
                     title="Open high-resolution original in new tab"
                   >
-                    <ExternalLink className="w-4 h-4 text-cyber-blue" />
+                    <ExternalLink className="w-4 h-4 text-cyber-blue" aria-hidden="true" />
                     <span className="hidden sm:inline">Open Original</span>
+                    <span className="sr-only">Open original certificate (opens in a new tab)</span>
                   </a>
 
                   <button
+                    ref={closeButtonRef}
                     onClick={() => setSelectedCertImage(null)}
                     className="p-2 rounded-lg bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 hover:text-red-300 transition cursor-pointer flex items-center justify-center"
+                    aria-label="Close certificate viewer"
                     title="Close (ESC)"
                   >
-                    <X className="w-5 h-5" />
+                    <X className="w-5 h-5" aria-hidden="true" />
                   </button>
                 </div>
               </div>

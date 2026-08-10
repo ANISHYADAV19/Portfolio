@@ -110,7 +110,7 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-24 px-6 bg-dark-bg border-t border-white/10 relative">
+    <section id="skills" aria-labelledby="skills-heading" className="py-24 px-6 bg-dark-bg border-t border-white/10 relative">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyber-blue/5 rounded-full blur-3xl -z-10" />
 
       <div className="w-full max-w-6xl mx-auto">
@@ -118,7 +118,7 @@ export default function Skills() {
         {/* Section Header */}
         <div className="mb-16 text-center lg:text-left">
           <p className="text-xs font-mono text-cyber-blue tracking-wider uppercase mb-2">Technical Capabilities</p>
-          <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">
+          <h2 id="skills-heading" className="text-3xl md:text-5xl font-light text-white tracking-tight">
             Skills & <span className="font-serif italic text-cyber-blue">Specializations</span>
           </h2>
           <div className="h-0.5 w-16 bg-cyber-blue mt-4 mx-auto lg:mx-0" />
@@ -135,7 +135,7 @@ export default function Skills() {
                 className="bg-dark-card border border-white/10 p-6 rounded-xl hover:border-white/20 transition duration-300 flex flex-col space-y-4"
               >
                 <div className="flex items-center space-x-2 pb-2 border-b border-white/10">
-                  {category.icon}
+                  <span aria-hidden="true">{category.icon}</span>
                   <h3 className="text-sm font-display font-medium text-white">{category.title}</h3>
                 </div>
 
@@ -146,25 +146,27 @@ export default function Skills() {
                       <button
                         key={skIdx}
                         onClick={() => setActiveSkill(skill)}
+                        aria-pressed={isActive}
+                        aria-label={`${skill.name}, ${skill.level} percent — show details`}
                         className={`w-full text-left p-2.5 rounded-lg border transition duration-200 cursor-pointer flex flex-col space-y-1.5 ${
-                          isActive 
-                            ? "bg-cyber-blue/10 border-cyber-blue" 
+                          isActive
+                            ? "bg-cyber-blue/10 border-cyber-blue"
                             : "bg-dark-bg/40 border-transparent hover:bg-white/5 hover:border-white/10"
                         }`}
                       >
-                        <div className="flex justify-between items-center text-xs">
+                        <div className="flex justify-between items-center text-xs" aria-hidden="true">
                           <span className={`font-mono font-medium ${isActive ? "text-cyber-blue" : "text-gray-300"}`}>
                             {skill.name}
                           </span>
                           <span className="text-[10px] text-gray-500 font-mono">{skill.level}%</span>
                         </div>
-                        
+
                         {/* Custom visual progress bar */}
-                        <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
-                          <div 
+                        <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden" aria-hidden="true">
+                          <div
                             className={`h-full rounded-full transition-all duration-500 ${
                               isActive ? "bg-cyber-blue" : "bg-white/20"
-                            }`} 
+                            }`}
                             style={{ width: `${skill.level}%` }}
                           />
                         </div>

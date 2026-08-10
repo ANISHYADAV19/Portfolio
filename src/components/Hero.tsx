@@ -73,9 +73,12 @@ export default function Hero({ onScrollToContact, onScrollToProjects, onOpenResu
             initial="hidden"
             animate="visible"
           >
-            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light tracking-tight text-white leading-none select-none flex flex-wrap gap-x-4 sm:gap-x-6">
+            <h1
+              aria-label="Anish Yadav"
+              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light tracking-tight text-white leading-none select-none flex flex-wrap gap-x-4 sm:gap-x-6"
+            >
               {/* First Name: Anish */}
-              <span className="inline-flex space-x-0.5 sm:space-x-1">
+              <span className="inline-flex space-x-0.5 sm:space-x-1" aria-hidden="true">
                 {firstName.map((char, index) => (
                   <motion.span
                     key={`first-${index}`}
@@ -95,7 +98,7 @@ export default function Hero({ onScrollToContact, onScrollToProjects, onOpenResu
               </span>
 
               {/* Last Name: Yadav */}
-              <span className="inline-flex space-x-0.5 sm:space-x-1 font-serif italic text-cyber-blue font-medium drop-shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+              <span className="inline-flex space-x-0.5 sm:space-x-1 font-serif italic text-cyber-blue font-medium drop-shadow-[0_0_20px_rgba(59,130,246,0.3)]" aria-hidden="true">
                 {lastName.map((char, index) => (
                   <motion.span
                     key={`last-${index}`}
@@ -195,27 +198,29 @@ export default function Hero({ onScrollToContact, onScrollToProjects, onOpenResu
 
             {/* Socials */}
             <div className="flex space-x-3 sm:ml-2">
-              <a 
+              <a
                 id="social-github-btn"
-                href="https://github.com/ANISHYADAV19" 
-                target="_blank" 
-                referrerPolicy="no-referrer" 
+                href="https://github.com/ANISHYADAV19"
+                target="_blank"
+                referrerPolicy="no-referrer"
                 rel="noreferrer"
                 className="p-3 bg-dark-card border border-white/10 hover:border-cyber-blue hover:text-cyber-blue rounded-lg transition duration-300 text-gray-400"
+                aria-label="GitHub profile (opens in a new tab)"
                 title="GitHub Profile"
               >
-                <Github className="w-5 h-5" />
+                <Github className="w-5 h-5" aria-hidden="true" />
               </a>
-              <a 
+              <a
                 id="social-linkedin-btn"
-                href="https://linkedin.com/in/anish-yadav-528941333" 
-                target="_blank" 
-                referrerPolicy="no-referrer" 
+                href="https://linkedin.com/in/anish-yadav-528941333"
+                target="_blank"
+                referrerPolicy="no-referrer"
                 rel="noreferrer"
                 className="p-3 bg-dark-card border border-white/10 hover:border-cyber-blue hover:text-cyber-blue rounded-lg transition duration-300 text-gray-400"
+                aria-label="LinkedIn profile (opens in a new tab)"
                 title="LinkedIn Profile"
               >
-                <Linkedin className="w-5 h-5" />
+                <Linkedin className="w-5 h-5" aria-hidden="true" />
               </a>
             </div>
           </motion.div>
