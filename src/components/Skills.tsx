@@ -1,5 +1,4 @@
 import { useState, ReactNode } from "react";
-import { motion } from "motion/react";
 import { Code, Server, Database, Sparkles, HelpCircle, CheckCircle2, MousePointerClick } from "lucide-react";
 
 interface SkillItem {

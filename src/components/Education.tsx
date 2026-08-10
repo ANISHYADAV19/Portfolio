@@ -1,4 +1,4 @@
-import { GraduationCap, Award, BookOpen, Calendar, CircleDot } from "lucide-react";
+import { Calendar, CircleDot } from "lucide-react";
 
 interface EducationItem {
   institution: string;
