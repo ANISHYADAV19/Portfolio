@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Send, CheckCircle2, ShieldAlert, Cpu, Mail } from "lucide-react";
 
@@ -12,6 +12,14 @@ export default function Contact() {
   const [sendStatus, setSendStatus] = useState<
     "idle" | "success" | "error" | "network_error" | "mail_client_opened"
   >("idle");
+
+  // The success banner is confirmation, not a permanent state — clear it so the form
+  // returns to a neutral, ready-to-send look.
+  useEffect(() => {
+    if (sendStatus !== "success") return;
+    const timer = setTimeout(() => setSendStatus("idle"), 4000);
+    return () => clearTimeout(timer);
+  }, [sendStatus]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
