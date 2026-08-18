@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Github } from "lucide-react";
 
 interface ProjectItem {
@@ -8,12 +7,9 @@ interface ProjectItem {
   bullets: string[];
   technologies: string[];
   githubUrl: string;
-  category: "AI" | "Computer Vision";
 }
 
 export default function Projects() {
-  const [activeTab, setActiveTab] = useState<string>("all");
-
   const projects: ProjectItem[] = [
     {
       id: "nutriscan",
@@ -25,8 +21,7 @@ export default function Projects() {
         "Designed a focused scanning viewport with live sizing controls and dual-engine fallback (pyzbar and OpenCV) for high accuracy"
       ],
       technologies: ["Python", "OpenCV", "Pyzbar", "APIs", "Multithreading"],
-      githubUrl: "https://github.com/ANISHYADAV19/NutriScan",
-      category: "Computer Vision"
+      githubUrl: "https://github.com/ANISHYADAV19/NutriScan"
     },
     {
       id: "story-gen",
@@ -38,8 +33,7 @@ export default function Projects() {
         "Built responsive user interface for seamless story creation and management experience"
       ],
       technologies: ["Python", "Flask", "Artificial Intelligence", "HTML", "CSS", "JavaScript"],
-      githubUrl: "https://github.com/ANISHYADAV19/AI-Story-Generator",
-      category: "AI"
+      githubUrl: "https://github.com/ANISHYADAV19/AI-Story-Generator"
     },
     {
       id: "object-rec",
@@ -51,8 +45,7 @@ export default function Projects() {
         "Utilized deep learning methodologies including custom convolution kernels, max-pooling, and dropout grids"
       ],
       technologies: ["Python", "TensorFlow", "CNN", "OpenCV", "NumPy", "Matplotlib"],
-      githubUrl: "https://github.com/ANISHYADAV19/Object-Recognition-in-Images",
-      category: "Computer Vision"
+      githubUrl: "https://github.com/ANISHYADAV19/Object-Recognition-in-Images"
     },
     {
       id: "traffic-density",
@@ -64,14 +57,9 @@ export default function Projects() {
         "Features visual bounding box tracking, lane queue analysis, and traffic flow monitoring across multi-lane camera feeds"
       ],
       technologies: ["Python", "OpenCV", "YOLO", "Computer Vision", "Deep Learning", "NumPy"],
-      githubUrl: "https://github.com/ANISHYADAV19/Smart-Traffic-Density-Estimator",
-      category: "Computer Vision"
+      githubUrl: "https://github.com/ANISHYADAV19/Smart-Traffic-Density-Estimator"
     }
   ];
-
-  const filteredProjects = activeTab === "all" 
-    ? projects 
-    : projects.filter(p => p.category === (activeTab === "ai" ? "AI" : "Computer Vision"));
 
   return (
     <section id="projects" aria-labelledby="projects-heading" className="py-24 px-6 bg-dark-bg border-t border-white/10 relative">
@@ -91,27 +79,9 @@ export default function Projects() {
           <div className="h-0.5 w-16 bg-cyber-blue mt-4 mx-auto" />
         </div>
 
-        {/* Categories Tab */}
-        <div className="flex justify-center space-x-2 mb-12">
-          {["all", "ai", "computer vision"].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              aria-pressed={activeTab === tab}
-              className={`px-4 py-1.5 rounded-full text-xs font-mono border uppercase tracking-wider cursor-pointer transition-all duration-300 ${
-                activeTab === tab
-                  ? "bg-cyber-blue/10 border-cyber-blue text-cyber-blue"
-                  : "bg-transparent border-white/10 text-gray-400 hover:text-white hover:border-white/20"
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
-
         {/* Project Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {filteredProjects.map((project) => (
+          {projects.map((project) => (
             <div 
               key={project.id}
               className="bg-dark-card border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-all duration-300 flex flex-col h-full group"
@@ -121,10 +91,7 @@ export default function Projects() {
               
               <div className="p-8 flex flex-col flex-grow justify-between">
                 <div>
-                  <div className="flex justify-between items-start mb-4">
-                    <span className="px-2.5 py-1 rounded bg-dark-bg border border-white/10 text-[10px] font-mono text-gray-400 uppercase">
-                      {project.category}
-                    </span>
+                  <div className="flex justify-end items-center mb-4">
                     <a 
                       href={project.githubUrl} 
                       target="_blank" 
