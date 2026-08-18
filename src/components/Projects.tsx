@@ -16,6 +16,19 @@ export default function Projects() {
 
   const projects: ProjectItem[] = [
     {
+      id: "nutriscan",
+      title: "NutriScan",
+      description: "A real-time, multi-threaded webcam barcode and QR code reader featuring a non-blocking asynchronous architecture and a 2-stage cascading database lookup.",
+      bullets: [
+        "Engineered a multi-threaded Python application with a non-blocking background queue to maintain 30+ FPS during network lookups",
+        "Implemented a 2-stage cascading API lookup using Open Food Facts and Open Pet Food Facts to resolve food and pet items",
+        "Designed a focused scanning viewport with live sizing controls and dual-engine fallback (pyzbar and OpenCV) for high accuracy"
+      ],
+      technologies: ["Python", "OpenCV", "Pyzbar", "APIs", "Multithreading"],
+      githubUrl: "https://github.com/ANISHYADAV19/NutriScan",
+      category: "Computer Vision"
+    },
+    {
       id: "story-gen",
       title: "AI Story Generator",
       description: "A creative AI-powered application that leverages deep generation pipelines to compose customizable stories with adjustable parameters and an elegant responsive user interface.",
