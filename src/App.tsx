@@ -329,7 +329,7 @@ export default function App() {
             <a href="https://github.com/ANISHYADAV19" target="_blank" referrerPolicy="no-referrer" rel="noreferrer" className="hover:text-cyber-blue transition">
               GitHub<span className="sr-only"> (opens in a new tab)</span>
             </a>
-            <a href="https://linkedin.com/in/anish-yadav-528941333" target="_blank" referrerPolicy="no-referrer" rel="noreferrer" className="hover:text-cyber-blue transition">
+            <a href="https://www.linkedin.com/in/anish-yadav-dev/" target="_blank" referrerPolicy="no-referrer" rel="noreferrer" className="hover:text-cyber-blue transition">
               LinkedIn<span className="sr-only"> (opens in a new tab)</span>
             </a>
           </div>

@@ -212,7 +212,7 @@ export default function Hero({ onScrollToContact, onScrollToProjects, onOpenResu
               </a>
               <a
                 id="social-linkedin-btn"
-                href="https://linkedin.com/in/anish-yadav-528941333"
+                href="https://www.linkedin.com/in/anish-yadav-dev/"
                 target="_blank"
                 referrerPolicy="no-referrer"
                 rel="noreferrer"
