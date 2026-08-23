@@ -12,6 +12,19 @@ interface ProjectItem {
 export default function Projects() {
   const projects: ProjectItem[] = [
     {
+      id: "say-pay",
+      title: "Say & Pay",
+      description: "A voice-driven shopping list manager and assistant that uses a hybrid intent parser combining a fast offline rule engine and a serverless Google Gemini LLM proxy.",
+      bullets: [
+        "Implemented hands-free voice control utilizing the Web Speech API with live transcript overlays and a typed fallback system",
+        "Developed a hybrid parsing engine combining an offline rule-based parser with a serverless Gemini API proxy for multilingual and free-form NLP",
+        "Created an auto-categorized inventory model featuring semantic voice search, smart product suggestions, and local state management",
+        "Designed the system to be secure by design with server-side LLM key hosting and client-side command contract validation"
+      ],
+      technologies: ["React", "Gemini API", "Web Speech API", "Natural Language Processing", "Local Storage"],
+      githubUrl: "https://github.com/ANISHYADAV19/Say-Pay"
+    },
+    {
       id: "nutriscan",
       title: "NutriScan",
       description: "A real-time, multi-threaded webcam barcode and QR code reader featuring a non-blocking asynchronous architecture and a 2-stage cascading database lookup.",
