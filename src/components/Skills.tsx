@@ -157,7 +157,7 @@ export default function Skills() {
                           <span className={`font-mono font-medium ${isActive ? "text-cyber-blue" : "text-gray-300"}`}>
                             {skill.name}
                           </span>
-                          <span className="text-[10px] text-gray-500 font-mono">{skill.level}%</span>
+                          <span className="text-xs text-gray-500 font-mono">{skill.level}%</span>
                         </div>
 
                         {/* Custom visual progress bar */}
@@ -204,7 +204,7 @@ export default function Skills() {
                       Select any skill item from the categories on the left to inspect detailed expertise metrics and project context.
                     </p>
                   </div>
-                  <div className="text-[10px] font-mono text-gray-500 border-t border-white/10 pt-4 w-full flex justify-between">
+                  <div className="text-xs font-mono text-gray-500 border-t border-white/10 pt-4 w-full flex justify-between">
                     <span>SYSTEM: SKILL_MATRIX</span>
                     <span>STATUS: AWAITING_SELECTION</span>
                   </div>
@@ -229,7 +229,7 @@ export default function Skills() {
                     </p>
                   </div>
 
-                  <div className="text-[10px] font-mono text-gray-500 border-t border-white/10 pt-4 flex justify-between">
+                  <div className="text-xs font-mono text-gray-500 border-t border-white/10 pt-4 flex justify-between">
                     <span>SYSTEM: SKILL_MATRIX</span>
                     <span>STATUS: OPTIMIZED</span>
                   </div>

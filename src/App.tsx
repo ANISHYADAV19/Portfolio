@@ -208,7 +208,7 @@ export default function App() {
           </div>
 
           {/* Top Resume CTA */}
-          <div className="hidden md:flex items-center text-[11px] font-mono text-gray-500">
+          <div className="hidden md:flex items-center text-xs font-mono text-gray-500">
             <Button
               onClick={handleOpenResume}
               variant="primary"
@@ -323,7 +323,7 @@ export default function App() {
             <p className="text-xs text-gray-400">
               &copy; {new Date().getFullYear()} &mdash; Developed by <span className="text-white font-bold">Anish</span>
             </p>
-            <p className="text-[10px] text-gray-500 mt-1">
+            <p className="text-xs text-gray-500 mt-1">
               B.Tech in Computer Science (Artificial Intelligence & Machine Learning)
             </p>
           </div>

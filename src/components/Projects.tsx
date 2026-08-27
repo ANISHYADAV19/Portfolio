@@ -140,7 +140,7 @@ export default function Projects() {
                   {/* Tech stack badges */}
                   <div className="flex flex-wrap gap-1.5">
                     {project.technologies.map((t, idx) => (
-                      <span key={idx} className="px-2 py-0.5 rounded bg-dark-bg border border-white/10 text-[10px] font-mono text-gray-400">
+                      <span key={idx} className="px-2 py-0.5 rounded bg-dark-bg border border-white/10 text-xs font-mono text-gray-400">
                         {t}
                       </span>
                     ))}

@@ -181,7 +181,7 @@ export default function Certifications() {
                     <span>View Certificate</span>
                   </Button>
                 ) : (
-                  <span className="text-[10px] text-gray-600 uppercase tracking-widest">{cert.issuer}</span>
+                  <span className="text-xs text-gray-600 uppercase tracking-widest">{cert.issuer}</span>
                 )}
               </div>
             </div>
@@ -218,7 +218,7 @@ export default function Certifications() {
                     <h3 className="text-sm sm:text-base md:text-lg font-display font-medium text-white truncate">
                       {selectedCertImage.title}
                     </h3>
-                    <p className="text-[11px] font-mono text-cyber-blue/80 hidden sm:block">
+                    <p className="text-xs font-mono text-cyber-blue/80 hidden sm:block">
                       Verified Credential Document • Click anywhere outside or press ESC to close
                     </p>
                   </div>
