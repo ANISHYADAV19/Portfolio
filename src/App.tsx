@@ -489,40 +489,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Right Column: Carousel navigation arrows */}
-            <div className="flex items-center gap-3 mt-4 md:mt-0 justify-start md:justify-end shrink-0">
-              <Button
-                variant="ghost"
-                className="w-12 h-12 rounded-full p-0 flex items-center justify-center animate-blur-fade-up"
-                style={{ animationDelay: "800ms" }}
-                onClick={() => {
-                  const sections = ["hero", "skills", "projects", "certifications", "education", "contact"];
-                  const currentIndex = sections.indexOf(activeSection);
-                  if (currentIndex > 0) {
-                    scrollToSection(sections[currentIndex - 1]);
-                  }
-                }}
-                aria-label="Previous section"
-              >
-                <ChevronLeft size={20} className="text-gray-300 hover:text-white" />
-              </Button>
-
-              <Button
-                variant="ghost"
-                className="w-12 h-12 rounded-full p-0 flex items-center justify-center animate-blur-fade-up"
-                style={{ animationDelay: "900ms" }}
-                onClick={() => {
-                  const sections = ["hero", "skills", "projects", "certifications", "education", "contact"];
-                  const currentIndex = sections.indexOf(activeSection);
-                  if (currentIndex < sections.length - 1) {
-                    scrollToSection(sections[currentIndex + 1]);
-                  }
-                }}
-                aria-label="Next section"
-              >
-                <ChevronRight size={20} className="text-gray-300 hover:text-white" />
-              </Button>
-            </div>
           </div>
         </section>
 
