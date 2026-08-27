@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Github, Linkedin, Mail, MapPin, Phone, Database, ArrowDown, Sparkles, ExternalLink, FileText } from "lucide-react";
+import Button from "./Button";
 
 interface HeroProps {
   onScrollToContact: () => void;
@@ -168,60 +169,66 @@ export default function Hero({ onScrollToContact, onScrollToProjects, onOpenResu
             transition={{ duration: 0.6, delay: 1.0 }}
             className="flex flex-wrap gap-4 items-center pt-2"
           >
-            <button 
+            <Button 
               id="cta-resume-btn"
               onClick={onOpenResume}
-              className="px-6 py-3 bg-gradient-to-r from-cyber-blue to-blue-600 hover:from-blue-500 hover:to-cyber-blue text-white font-display font-semibold rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg shadow-cyber-blue/25 hover:shadow-cyber-blue/40 flex items-center space-x-2.5 cursor-pointer border border-cyber-blue/40 group"
+              variant="primary"
+              size="lg"
+              className="group"
               title="View Resume"
             >
               <FileText className="w-4 h-4 text-white group-hover:scale-110 transition" />
               <span>Resume</span>
               <ExternalLink className="w-4 h-4 text-white/80 group-hover:translate-x-0.5 transition" />
-            </button>
+            </Button>
 
-            <button 
+            <Button 
               id="cta-projects-btn"
               onClick={onScrollToProjects}
-              className="px-6 py-3 bg-dark-card hover:bg-gray-800 text-gray-200 hover:text-white font-display font-medium rounded-lg border border-white/10 hover:border-cyber-blue/40 transition-all duration-300 flex items-center space-x-2 cursor-pointer"
+              variant="ghost"
+              size="lg"
             >
               <span>Explore Projects</span>
               <ArrowDown className="w-4 h-4 text-cyber-blue" />
-            </button>
+            </Button>
 
-            <button 
+            <Button 
               id="cta-contact-btn"
               onClick={onScrollToContact}
-              className="px-6 py-3 bg-transparent hover:bg-gray-800/40 text-white font-display border border-gray-700 hover:border-gray-500 rounded-lg transition-all duration-300 cursor-pointer"
+              variant="ghost"
+              size="lg"
             >
               Contact Me
-            </button>
+            </Button>
 
             {/* Socials */}
             <div className="flex space-x-3 sm:ml-2">
-              <a
+              <Button
                 id="social-github-btn"
                 href="https://github.com/ANISHYADAV19"
                 target="_blank"
                 referrerPolicy="no-referrer"
                 rel="noreferrer"
-                className="p-3 bg-dark-card border border-white/10 hover:border-cyber-blue hover:text-cyber-blue rounded-lg transition duration-300 text-gray-400"
+                variant="ghost"
+                className="p-3 text-gray-400 hover:text-cyber-blue hover:border-cyber-blue"
                 aria-label="GitHub profile (opens in a new tab)"
                 title="GitHub Profile"
               >
                 <Github className="w-5 h-5" aria-hidden="true" />
-              </a>
-              <a
+              </Button>
+              <Button
                 id="social-linkedin-btn"
                 href="https://www.linkedin.com/in/anish-yadav-dev/"
                 target="_blank"
                 referrerPolicy="no-referrer"
                 rel="noreferrer"
-                className="p-3 bg-dark-card border border-white/10 hover:border-cyber-blue hover:text-cyber-blue rounded-lg transition duration-300 text-gray-400"
+                variant="ghost"
+                className="p-3 text-gray-400 hover:text-cyber-blue hover:border-cyber-blue"
                 aria-label="LinkedIn profile (opens in a new tab)"
                 title="LinkedIn Profile"
               >
                 <Linkedin className="w-5 h-5" aria-hidden="true" />
-              </a>
+              </Button>
             </div>
           </motion.div>
         </div>

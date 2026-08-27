@@ -8,6 +8,7 @@ import Projects from "./components/Projects";
 import Certifications from "./components/Certifications";
 import Education from "./components/Education";
 import Contact from "./components/Contact";
+import Button from "./components/Button";
 
 const RESUME_URL = "https://drive.google.com/file/d/1-1WU6cFsLirmsw_ofJd9caE2BrMiznUI/view?usp=sharing";
 
@@ -208,16 +209,17 @@ export default function App() {
 
           {/* Top Resume CTA */}
           <div className="hidden md:flex items-center text-[11px] font-mono text-gray-500">
-            <button
+            <Button
               onClick={handleOpenResume}
-              className="px-3.5 py-1.5 bg-cyber-blue/10 hover:bg-cyber-blue/20 text-cyber-blue border border-cyber-blue/30 rounded-lg transition font-mono text-xs flex items-center space-x-1.5 cursor-pointer hover:border-cyber-blue shadow-sm"
+              variant="secondary"
+              size="sm"
               title="View Resume"
             >
               <FileText className="w-3.5 h-3.5 text-cyber-blue" aria-hidden="true" />
-              <span className="font-semibold">Resume</span>
+              <span>Resume</span>
               <ExternalLink className="w-3 h-3 text-cyber-blue/80" aria-hidden="true" />
               <span className="sr-only">(opens in a new tab)</span>
-            </button>
+            </Button>
           </div>
 
           {/* Mobile Menu Toggle Button */}
@@ -261,18 +263,20 @@ export default function App() {
             ))}
 
             {/* Mobile Resume CTA */}
-            <button
+            <Button
               onClick={() => {
                 setIsMobileMenuOpen(false);
                 handleOpenResume();
               }}
-              className="w-full py-3 mt-2 bg-gradient-to-r from-cyber-blue to-blue-600 text-white font-display font-semibold rounded-lg flex items-center justify-center space-x-2 shadow-lg shadow-cyber-blue/20 cursor-pointer"
+              variant="primary"
+              size="lg"
+              className="w-full mt-2"
             >
               <FileText className="w-4 h-4" aria-hidden="true" />
               <span>Resume</span>
               <ExternalLink className="w-4 h-4" aria-hidden="true" />
               <span className="sr-only">(opens in a new tab)</span>
-            </button>
+            </Button>
 
             {/* Mobile system status metadata */}
             <div className="pt-8 text-xs font-mono text-gray-500">

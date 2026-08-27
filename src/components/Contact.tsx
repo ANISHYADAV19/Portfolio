@@ -1,6 +1,7 @@
 import { useState, useEffect, FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Send, CheckCircle2, ShieldAlert, Cpu, Mail } from "lucide-react";
+import Button from "./Button";
 
 export default function Contact() {
   const [name, setName] = useState("");
@@ -165,24 +166,26 @@ export default function Contact() {
             </div>
 
             <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
-              <button
+              <Button
                 type="submit"
                 disabled={isSending}
-                className="px-6 py-2.5 bg-cyber-blue hover:bg-cyber-blue/90 disabled:bg-white/5 disabled:text-gray-500 text-dark-bg text-xs font-mono font-bold rounded transition-all cursor-pointer flex items-center space-x-2"
+                variant="primary"
+                size="md"
               >
                 <Send className="w-3.5 h-3.5" />
                 <span>{isSending ? "Sending..." : "Send Message"}</span>
-              </button>
+              </Button>
 
-              <button
+              <Button
                 type="button"
                 onClick={handleMailtoFallback}
-                className="px-4 py-2.5 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 text-xs font-mono rounded transition-all cursor-pointer flex items-center space-x-2"
+                variant="ghost"
+                size="md"
                 title="Opens your default email application"
               >
                 <Mail className="w-3.5 h-3.5 text-cyber-blue" />
                 <span>Open in Email App</span>
-              </button>
+              </Button>
             </div>
           </form>
 

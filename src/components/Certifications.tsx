@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { Sparkles, Cpu, Calendar, Award, Cloud, Wifi, Brain, Eye, ExternalLink, X } from "lucide-react";
+import Button from "./Button";
 
 interface CertificateItem {
   id: string;
@@ -170,14 +171,15 @@ export default function Certifications() {
                 </span>
 
                 {cert.imageUrl ? (
-                  <button
+                  <Button
                     id={`view-cert-${cert.id}`}
                     onClick={() => setSelectedCertImage({ title: cert.title, url: cert.imageUrl! })}
-                    className="flex items-center space-x-1.5 px-3 py-1.5 rounded bg-cyber-blue/10 hover:bg-cyber-blue/20 border border-cyber-blue/30 text-cyber-blue hover:text-white text-xs font-mono font-medium transition duration-200 cursor-pointer"
+                    variant="secondary"
+                    size="sm"
                   >
                     <Eye className="w-3.5 h-3.5" />
                     <span>View Certificate</span>
-                  </button>
+                  </Button>
                 ) : (
                   <span className="text-[10px] text-gray-600 uppercase tracking-widest">{cert.issuer}</span>
                 )}
@@ -223,27 +225,30 @@ export default function Certifications() {
                 </div>
 
                 <div className="flex items-center space-x-2.5 shrink-0">
-                  <a
+                  <Button
                     href={selectedCertImage.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-1.5 px-3.5 py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-gray-300 hover:text-white transition"
+                    variant="ghost"
+                    size="sm"
                     title="Open high-resolution original in new tab"
                   >
                     <ExternalLink className="w-4 h-4 text-cyber-blue" aria-hidden="true" />
                     <span className="hidden sm:inline">Open Original</span>
                     <span className="sr-only">Open original certificate (opens in a new tab)</span>
-                  </a>
+                  </Button>
 
-                  <button
+                  <Button
                     ref={closeButtonRef}
                     onClick={() => setSelectedCertImage(null)}
-                    className="p-2 rounded-lg bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 hover:text-red-300 transition cursor-pointer flex items-center justify-center"
+                    variant="danger"
+                    size="sm"
+                    className="p-2"
                     aria-label="Close certificate viewer"
                     title="Close (ESC)"
                   >
                     <X className="w-5 h-5" aria-hidden="true" />
-                  </button>
+                  </Button>
                 </div>
               </div>
 
