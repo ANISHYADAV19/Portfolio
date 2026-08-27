@@ -211,13 +211,13 @@ export default function App() {
           <div className="hidden md:flex items-center text-[11px] font-mono text-gray-500">
             <Button
               onClick={handleOpenResume}
-              variant="secondary"
+              variant="primary"
               size="sm"
               title="View Resume"
             >
-              <FileText className="w-3.5 h-3.5 text-cyber-blue" aria-hidden="true" />
+              <FileText className="w-3.5 h-3.5 text-white" aria-hidden="true" />
               <span>Resume</span>
-              <ExternalLink className="w-3 h-3 text-cyber-blue/80" aria-hidden="true" />
+              <ExternalLink className="w-3 h-3 text-white/80" aria-hidden="true" />
               <span className="sr-only">(opens in a new tab)</span>
             </Button>
           </div>

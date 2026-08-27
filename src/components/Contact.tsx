@@ -165,7 +165,7 @@ export default function Contact() {
               />
             </div>
 
-            <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
+            <div className="pt-2 flex flex-wrap items-center justify-start gap-4">
               <Button
                 type="submit"
                 disabled={isSending}
