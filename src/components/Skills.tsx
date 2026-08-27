@@ -131,7 +131,7 @@ export default function Skills() {
             {categories.map((category, catIdx) => (
               <div 
                 key={catIdx} 
-                className="bg-dark-card border border-white/10 p-6 rounded-xl hover:border-white/20 transition duration-300 flex flex-col space-y-4"
+                className="liquid-glass rounded-xl p-6 hover:bg-white/5 transition duration-300 flex flex-col space-y-4"
               >
                 <div className="flex items-center space-x-2 pb-2 border-b border-white/10">
                   <span aria-hidden="true">{category.icon}</span>
@@ -179,7 +179,7 @@ export default function Skills() {
 
           {/* Interactive Skill Detail Card - Right Side (5 cols) */}
           <div className="lg:col-span-5 lg:sticky lg:top-24">
-            <div className="bg-dark-card border border-cyber-blue/30 p-6 rounded-xl shadow-xl relative overflow-hidden tech-glow">
+            <div className="bg-white/5 backdrop-blur-md border border-cyber-blue/30 p-6 rounded-xl shadow-xl relative overflow-hidden tech-glow">
               {/* Scanline overlay for that tech aesthetic */}
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyber-blue/[0.01] to-transparent pointer-events-none" />
 

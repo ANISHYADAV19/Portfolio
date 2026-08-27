@@ -121,7 +121,7 @@ export default function Certifications() {
           {certificates.map((cert) => (
             <div 
               key={cert.id}
-              className={`bg-dark-card border border-white/10 p-6 md:p-8 rounded-xl shadow-lg transition-all duration-300 ${cert.glowColor} flex flex-col justify-between group`}
+              className={`liquid-glass p-6 md:p-8 rounded-xl shadow-lg transition-all duration-300 ${cert.glowColor} flex flex-col justify-between group`}
             >
               <div>
                 <div className="flex items-start justify-between gap-4 mb-6 pb-4 border-b border-white/10">

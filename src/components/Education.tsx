@@ -52,7 +52,7 @@ export default function Education() {
               </div>
 
               {/* Box Content */}
-              <div className="bg-dark-card border border-white/10 p-6 md:p-8 rounded-xl shadow-lg hover:border-white/20 transition-all duration-300">
+              <div className="liquid-glass p-6 md:p-8 rounded-xl shadow-lg hover:bg-white/5 transition-all duration-300">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 pb-3 border-b border-white/10">
                   <div>
                     <span className="text-xs font-mono text-cyber-blue uppercase tracking-wider block mb-1">

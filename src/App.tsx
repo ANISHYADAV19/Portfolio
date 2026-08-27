@@ -1,8 +1,19 @@
 import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from "react";
-import { Menu, X, ChevronRight, FileText, ExternalLink } from "lucide-react";
+import {
+  Menu,
+  X,
+  ChevronRight,
+  FileText,
+  ExternalLink,
+  Search,
+  User,
+  GraduationCap,
+  MapPin,
+  Database,
+  ChevronLeft,
+  ArrowDown
+} from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import Background3D from "./components/Background3D";
-import Hero from "./components/Hero";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Certifications from "./components/Certifications";
@@ -134,17 +145,51 @@ export default function App() {
   };
 
   const navItems = [
-    { id: "hero", label: "About" },
-    { id: "skills", label: "Skills" },
-    { id: "projects", label: "Projects" },
-    { id: "certifications", label: "Certificates" },
-    { id: "education", label: "Education" },
-    { id: "contact", label: "Contact" }
+    { id: "skills", label: "Skills", delay: "100ms" },
+    { id: "projects", label: "Projects", delay: "150ms" },
+    { id: "certifications", label: "Certificates", delay: "200ms" },
+    { id: "education", label: "Education", delay: "250ms" },
+    { id: "contact", label: "Contact", delay: "300ms" }
   ];
 
-  return (
-    <div className="min-h-screen bg-dark-bg text-gray-100 selection:bg-cyber-blue selection:text-dark-bg font-sans relative overflow-x-hidden">
+  const firstName = "Anish".split("");
+  const lastName = "Yadav".split("");
 
+  const nameContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.07,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const letterVariants = {
+    hidden: {
+      opacity: 0,
+      y: 45,
+      rotateX: -80,
+      scale: 0.8,
+      filter: "blur(10px)"
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      scale: 1,
+      filter: "blur(0px)",
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 110
+      }
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-black text-gray-100 selection:bg-cyber-blue selection:text-dark-bg font-sans relative overflow-x-hidden">
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-cyber-blue focus:text-dark-bg focus:font-mono focus:text-sm focus:font-bold"
@@ -152,8 +197,18 @@ export default function App() {
         Skip to main content
       </a>
 
-      {/* Interactive 3D WebGL Background Canvas */}
-      <Background3D activeSection={activeSection} scrollProgress={scrollProgress} />
+      {/* Cinematic Loop Background Video */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="fixed inset-0 w-screen h-screen object-cover z-0 pointer-events-none"
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_094145_4a271a6c-3869-4f1c-8aa7-aeb0cb227994.mp4"
+      />
+
+      {/* Bottom Blur Overlay Mask */}
+      <div className="fixed inset-0 w-full h-full backdrop-blur-xl bottom-blur-overlay pointer-events-none z-1" />
 
       {/* Top Scroll Progress indicator */}
       <div
@@ -162,30 +217,20 @@ export default function App() {
         style={{ width: `${scrollProgress}%` }}
       />
 
-      {/* Futuristic Navbar */}
-      <nav aria-label="Main navigation" className="fixed top-0 left-0 right-0 h-16 bg-dark-bg/80 backdrop-blur-md border-b border-white/10 z-40 px-6">
-        <div className="h-full w-full max-w-6xl mx-auto flex items-center justify-between">
-
+      {/* Cinematic Glass Navbar */}
+      <nav
+        aria-label="Main navigation"
+        className="fixed top-0 left-0 right-0 h-16 md:h-20 bg-black/30 backdrop-blur-md border-b border-white/5 z-50 px-4 sm:px-6 md:px-12 flex items-center"
+      >
+        <div className="w-full max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo Brand */}
           <a
             href="#hero"
             onClick={(e) => handleNavClick(e, "hero")}
-            className="flex items-center space-x-2.5 group cursor-pointer"
-            aria-label="Anish Yadav — back to top"
+            className="font-mono text-base md:text-lg font-bold tracking-wider text-white hover:text-cyber-blue transition cursor-pointer select-none animate-blur-fade-up"
+            style={{ animationDelay: "0ms" }}
           >
-            <div className="w-8 h-8 rounded overflow-hidden flex items-center justify-center border border-white/10 shadow-lg shadow-cyber-blue/20 group-hover:border-cyber-blue/50 transition-all duration-300">
-              <img
-                src="/logo.jpg"
-                alt=""
-                width={32}
-                height={32}
-                aria-hidden="true"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="text-left font-mono">
-              <span className="text-white font-semibold text-sm group-hover:text-cyber-blue transition">Anish Yadav</span>
-            </div>
+            ANISH YADAV
           </a>
 
           {/* Desktop Navigation Items */}
@@ -196,105 +241,292 @@ export default function App() {
                 href={`#${item.id}`}
                 onClick={(e) => handleNavClick(e, item.id)}
                 aria-current={activeSection === item.id ? "true" : undefined}
-                className={`text-xs font-mono tracking-wider transition-all cursor-pointer ${
+                className={`text-xs font-mono tracking-wider transition-all cursor-pointer animate-blur-fade-up ${
                   activeSection === item.id
                     ? "text-cyber-blue font-semibold scale-105"
-                    : "text-gray-400 hover:text-white"
+                    : "text-gray-300 hover:text-white"
                 }`}
+                style={{ animationDelay: item.delay }}
               >
                 {item.label}
               </a>
             ))}
           </div>
 
-          {/* Top Resume CTA */}
-          <div className="hidden md:flex items-center text-xs font-mono text-gray-500">
+          {/* Top Actions Section */}
+          <div className="hidden sm:flex items-center space-x-4">
+            {/* Search Pill */}
             <Button
-              onClick={handleOpenResume}
-              variant="primary"
-              size="sm"
-              title="View Resume"
+              variant="ghost"
+              className="rounded-full liquid-glass px-4 py-2 flex items-center space-x-2 animate-blur-fade-up"
+              style={{ animationDelay: "350ms" }}
+              onClick={() => scrollToSection("skills")}
+              title="Search Portfolio"
             >
-              <FileText className="w-3.5 h-3.5 text-white" aria-hidden="true" />
-              <span>Resume</span>
-              <ExternalLink className="w-3 h-3 text-white/80" aria-hidden="true" />
-              <span className="sr-only">(opens in a new tab)</span>
+              <Search size={18} className="text-gray-300" />
+              <span className="text-xs font-mono font-medium tracking-wide">Search</span>
+            </Button>
+
+            {/* Profile Button */}
+            <Button
+              variant="ghost"
+              className="w-10 h-10 rounded-full liquid-glass p-0 flex items-center justify-center animate-blur-fade-up"
+              style={{ animationDelay: "400ms" }}
+              onClick={() => scrollToSection("contact")}
+              title="View Profile Info"
+            >
+              <User size={18} className="text-gray-300" />
             </Button>
           </div>
 
           {/* Mobile Menu Toggle Button */}
-          <button
+          <Button
             ref={menuToggleRef}
+            variant="ghost"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-gray-400 hover:text-white cursor-pointer"
+            className="lg:hidden w-10 h-10 rounded-full liquid-glass p-0 flex items-center justify-center animate-blur-fade-up"
+            style={{ animationDelay: "350ms" }}
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
-          </button>
+            <div className="relative w-5 h-5 flex items-center justify-center">
+              <X
+                size={18}
+                className={`absolute transition-all duration-500 ease-out ${
+                  isMobileMenuOpen ? "rotate-0 opacity-100 scale-100" : "rotate-180 opacity-0 scale-50"
+                }`}
+              />
+              <Menu
+                size={18}
+                className={`absolute transition-all duration-500 ease-out ${
+                  isMobileMenuOpen ? "-rotate-180 opacity-0 scale-50" : "rotate-0 opacity-100 scale-100"
+                }`}
+              />
+            </div>
+          </Button>
         </div>
       </nav>
 
       {/* Mobile drawer overlay menu */}
-      {isMobileMenuOpen && (
-        <div
-          id="mobile-menu"
-          ref={drawerRef}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Site menu"
-          className="fixed inset-0 top-16 bg-dark-bg/95 backdrop-blur-lg z-35 flex flex-col p-6 border-b border-white/10 lg:hidden"
-        >
-          <div className="flex flex-col space-y-5 pt-8">
-            {navItems.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                onClick={(e) => handleNavClick(e, item.id)}
-                aria-current={activeSection === item.id ? "true" : undefined}
-                className={`text-left text-lg font-mono tracking-wide py-2 border-b border-white/10 flex items-center justify-between cursor-pointer ${
-                  activeSection === item.id ? "text-cyber-blue font-semibold" : "text-gray-400"
-                }`}
-              >
-                <span>{item.label}</span>
-                <ChevronRight className="w-4 h-4 text-gray-600" aria-hidden="true" />
-              </a>
-            ))}
+      <div
+        id="mobile-menu"
+        ref={drawerRef}
+        className={`fixed left-0 right-0 top-[64px] md:top-[80px] z-40 p-5 border-t border-b border-gray-800 bg-gray-950/95 backdrop-blur-xl shadow-2xl transition-all duration-500 ease-out lg:hidden ${
+          isMobileMenuOpen
+            ? "translate-y-0 opacity-100 pointer-events-auto"
+            : "-translate-y-4 opacity-0 pointer-events-none"
+        }`}
+      >
+        <div className="flex flex-col space-y-2">
+          {navItems.map((item, idx) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              onClick={(e) => {
+                handleNavClick(e, item.id);
+                setIsMobileMenuOpen(false);
+              }}
+              className="py-3 px-4 rounded-lg hover:bg-gray-800/40 font-mono text-sm text-gray-300 hover:text-white transition-all duration-300"
+              style={{
+                transitionDelay: `${idx * 50}ms`,
+                transform: isMobileMenuOpen ? "translateX(0)" : "translateX(-16px)"
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
 
-            {/* Mobile Resume CTA */}
+          {/* Mobile buttons below sm breakpoint */}
+          <div className="sm:hidden pt-4 mt-2 border-t border-gray-800 flex items-center justify-between">
             <Button
+              variant="ghost"
+              className="rounded-full liquid-glass px-4 py-2 flex items-center space-x-2"
               onClick={() => {
                 setIsMobileMenuOpen(false);
-                handleOpenResume();
+                scrollToSection("skills");
               }}
-              variant="primary"
-              size="lg"
-              className="w-full mt-2"
             >
-              <FileText className="w-4 h-4" aria-hidden="true" />
-              <span>Resume</span>
-              <ExternalLink className="w-4 h-4" aria-hidden="true" />
-              <span className="sr-only">(opens in a new tab)</span>
+              <Search size={18} className="text-gray-300" />
+              <span className="text-xs font-mono font-medium">Search</span>
             </Button>
 
-            {/* Mobile system status metadata */}
-            <div className="pt-8 text-xs font-mono text-gray-500">
-              <p>📍 Location: Mahendragarh, Haryana, India</p>
-            </div>
+            <Button
+              variant="ghost"
+              className="w-10 h-10 rounded-full liquid-glass p-0 flex items-center justify-center"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                scrollToSection("contact");
+              }}
+            >
+              <User size={18} className="text-gray-300" />
+            </Button>
           </div>
         </div>
-      )}
+      </div>
 
-      {/* Main Sections Body with 3D Spatial Transitions */}
+      {/* Main Content Area */}
       <main id="main-content" className="relative z-10">
-        <Hero
-          onScrollToContact={() => scrollToSection("contact")}
-          onScrollToProjects={() => scrollToSection("projects")}
-          onOpenResume={handleOpenResume}
-        />
+        
+        {/* Full-Viewport Landing Hero Section */}
+        <section
+          id="hero"
+          className="h-screen w-full relative flex flex-col justify-end px-4 sm:px-6 md:px-12 pb-8 md:pb-16"
+        >
+          <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row items-end justify-between gap-8">
+            {/* Left Column: Bio Details & Primary Actions */}
+            <div className="flex-1 flex flex-col items-start text-left max-w-3xl">
+              
+              {/* Metadata Row */}
+              <div
+                className="flex flex-wrap items-center gap-3 sm:gap-6 mb-6 md:mb-8 text-xs sm:text-sm text-gray-200 font-mono animate-blur-fade-up drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+                style={{ animationDelay: "300ms" }}
+              >
+                <div className="flex items-center space-x-2">
+                  <GraduationCap size={16} className="text-cyber-blue fill-cyber-blue/20" />
+                  <span className="font-semibold uppercase tracking-wider">VIT Bhopal University</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <MapPin size={16} className="text-cyber-green" />
+                  <span className="uppercase tracking-wider">Haryana, India</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Database size={16} className="text-cyber-purple" />
+                  <span className="uppercase tracking-wider">AI & ML Specialization</span>
+                </div>
+              </div>
 
-        {/* 3D Section Transition Dividers */}
+              {/* Title Header with Staggered Split Letters */}
+              <motion.div
+                className="mb-4 md:mb-6 perspective-1000 animate-blur-fade-up"
+                style={{ animationDelay: "400ms" }}
+                variants={nameContainerVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                <h1
+                  aria-label="Anish Yadav"
+                  className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-light tracking-tight text-white leading-none select-none flex flex-wrap gap-x-4 sm:gap-x-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]"
+                >
+                  {/* First Name: Anish */}
+                  <span className="inline-flex space-x-0.5 sm:space-x-1" aria-hidden="true">
+                    {firstName.map((char, index) => (
+                      <motion.span
+                        key={`first-${index}`}
+                        variants={letterVariants}
+                        whileHover={{
+                          y: -8,
+                          scale: 1.15,
+                          color: "#3b82f6",
+                          textShadow: "0 0 25px rgba(59, 130, 246, 0.8)",
+                          transition: { duration: 0.15 }
+                        }}
+                        className="inline-block transform-gpu cursor-pointer transition-colors"
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                  </span>
+
+                  {/* Last Name: Yadav */}
+                  <span
+                    className="inline-flex space-x-0.5 sm:space-x-1 font-serif italic text-cyber-blue font-medium drop-shadow-[0_0_20px_rgba(59,130,246,0.3)]"
+                    aria-hidden="true"
+                  >
+                    {lastName.map((char, index) => (
+                      <motion.span
+                        key={`last-${index}`}
+                        variants={letterVariants}
+                        whileHover={{
+                          y: -8,
+                          scale: 1.15,
+                          color: "#60a5fa",
+                          textShadow: "0 0 30px rgba(96, 165, 250, 0.9)",
+                          transition: { duration: 0.15 }
+                        }}
+                        className="inline-block transform-gpu cursor-pointer transition-colors"
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                  </span>
+                </h1>
+              </motion.div>
+
+              {/* Tagline Bio Description */}
+              <p
+                className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 md:mb-12 max-w-2xl font-sans leading-relaxed animate-blur-fade-up drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]"
+                style={{ animationDelay: "500ms" }}
+              >
+                AI & Machine Learning student and web developer based in India. Passionate about building intelligent,
+                computer-vision enabled systems, high-accuracy neural architectures, and responsive web applications.
+              </p>
+
+              {/* Call-to-Action Action Buttons */}
+              <div
+                className="flex flex-wrap gap-3 sm:gap-4 animate-blur-fade-up"
+                style={{ animationDelay: "600ms" }}
+              >
+                <Button
+                  onClick={handleOpenResume}
+                  variant="primary"
+                  className="bg-white text-black hover:bg-gray-200 border-none rounded-full px-6 sm:px-8 py-2.5 sm:py-3 flex items-center space-x-2.5 text-xs font-mono font-bold tracking-wider"
+                >
+                  <FileText className="w-4 h-4 text-black" aria-hidden="true" />
+                  <span>Resume</span>
+                  <ExternalLink className="w-4 h-4 text-black/80" aria-hidden="true" />
+                  <span className="sr-only">(opens in new tab)</span>
+                </Button>
+
+                <Button
+                  onClick={() => scrollToSection("contact")}
+                  variant="ghost"
+                  className="rounded-full px-6 sm:px-8 py-2.5 sm:py-3 text-xs font-mono font-bold tracking-wider"
+                  style={{ animationDelay: "700ms" }}
+                >
+                  <span>Contact Me</span>
+                </Button>
+              </div>
+            </div>
+
+            {/* Right Column: Carousel navigation arrows */}
+            <div className="flex items-center gap-3 mt-4 md:mt-0 justify-start md:justify-end shrink-0">
+              <Button
+                variant="ghost"
+                className="w-12 h-12 rounded-full p-0 flex items-center justify-center animate-blur-fade-up"
+                style={{ animationDelay: "800ms" }}
+                onClick={() => {
+                  const sections = ["hero", "skills", "projects", "certifications", "education", "contact"];
+                  const currentIndex = sections.indexOf(activeSection);
+                  if (currentIndex > 0) {
+                    scrollToSection(sections[currentIndex - 1]);
+                  }
+                }}
+                aria-label="Previous section"
+              >
+                <ChevronLeft size={20} className="text-gray-300 hover:text-white" />
+              </Button>
+
+              <Button
+                variant="ghost"
+                className="w-12 h-12 rounded-full p-0 flex items-center justify-center animate-blur-fade-up"
+                style={{ animationDelay: "900ms" }}
+                onClick={() => {
+                  const sections = ["hero", "skills", "projects", "certifications", "education", "contact"];
+                  const currentIndex = sections.indexOf(activeSection);
+                  if (currentIndex < sections.length - 1) {
+                    scrollToSection(sections[currentIndex + 1]);
+                  }
+                }}
+                aria-label="Next section"
+              >
+                <ChevronRight size={20} className="text-gray-300 hover:text-white" />
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Scrollable Portfolio Subsections */}
         <RevealSection tilt={-10} reduceMotion={prefersReducedMotion}>
           <Skills />
         </RevealSection>
@@ -317,7 +549,7 @@ export default function App() {
       </main>
 
       {/* Clean high-contrast futuristic Footer */}
-      <footer className="bg-dark-bg border-t border-white/10 py-12 px-6">
+      <footer className="bg-black/90 border-t border-white/10 py-12 px-6 relative z-10">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left font-mono">
             <p className="text-xs text-gray-400">

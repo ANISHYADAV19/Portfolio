@@ -97,7 +97,7 @@ export default function Projects() {
           {projects.map((project) => (
             <div 
               key={project.id}
-              className="bg-dark-card border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-all duration-300 flex flex-col h-full group"
+              className="liquid-glass rounded-xl hover:bg-white/5 transition-all duration-300 flex flex-col h-full group"
             >
               {/* Card visual accent */}
               <div className="h-1 w-full bg-gradient-to-r from-cyber-blue to-cyber-purple opacity-40 group-hover:opacity-100 transition duration-300" />

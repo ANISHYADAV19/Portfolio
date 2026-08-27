@@ -96,7 +96,7 @@ export default function Contact() {
         </div>
 
         {/* Form Container */}
-        <div className="bg-dark-card border border-white/10 p-6 md:p-8 rounded-xl shadow-xl">
+        <div className="liquid-glass p-6 md:p-8 rounded-xl shadow-xl">
           <h3 className="text-lg font-display font-medium text-white mb-6 border-b border-white/10 pb-3 flex items-center space-x-2">
             <Cpu className="w-4 h-4 text-cyber-blue" />
             <span>Messaging Portal</span>
