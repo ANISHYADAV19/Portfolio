@@ -187,13 +187,18 @@ export default function App() {
         Skip to main content
       </a>
 
-      {/* Ambient Luminous Background Gradient Orbs */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-blue-200/30 rounded-full blur-3xl" />
-        <div className="absolute top-1/3 -right-40 w-[550px] h-[550px] bg-indigo-200/25 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 left-1/4 w-[600px] h-[600px] bg-emerald-200/20 rounded-full blur-3xl" />
-        <div className="absolute inset-0 bg-grid-pattern opacity-40" />
-      </div>
+      {/* Cinematic Loop Background Video */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="fixed inset-0 w-screen h-screen object-cover z-0 pointer-events-none"
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_094145_4a271a6c-3869-4f1c-8aa7-aeb0cb227994.mp4"
+      />
+
+      {/* Bottom Blur Overlay Mask */}
+      <div className="fixed inset-0 w-full h-full backdrop-blur-xl bottom-blur-overlay pointer-events-none z-1" />
 
       {/* Top Scroll Progress indicator */}
       <div

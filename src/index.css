@@ -117,6 +117,6 @@ html {
 }
 
 .bottom-blur-overlay {
-  mask-image: linear-gradient(to top, white 0%, transparent 60%);
-  -webkit-mask-image: linear-gradient(to top, white 0%, transparent 60%);
+  mask-image: linear-gradient(to top, black 0%, transparent 45%);
+  -webkit-mask-image: linear-gradient(to top, black 0%, transparent 45%);
 }
