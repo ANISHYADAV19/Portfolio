@@ -1,4 +1,4 @@
-import { forwardRef, type ReactNode, type ButtonHTMLAttributes, type AnchorHTMLAttributes, type MouseEvent } from "react";
+import { forwardRef, type ReactNode, type ButtonHTMLAttributes, type AnchorHTMLAttributes, type MouseEvent, type HTMLAttributeReferrerPolicy } from "react";
 
 export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick"> {
   children: ReactNode;
@@ -10,7 +10,7 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   // Anchor attributes:
   target?: string;
   rel?: string;
-  referrerPolicy?: React.HTMLAttributeReferrerPolicy;
+  referrerPolicy?: HTMLAttributeReferrerPolicy;
 }
 
 export const Button = forwardRef<any, ButtonProps>(
@@ -29,17 +29,17 @@ export const Button = forwardRef<any, ButtonProps>(
     ref
   ) => {
     const baseStyles =
-      "font-mono font-semibold uppercase tracking-wider rounded-lg transition-all duration-300 inline-flex items-center justify-center cursor-pointer select-none disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none";
+      "font-mono font-semibold uppercase tracking-wider rounded-lg transition-all duration-200 inline-flex items-center justify-center cursor-pointer select-none disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none";
 
     const variantStyles = {
       primary:
-        "bg-gradient-to-r from-cyber-blue to-blue-600 text-white border border-cyber-blue/40 hover:from-blue-500 hover:to-cyber-blue hover:shadow-lg hover:shadow-cyber-blue/20 transform hover:-translate-y-0.5",
+        "bg-slate-900 text-white border border-slate-900 hover:bg-slate-800 hover:shadow-md shadow-xs transform hover:-translate-y-0.5",
       secondary:
-        "bg-cyber-blue/10 text-cyber-blue border border-cyber-blue/30 hover:bg-cyber-blue/20 hover:border-cyber-blue hover:text-white",
+        "bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100/90 hover:text-blue-800",
       ghost:
-        "bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 hover:border-cyber-blue/40",
+        "bg-white/80 hover:bg-slate-100 text-slate-700 hover:text-slate-900 border border-slate-200 shadow-xs",
       danger:
-        "bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 border border-red-500/30",
+        "bg-red-50 hover:bg-red-100 text-red-600 hover:text-red-700 border border-red-200",
     };
 
     const hasCustomPadding = /\bp[xy]?-[\d.]+/.test(className);

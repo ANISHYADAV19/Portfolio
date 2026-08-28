@@ -75,21 +75,21 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" aria-labelledby="projects-heading" className="py-24 px-6 bg-dark-bg border-t border-white/10 relative">
-      <div className="absolute top-1/4 right-10 w-80 h-80 bg-cyber-blue/5 rounded-full blur-3xl -z-10" />
+    <section id="projects" aria-labelledby="projects-heading" className="py-24 px-6 bg-slate-50 border-t border-slate-200/80 relative">
+      <div className="absolute top-1/4 right-10 w-80 h-80 bg-blue-100/30 rounded-full blur-3xl -z-10" />
 
       <div className="w-full max-w-6xl mx-auto">
         
         {/* Header */}
         <div className="mb-12 text-center">
-          <p className="text-xs font-mono text-cyber-blue tracking-wider uppercase mb-2">My Craft</p>
-          <h2 id="projects-heading" className="text-3xl md:text-5xl font-light text-white tracking-tight">
-            Featured <span className="font-serif italic text-cyber-blue">Projects</span>
+          <p className="text-xs font-mono text-blue-600 font-semibold tracking-wider uppercase mb-2">My Craft</p>
+          <h2 id="projects-heading" className="text-3xl md:text-5xl font-light text-slate-900 tracking-tight">
+            Featured <span className="font-serif italic text-blue-600 font-medium">Projects</span>
           </h2>
-          <p className="text-sm text-gray-400 mt-2 max-w-xl mx-auto">
+          <p className="text-sm text-slate-600 mt-2 max-w-xl mx-auto">
             Explore my machine learning, deep learning, and software engineering projects.
           </p>
-          <div className="h-0.5 w-16 bg-cyber-blue mt-4 mx-auto" />
+          <div className="h-0.5 w-16 bg-blue-600 mt-4 mx-auto" />
         </div>
 
         {/* Project Cards Grid */}
@@ -97,10 +97,10 @@ export default function Projects() {
           {projects.map((project) => (
             <div 
               key={project.id}
-              className="liquid-glass rounded-xl hover:bg-white/5 transition-all duration-300 flex flex-col h-full group"
+              className="liquid-glass rounded-2xl hover:shadow-xl transition-all duration-300 flex flex-col h-full group bg-white border border-slate-200 overflow-hidden"
             >
               {/* Card visual accent */}
-              <div className="h-1 w-full bg-gradient-to-r from-cyber-blue to-cyber-purple opacity-40 group-hover:opacity-100 transition duration-300" />
+              <div className="h-1.5 w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 opacity-70 group-hover:opacity-100 transition duration-300" />
               
               <div className="p-8 flex flex-col flex-grow justify-between">
                 <div>
@@ -110,7 +110,7 @@ export default function Projects() {
                       target="_blank" 
                       referrerPolicy="no-referrer"
                       rel="noreferrer"
-                      className="text-gray-500 hover:text-white transition"
+                      className="text-slate-500 hover:text-slate-900 p-2 rounded-full hover:bg-slate-100 transition"
                       title={`${project.title} on GitHub`}
                       aria-label={`${project.title} source code on GitHub`}
                     >
@@ -118,18 +118,18 @@ export default function Projects() {
                     </a>
                   </div>
 
-                  <h3 className="text-2xl font-display font-medium text-white mb-3">
+                  <h3 className="text-2xl font-display font-semibold text-slate-900 mb-3">
                     {project.title}
                   </h3>
                   
-                  <p className="text-sm text-gray-400 mb-6 leading-relaxed">
+                  <p className="text-sm text-slate-600 mb-6 leading-relaxed">
                     {project.description}
                   </p>
 
-                  <ul className="space-y-2 mb-8">
+                  <ul className="space-y-2.5 mb-8">
                     {project.bullets.map((b, idx) => (
-                      <li key={idx} className="text-xs text-gray-400 flex items-start space-x-2">
-                        <span className="text-cyber-blue mt-1" aria-hidden="true">▪</span>
+                      <li key={idx} className="text-xs text-slate-600 flex items-start space-x-2">
+                        <span className="text-blue-600 font-bold mt-0.5" aria-hidden="true">▪</span>
                         <span>{b}</span>
                       </li>
                     ))}
@@ -138,9 +138,9 @@ export default function Projects() {
 
                 <div>
                   {/* Tech stack badges */}
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap gap-1.5 pt-4 border-t border-slate-100">
                     {project.technologies.map((t, idx) => (
-                      <span key={idx} className="px-2 py-0.5 rounded bg-dark-bg border border-white/10 text-xs font-mono text-gray-400">
+                      <span key={idx} className="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200/80 text-xs font-mono font-medium text-slate-700">
                         {t}
                       </span>
                     ))}
@@ -155,4 +155,3 @@ export default function Projects() {
     </section>
   );
 }
-
