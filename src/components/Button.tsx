@@ -1,4 +1,4 @@
-import { forwardRef, type ReactNode, type ButtonHTMLAttributes, type AnchorHTMLAttributes, type MouseEvent } from "react";
+import { forwardRef, type ReactNode, type ButtonHTMLAttributes, type AnchorHTMLAttributes, type MouseEvent, type HTMLAttributeReferrerPolicy } from "react";
 
 export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick"> {
   children: ReactNode;
@@ -10,7 +10,7 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   // Anchor attributes:
   target?: string;
   rel?: string;
-  referrerPolicy?: React.HTMLAttributeReferrerPolicy;
+  referrerPolicy?: HTMLAttributeReferrerPolicy;
 }
 
 export const Button = forwardRef<any, ButtonProps>(

@@ -1,17 +1,14 @@
-import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import {
   Menu,
   X,
-  ChevronRight,
   FileText,
   ExternalLink,
   Search,
   User,
   GraduationCap,
   MapPin,
-  Database,
-  ChevronLeft,
-  ArrowDown
+  Database
 } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import Skills from "./components/Skills";
@@ -20,39 +17,19 @@ import Certifications from "./components/Certifications";
 import Education from "./components/Education";
 import Contact from "./components/Contact";
 import Button from "./components/Button";
+import RevealSection from "./components/RevealSection";
+import PageTransitionOverlay from "./components/PageTransitionOverlay";
+import CyberHUDNavigator from "./components/CyberHUDNavigator";
 
 const RESUME_URL = "https://drive.google.com/file/d/1-1WU6cFsLirmsw_ofJd9caE2BrMiznUI/view?usp=sharing";
-
-// Scroll-reveal wrapper. Renders a plain div when the visitor has asked for
-// reduced motion, so content is simply present instead of animating in.
-function RevealSection({
-  tilt,
-  reduceMotion,
-  children
-}: {
-  tilt: number;
-  reduceMotion: boolean | null;
-  children: ReactNode;
-}) {
-  if (reduceMotion) return <div>{children}</div>;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40, rotateX: tilt }}
-      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      style={{ perspective: "1000px" }}
-    >
-      {children}
-    </motion.div>
-  );
-}
 
 export default function App() {
   const [activeSection, setActiveSection] = useState("hero");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [transitionTarget, setTransitionTarget] = useState("hero");
+  const transitionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prefersReducedMotion = useReducedMotion();
   const menuToggleRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -61,6 +38,48 @@ export default function App() {
   const handleOpenResume = () => {
     window.open(RESUME_URL, "_blank", "noopener,noreferrer");
   };
+
+  const triggerTransition = (id: string) => {
+    setIsMobileMenuOpen(false);
+
+    if (prefersReducedMotion) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "auto" });
+      }
+      history.replaceState(null, "", `#${id}`);
+      return;
+    }
+
+    if (transitionTimeoutRef.current) {
+      clearTimeout(transitionTimeoutRef.current);
+    }
+
+    setTransitionTarget(id);
+    setIsTransitioning(true);
+
+    // Scroll to target section in sync with shutter peak
+    transitionTimeoutRef.current = setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+      history.replaceState(null, "", `#${id}`);
+
+      // Finish transition and pull back shutter
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 350);
+    }, 280);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (transitionTimeoutRef.current) {
+        clearTimeout(transitionTimeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     // Tracking scroll progress & current active section
@@ -128,20 +147,15 @@ export default function App() {
   }, [isMobileMenuOpen]);
 
   const scrollToSection = (id: string) => {
-    setIsMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
-    }
+    triggerTransition(id);
   };
 
   // Anchor links stay real links (shareable, middle-clickable); we only intercept
-  // the left-click to keep the smooth scroll.
+  // the left-click to keep the cyber transition.
   const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
     e.preventDefault();
-    scrollToSection(id);
-    history.replaceState(null, "", `#${id}`);
+    triggerTransition(id);
   };
 
   const navItems = [
@@ -190,6 +204,12 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-black text-gray-100 selection:bg-cyber-blue selection:text-dark-bg font-sans relative overflow-x-hidden">
+      {/* Cyber Shutter & Holographic HUD Page Transition Overlay */}
+      <PageTransitionOverlay isTransitioning={isTransitioning} targetSector={transitionTarget} />
+
+      {/* Floating Sector Quick-Jump HUD Navigator */}
+      <CyberHUDNavigator activeSection={activeSection} onNavigate={triggerTransition} />
+
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-cyber-blue focus:text-dark-bg focus:font-mono focus:text-sm focus:font-bold"
