@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence } from "motion/react";
-import { Sparkles, Cpu, Calendar, Award, Cloud, Wifi, Brain, Eye, X, ShieldCheck } from "lucide-react";
+import { Sparkles, Cpu, Calendar, Award, Wifi, Brain, Eye, X, ShieldCheck } from "lucide-react";
 import Button from "./Button";
 
 interface CertificateItem {
@@ -61,28 +61,6 @@ export default function Certifications() {
       imageUrl: "https://res.cloudinary.com/mjob3d9y/image/upload/v1784737466/Coursera_TJ0LEUE5XU3L_page-0001_1_h5j9t7.jpg"
     },
     {
-      id: "aws-cloud",
-      title: "AWS Cloud Certification",
-      issuer: "Amazon Web Services",
-      year: 2024,
-      bullets: [
-        "In-depth architectural training on cloud computing paradigms, Amazon EC2, S3 storage tiers, IAM security, and auto-scaling.",
-        "Explored serverless compute integrations and deploying resilient multi-tier microservice infrastructures."
-      ],
-      imageUrl: "https://res.cloudinary.com/mjob3d9y/image/upload/v1784737452/AWS_ACADEMY_CLOUD_SECURITY_BADGE_page-0001_a83v6y.jpg"
-    },
-    {
-      id: "postman-api",
-      title: "Postman API Fundamentals Student Expert",
-      issuer: "Postman",
-      year: 2024,
-      bullets: [
-        "Mastered REST API prototyping, dynamic mock servers, automated testing suites, and webhook validation.",
-        "Built and debugged HTTP requests with custom headers, authentication payloads, and automated test runners."
-      ],
-      imageUrl: "https://res.cloudinary.com/mjob3d9y/image/upload/v1784737463/postman_student_expert_badge_page-0001_k7173e.jpg"
-    },
-    {
       id: "lt-edge",
       title: "Industrial Edge AI & IoT Training",
       issuer: "Larsen & Toubro (L&T)",
@@ -92,17 +70,6 @@ export default function Certifications() {
         "Designed edge pipelines connecting edge intelligence with central telemetry dashboards."
       ],
       imageUrl: "https://res.cloudinary.com/mjob3d9y/image/upload/v1784737458/L_T_INTERNSHIP_CERTIFICATE_page-0001_c5fuxl.jpg"
-    },
-    {
-      id: "stanford-ml",
-      title: "Machine Learning Specialization",
-      issuer: "DeepLearning.AI / Stanford Online",
-      year: 2023,
-      bullets: [
-        "Foundational mastery of linear regression, logistic regression, cost gradient descent, and regularization techniques.",
-        "Built anomaly detection models, recommender systems, and reinforcement learning policy gradients."
-      ],
-      imageUrl: "https://res.cloudinary.com/mjob3d9y/image/upload/v1784737460/ML_BY_ANDREW_NG_page-0001_1_u8o0om.jpg"
     }
   ];
 
@@ -120,7 +87,7 @@ export default function Certifications() {
             Verified <span className="font-serif italic text-cyan-400 font-medium drop-shadow-[0_0_20px_rgba(6,182,212,0.35)]">Certifications</span>
           </h2>
           <p className="text-sm text-slate-300 font-sans mt-2 max-w-xl">
-            Formal technical certifications issued by IBM, Stanford Online, AWS, University of Michigan, and Larsen & Toubro.
+            Formal technical certifications issued by IBM, University of Michigan, and Larsen & Toubro.
           </p>
         </div>
 
@@ -139,8 +106,6 @@ export default function Certifications() {
                         <Sparkles className="w-5 h-5" />
                       ) : cert.id.includes("ml") ? (
                         <Brain className="w-5 h-5" />
-                      ) : cert.id.includes("cloud") ? (
-                        <Cloud className="w-5 h-5" />
                       ) : cert.id.includes("iot") || cert.id.includes("edge") ? (
                         <Wifi className="w-5 h-5" />
                       ) : (

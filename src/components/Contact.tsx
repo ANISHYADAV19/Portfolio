@@ -1,6 +1,6 @@
 import { useState, useEffect, type FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Send, CheckCircle2, ShieldAlert, Cpu, Mail, MapPin, Github, Linkedin, MessageSquare } from "lucide-react";
+import { Send, CheckCircle2, ShieldAlert, Mail, MapPin, Github, Linkedin, MessageSquare } from "lucide-react";
 import Button from "./Button";
 
 export default function Contact() {
@@ -128,18 +128,6 @@ export default function Contact() {
                     <span className="text-xs font-mono text-slate-400 block font-medium">Location</span>
                     <span className="text-sm font-sans font-bold text-slate-100">
                       Haryana, India &bull; Open for Remote / Relocation
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4 p-4 rounded-2xl bg-white/5 border border-white/10 shadow-2xs">
-                  <div className="p-3 rounded-xl bg-purple-500/20 text-purple-400">
-                    <Cpu size={18} />
-                  </div>
-                  <div>
-                    <span className="text-xs font-mono text-slate-400 block font-medium">Domain Focus</span>
-                    <span className="text-sm font-sans font-bold text-slate-100">
-                      AI/ML Engineering, Computer Vision, React Applications
                     </span>
                   </div>
                 </div>

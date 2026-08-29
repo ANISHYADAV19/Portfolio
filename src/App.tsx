@@ -8,9 +8,7 @@ import {
   User,
   GraduationCap,
   MapPin,
-  Database,
-  Sparkles,
-  ChevronDown
+  Database
 } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import Skills from "./components/Skills";
@@ -232,16 +230,6 @@ export default function App() {
           aria-label="Main navigation"
           className="w-full max-w-7xl h-16 md:h-18 liquid-glass-nav rounded-full px-5 sm:px-8 flex items-center justify-between shadow-2xl"
         >
-          {/* Logo Brand */}
-          <a
-            href="#hero"
-            onClick={(e) => handleNavClick(e, "hero")}
-            className="font-mono text-base md:text-lg font-extrabold tracking-wider text-white hover:text-cyan-400 transition cursor-pointer select-none flex items-center space-x-2"
-          >
-            <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
-            <span>ANISH YADAV</span>
-          </a>
-
           {/* Desktop Navigation Items */}
           <div className="hidden lg:flex items-center space-x-2 bg-white/5 p-1.5 rounded-full border border-white/10 backdrop-blur-md">
             {navItems.map((item) => (
@@ -499,48 +487,6 @@ export default function App() {
                   <span>Contact Me</span>
                 </Button>
               </div>
-            </div>
-
-            {/* Right Column: Crystal Transparent Glass Status Lens */}
-            <div
-              className="hidden md:flex flex-col items-end animate-blur-fade-up"
-              style={{ animationDelay: "600ms" }}
-            >
-              <div
-                className="liquid-glass-card liquid-glass-refract rounded-3xl p-6 flex flex-col space-y-3 max-w-xs shadow-2xl"
-                data-config={JSON.stringify({
-                  cornerRadius: 32,
-                  zRadius: 32,
-                  refraction: 0.95,
-                  blurAmount: 0.1,
-                  chromAberration: 0.12
-                })}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <span className="w-3 h-3 rounded-full bg-emerald-400 animate-ping" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 absolute" />
-                    <span className="font-mono text-xs font-bold uppercase tracking-wider text-emerald-300">Available</span>
-                  </div>
-                  <Sparkles size={16} className="text-cyan-400" />
-                </div>
-                <p className="text-xs text-slate-300 font-sans leading-relaxed">
-                  Open for AI/ML engineering internships, research roles, and creative web development projects.
-                </p>
-                <div className="pt-2 border-t border-white/15 flex items-center justify-between text-[11px] font-mono text-slate-400">
-                  <span>SPECIALTY</span>
-                  <span className="font-semibold text-cyan-300">PyTorch & WebGL</span>
-                </div>
-              </div>
-
-              {/* Scroll down indicator */}
-              <button
-                onClick={() => scrollToSection("skills")}
-                className="mt-6 flex items-center space-x-2 text-xs font-mono text-slate-300 hover:text-cyan-400 transition cursor-pointer"
-              >
-                <span>Scroll to explore</span>
-                <ChevronDown size={14} className="animate-bounce" />
-              </button>
             </div>
 
           </div>
