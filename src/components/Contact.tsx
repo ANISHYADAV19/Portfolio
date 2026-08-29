@@ -84,13 +84,13 @@ export default function Contact() {
         {/* Section Header */}
         <div className="mb-14 text-center lg:text-left">
           <div className="inline-flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full mb-3 shadow-xs">
-            <MessageSquare size={14} className="text-blue-600" />
-            <span className="text-xs font-mono text-blue-700 font-bold tracking-wider uppercase">Let's Connect</span>
+            <MessageSquare size={14} className="text-cyan-400" />
+            <span className="text-xs font-mono text-cyan-300 font-bold tracking-wider uppercase">Let's Connect</span>
           </div>
-          <h2 id="contact-heading" className="text-3xl md:text-5xl font-light text-slate-950 tracking-tight">
-            Get in <span className="font-serif italic text-blue-600 font-medium">Touch</span>
+          <h2 id="contact-heading" className="text-3xl md:text-5xl font-light text-white tracking-tight">
+            Get in <span className="font-serif italic text-cyan-400 font-medium drop-shadow-[0_0_20px_rgba(6,182,212,0.35)]">Touch</span>
           </h2>
-          <p className="text-sm text-slate-600 font-sans mt-2 max-w-xl">
+          <p className="text-sm text-slate-300 font-sans mt-2 max-w-xl">
             Have a project in mind, an opportunity to discuss, or just want to connect? Send a direct message below.
           </p>
         </div>
@@ -99,46 +99,46 @@ export default function Contact() {
           
           {/* Left Column: Direct Info Cards */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="liquid-glass-card rounded-3xl p-6 sm:p-8 shadow-xl border border-white/80 space-y-6">
-              <h3 className="text-xl font-display font-semibold text-slate-950">
+            <div className="liquid-glass-card rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/20 space-y-6">
+              <h3 className="text-xl font-display font-semibold text-white">
                 Contact Coordinates
               </h3>
               
               <div className="space-y-4">
                 <a
                   href="mailto:anishyadav872004@gmail.com"
-                  className="flex items-center space-x-4 p-4 rounded-2xl bg-white/60 border border-white/80 hover:bg-white/90 hover:border-blue-400 transition duration-200 group shadow-2xs"
+                  className="flex items-center space-x-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/15 hover:border-cyan-400 transition duration-200 group shadow-2xs"
                 >
-                  <div className="p-3 rounded-xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition">
+                  <div className="p-3 rounded-xl bg-white/10 text-cyan-400 group-hover:bg-blue-600 group-hover:text-white transition">
                     <Mail size={18} />
                   </div>
                   <div>
-                    <span className="text-xs font-mono text-slate-500 block font-medium">Direct Email</span>
-                    <span className="text-sm font-mono font-bold text-slate-900 group-hover:text-blue-600 transition">
+                    <span className="text-xs font-mono text-slate-400 block font-medium">Direct Email</span>
+                    <span className="text-sm font-mono font-bold text-slate-100 group-hover:text-cyan-300 transition">
                       anishyadav872004@gmail.com
                     </span>
                   </div>
                 </a>
 
-                <div className="flex items-center space-x-4 p-4 rounded-2xl bg-white/60 border border-white/80 shadow-2xs">
-                  <div className="p-3 rounded-xl bg-emerald-50 text-emerald-600">
+                <div className="flex items-center space-x-4 p-4 rounded-2xl bg-white/5 border border-white/10 shadow-2xs">
+                  <div className="p-3 rounded-xl bg-emerald-500/20 text-emerald-400">
                     <MapPin size={18} />
                   </div>
                   <div>
-                    <span className="text-xs font-mono text-slate-500 block font-medium">Location</span>
-                    <span className="text-sm font-sans font-bold text-slate-900">
+                    <span className="text-xs font-mono text-slate-400 block font-medium">Location</span>
+                    <span className="text-sm font-sans font-bold text-slate-100">
                       Haryana, India &bull; Open for Remote / Relocation
                     </span>
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-4 p-4 rounded-2xl bg-white/60 border border-white/80 shadow-2xs">
-                  <div className="p-3 rounded-xl bg-purple-50 text-purple-600">
+                <div className="flex items-center space-x-4 p-4 rounded-2xl bg-white/5 border border-white/10 shadow-2xs">
+                  <div className="p-3 rounded-xl bg-purple-500/20 text-purple-400">
                     <Cpu size={18} />
                   </div>
                   <div>
-                    <span className="text-xs font-mono text-slate-500 block font-medium">Domain Focus</span>
-                    <span className="text-sm font-sans font-bold text-slate-900">
+                    <span className="text-xs font-mono text-slate-400 block font-medium">Domain Focus</span>
+                    <span className="text-sm font-sans font-bold text-slate-100">
                       AI/ML Engineering, Computer Vision, React Applications
                     </span>
                   </div>
@@ -146,13 +146,13 @@ export default function Contact() {
               </div>
 
               {/* Social Links */}
-              <div className="pt-4 border-t border-slate-200/70 flex items-center space-x-3">
+              <div className="pt-4 border-t border-white/10 flex items-center space-x-3">
                 <a
                   href="https://github.com/ANISHYADAV19"
                   target="_blank"
                   rel="noreferrer"
                   referrerPolicy="no-referrer"
-                  className="flex-1 flex items-center justify-center space-x-2 py-3 rounded-2xl liquid-glass-pill text-slate-800 font-mono text-xs font-bold hover:text-white hover:bg-slate-950 transition-all shadow-xs"
+                  className="flex-1 flex items-center justify-center space-x-2 py-3 rounded-2xl liquid-glass-pill text-slate-200 font-mono text-xs font-bold hover:text-white hover:bg-blue-600 transition-all shadow-xs"
                 >
                   <Github size={16} />
                   <span>GitHub</span>
@@ -162,7 +162,7 @@ export default function Contact() {
                   target="_blank"
                   rel="noreferrer"
                   referrerPolicy="no-referrer"
-                  className="flex-1 flex items-center justify-center space-x-2 py-3 rounded-2xl liquid-glass-pill text-slate-800 font-mono text-xs font-bold hover:text-white hover:bg-blue-600 transition-all shadow-xs"
+                  className="flex-1 flex items-center justify-center space-x-2 py-3 rounded-2xl liquid-glass-pill text-slate-200 font-mono text-xs font-bold hover:text-white hover:bg-blue-600 transition-all shadow-xs"
                 >
                   <Linkedin size={16} />
                   <span>LinkedIn</span>
@@ -175,11 +175,11 @@ export default function Contact() {
           <div className="lg:col-span-7">
             <form
               onSubmit={handleSubmit}
-              className="liquid-glass-card rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/90 space-y-5"
+              className="liquid-glass-card rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/20 space-y-5"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label htmlFor="contact-name" className="block text-xs font-mono font-bold text-slate-700 uppercase tracking-wider mb-2">
+                  <label htmlFor="contact-name" className="block text-xs font-mono font-bold text-slate-300 uppercase tracking-wider mb-2">
                     Your Name *
                   </label>
                   <input
@@ -189,12 +189,12 @@ export default function Contact() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Jane Doe"
-                    className="w-full liquid-glass-input rounded-2xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
+                    className="w-full liquid-glass-input rounded-2xl px-4 py-3 text-sm text-white placeholder:text-slate-400 focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="contact-email" className="block text-xs font-mono font-bold text-slate-700 uppercase tracking-wider mb-2">
+                  <label htmlFor="contact-email" className="block text-xs font-mono font-bold text-slate-300 uppercase tracking-wider mb-2">
                     Your Email *
                   </label>
                   <input
@@ -204,13 +204,13 @@ export default function Contact() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="jane@example.com"
-                    className="w-full liquid-glass-input rounded-2xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
+                    className="w-full liquid-glass-input rounded-2xl px-4 py-3 text-sm text-white placeholder:text-slate-400 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="contact-subject" className="block text-xs font-mono font-bold text-slate-700 uppercase tracking-wider mb-2">
+                <label htmlFor="contact-subject" className="block text-xs font-mono font-bold text-slate-300 uppercase tracking-wider mb-2">
                   Subject (Optional)
                 </label>
                 <input
@@ -219,12 +219,12 @@ export default function Contact() {
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
                   placeholder="Project Collaboration / Job Inquiry"
-                  className="w-full liquid-glass-input rounded-2xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
+                  className="w-full liquid-glass-input rounded-2xl px-4 py-3 text-sm text-white placeholder:text-slate-400 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label htmlFor="contact-message" className="block text-xs font-mono font-bold text-slate-700 uppercase tracking-wider mb-2">
+                <label htmlFor="contact-message" className="block text-xs font-mono font-bold text-slate-300 uppercase tracking-wider mb-2">
                   Message *
                 </label>
                 <textarea
@@ -234,7 +234,7 @@ export default function Contact() {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Describe your project, team opportunity, or inquiry..."
-                  className="w-full liquid-glass-input rounded-2xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none resize-none"
+                  className="w-full liquid-glass-input rounded-2xl px-4 py-3 text-sm text-white placeholder:text-slate-400 focus:outline-none resize-none"
                 />
               </div>
 
@@ -245,9 +245,9 @@ export default function Contact() {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="p-4 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-mono flex items-center space-x-2.5"
+                    className="p-4 rounded-2xl bg-emerald-500/20 border border-emerald-400 text-emerald-200 text-xs font-mono flex items-center space-x-2.5"
                   >
-                    <CheckCircle2 size={16} className="text-emerald-600 flex-shrink-0" />
+                    <CheckCircle2 size={16} className="text-emerald-400 flex-shrink-0" />
                     <span>Message delivered successfully! I will respond promptly.</span>
                   </motion.div>
                 )}
@@ -257,10 +257,10 @@ export default function Contact() {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="p-4 rounded-2xl bg-amber-50 border border-amber-300 text-amber-900 text-xs font-mono flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                    className="p-4 rounded-2xl bg-amber-500/20 border border-amber-400 text-amber-200 text-xs font-mono flex flex-col sm:flex-row sm:items-center justify-between gap-3"
                   >
                     <div className="flex items-center space-x-2">
-                      <ShieldAlert size={16} className="text-amber-600 flex-shrink-0" />
+                      <ShieldAlert size={16} className="text-amber-400 flex-shrink-0" />
                       <span>Direct form delivery timed out. Try sending via mail client.</span>
                     </div>
                     <Button
@@ -282,13 +282,13 @@ export default function Contact() {
                   disabled={isSending}
                   variant="primary"
                   size="lg"
-                  className="w-full sm:w-auto rounded-full px-8 py-3.5 bg-slate-950 text-white hover:bg-slate-900 flex items-center justify-center space-x-2.5 shadow-lg"
+                  className="w-full sm:w-auto rounded-full px-8 py-3.5 bg-blue-600/80 hover:bg-blue-500 text-white flex items-center justify-center space-x-2.5 shadow-xl border border-blue-400/40"
                 >
                   <Send size={15} className={isSending ? "animate-spin" : ""} />
                   <span>{isSending ? "Transmitting..." : "Send Message"}</span>
                 </Button>
 
-                <p className="text-[11px] font-mono text-slate-500 text-center sm:text-right">
+                <p className="text-[11px] font-mono text-slate-400 text-center sm:text-right">
                   Responses typically sent within 24 hours.
                 </p>
               </div>

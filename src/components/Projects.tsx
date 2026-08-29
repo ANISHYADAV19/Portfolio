@@ -81,13 +81,13 @@ export default function Projects() {
         {/* Section Header */}
         <div className="mb-14 text-center lg:text-left">
           <div className="inline-flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full mb-3 shadow-xs">
-            <FolderGit2 size={14} className="text-blue-600" />
-            <span className="text-xs font-mono text-blue-700 font-bold tracking-wider uppercase">Engineered Software</span>
+            <FolderGit2 size={14} className="text-cyan-400" />
+            <span className="text-xs font-mono text-cyan-300 font-bold tracking-wider uppercase">Engineered Software</span>
           </div>
-          <h2 id="projects-heading" className="text-3xl md:text-5xl font-light text-slate-950 tracking-tight">
-            Featured <span className="font-serif italic text-blue-600 font-medium">Projects</span>
+          <h2 id="projects-heading" className="text-3xl md:text-5xl font-light text-white tracking-tight">
+            Featured <span className="font-serif italic text-cyan-400 font-medium drop-shadow-[0_0_20px_rgba(6,182,212,0.35)]">Projects</span>
           </h2>
-          <p className="text-sm text-slate-600 font-sans mt-2 max-w-xl">
+          <p className="text-sm text-slate-300 font-sans mt-2 max-w-xl">
             Selected machine learning architectures, computer vision pipelines, and intelligent interactive web applications.
           </p>
         </div>
@@ -97,16 +97,16 @@ export default function Projects() {
           {projects.map((project) => (
             <article 
               key={project.id}
-              className="liquid-glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xl border border-white/80 group"
+              className="liquid-glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl border border-white/20 group"
             >
               <div>
                 {/* Header */}
-                <div className="flex items-start justify-between gap-4 mb-4 pb-4 border-b border-slate-200/70">
+                <div className="flex items-start justify-between gap-4 mb-4 pb-4 border-b border-white/10">
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-display font-semibold text-slate-950 group-hover:text-blue-600 transition duration-250">
+                    <h3 className="text-xl sm:text-2xl font-display font-semibold text-white group-hover:text-cyan-300 transition duration-250">
                       {project.title}
                     </h3>
-                    <p className="text-xs font-mono text-blue-600 font-bold mt-1 uppercase tracking-wider">
+                    <p className="text-xs font-mono text-cyan-400 font-bold mt-1 uppercase tracking-wider">
                       Repository &bull; Open Source
                     </p>
                   </div>
@@ -117,22 +117,22 @@ export default function Projects() {
                     rel="noreferrer"
                     referrerPolicy="no-referrer"
                     aria-label={`View ${project.title} on GitHub (opens in new tab)`}
-                    className="p-3 rounded-full liquid-glass-pill text-slate-700 hover:text-white hover:bg-slate-950 transition-all duration-300 shadow-xs group-hover:scale-110 shrink-0"
+                    className="p-3 rounded-full liquid-glass-pill text-slate-200 hover:text-white hover:border-cyan-400 transition-all duration-300 shadow-xs group-hover:scale-110 shrink-0"
                   >
                     <Github className="w-5 h-5" aria-hidden="true" />
                   </a>
                 </div>
 
                 {/* Description */}
-                <p className="text-sm text-slate-700 font-sans leading-relaxed mb-5">
+                <p className="text-sm text-slate-200 font-sans leading-relaxed mb-5">
                   {project.description}
                 </p>
 
                 {/* Highlights List */}
                 <ul className="space-y-2 mb-6">
                   {project.bullets.map((bullet, idx) => (
-                    <li key={idx} className="text-xs sm:text-sm text-slate-600 flex items-start space-x-2">
-                      <span className="text-blue-600 font-bold mt-0.5 flex-shrink-0">&bull;</span>
+                    <li key={idx} className="text-xs sm:text-sm text-slate-300 flex items-start space-x-2">
+                      <span className="text-cyan-400 font-bold mt-0.5 flex-shrink-0">&bull;</span>
                       <span className="leading-snug">{bullet}</span>
                     </li>
                   ))}
@@ -140,12 +140,12 @@ export default function Projects() {
               </div>
 
               {/* Footer Tech Stack & Link */}
-              <div className="pt-4 border-t border-slate-200/70 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex flex-wrap gap-1.5" aria-label="Technologies used">
                   {project.technologies.map((tech, idx) => (
                     <span 
                       key={idx}
-                      className="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-white/70 border border-white/90 text-slate-800 shadow-2xs"
+                      className="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-white/10 border border-white/15 text-slate-200 shadow-2xs"
                     >
                       {tech}
                     </span>
@@ -157,7 +157,7 @@ export default function Projects() {
                   target="_blank"
                   rel="noreferrer"
                   referrerPolicy="no-referrer"
-                  className="inline-flex items-center space-x-1 text-xs font-mono font-bold text-blue-600 hover:text-blue-800 transition whitespace-nowrap"
+                  className="inline-flex items-center space-x-1 text-xs font-mono font-bold text-cyan-300 hover:text-cyan-200 transition whitespace-nowrap"
                 >
                   <span>Source Code</span>
                   <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />

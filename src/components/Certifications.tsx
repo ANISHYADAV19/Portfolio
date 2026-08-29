@@ -113,13 +113,13 @@ export default function Certifications() {
         {/* Section Header */}
         <div className="mb-14 text-center lg:text-left">
           <div className="inline-flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full mb-3 shadow-xs">
-            <ShieldCheck size={14} className="text-blue-600" />
-            <span className="text-xs font-mono text-blue-700 font-bold tracking-wider uppercase">Accreditations</span>
+            <ShieldCheck size={14} className="text-cyan-400" />
+            <span className="text-xs font-mono text-cyan-300 font-bold tracking-wider uppercase">Accreditations</span>
           </div>
-          <h2 id="certifications-heading" className="text-3xl md:text-5xl font-light text-slate-950 tracking-tight">
-            Verified <span className="font-serif italic text-blue-600 font-medium">Certifications</span>
+          <h2 id="certifications-heading" className="text-3xl md:text-5xl font-light text-white tracking-tight">
+            Verified <span className="font-serif italic text-cyan-400 font-medium drop-shadow-[0_0_20px_rgba(6,182,212,0.35)]">Certifications</span>
           </h2>
-          <p className="text-sm text-slate-600 font-sans mt-2 max-w-xl">
+          <p className="text-sm text-slate-300 font-sans mt-2 max-w-xl">
             Formal technical certifications issued by IBM, Stanford Online, AWS, University of Michigan, and Larsen & Toubro.
           </p>
         </div>
@@ -129,12 +129,12 @@ export default function Certifications() {
           {certificates.map((cert) => (
             <div 
               key={cert.id}
-              className="liquid-glass-card p-6 sm:p-8 rounded-3xl shadow-xl border border-white/80 flex flex-col justify-between group"
+              className="liquid-glass-card p-6 sm:p-8 rounded-3xl shadow-2xl border border-white/20 flex flex-col justify-between group"
             >
               <div>
-                <div className="flex items-start justify-between gap-4 mb-5 pb-4 border-b border-slate-200/70">
+                <div className="flex items-start justify-between gap-4 mb-5 pb-4 border-b border-white/10">
                   <div className="flex items-start space-x-3.5">
-                    <div className="p-2.5 rounded-2xl bg-blue-50/90 border border-blue-200 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition duration-300 shadow-2xs" aria-hidden="true">
+                    <div className="p-2.5 rounded-2xl bg-white/10 border border-white/15 text-cyan-400 group-hover:bg-blue-600 group-hover:text-white transition duration-300 shadow-2xs" aria-hidden="true">
                       {cert.id.startsWith("ibm") ? (
                         <Sparkles className="w-5 h-5" />
                       ) : cert.id.includes("ml") ? (
@@ -148,33 +148,33 @@ export default function Certifications() {
                       )}
                     </div>
                     <div>
-                      <h3 className="text-lg font-display font-semibold text-slate-950 leading-snug">
+                      <h3 className="text-lg font-display font-semibold text-white leading-snug">
                         {cert.title}
                       </h3>
-                      <p className="text-xs font-mono text-slate-600 mt-1">
-                        Issuer: <span className="text-blue-700 font-bold">{cert.issuer}</span>
+                      <p className="text-xs font-mono text-cyan-300 mt-1">
+                        Issuer: <span className="text-slate-100 font-bold">{cert.issuer}</span>
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-1.5 px-3 py-1 rounded-full liquid-glass-pill text-xs font-mono text-slate-800 font-bold shrink-0">
-                    <Calendar className="w-3.5 h-3.5 text-blue-600" aria-hidden="true" />
+                  <div className="flex items-center space-x-1.5 px-3 py-1 rounded-full liquid-glass-pill text-xs font-mono text-slate-200 font-bold shrink-0">
+                    <Calendar className="w-3.5 h-3.5 text-cyan-400" aria-hidden="true" />
                     <span>{cert.year}</span>
                   </div>
                 </div>
 
                 <div className="space-y-2.5">
                   {cert.bullets.map((bullet, idx) => (
-                    <p key={idx} className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">
+                    <p key={idx} className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
                       &bull; {bullet}
                     </p>
                   ))}
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-slate-200/70 flex items-center justify-between text-xs font-mono">
-                <span className="flex items-center space-x-1.5 text-emerald-700 font-bold">
-                  <Award className="w-4 h-4 text-emerald-600" />
+              <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono">
+                <span className="flex items-center space-x-1.5 text-emerald-400 font-bold">
+                  <Award className="w-4 h-4 text-emerald-400" />
                   <span>Verified</span>
                 </span>
 
@@ -190,7 +190,7 @@ export default function Certifications() {
                     <span>Preview</span>
                   </Button>
                 ) : (
-                  <span className="text-xs text-slate-500 uppercase tracking-widest">{cert.issuer}</span>
+                  <span className="text-xs text-slate-400 uppercase tracking-widest">{cert.issuer}</span>
                 )}
               </div>
             </div>
@@ -208,27 +208,27 @@ export default function Certifications() {
                 role="dialog"
                 aria-modal="true"
                 aria-label={`Certificate preview: ${selectedCertImage.title}`}
-                className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xl animate-fade-in"
+                className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-2xl animate-fade-in"
                 onClick={() => setSelectedCertImage(null)}
               >
                 <div
-                  className="relative max-w-4xl w-full liquid-glass-card rounded-3xl p-4 sm:p-6 shadow-2xl border border-white/80"
+                  className="relative max-w-4xl w-full liquid-glass-card rounded-3xl p-4 sm:p-6 shadow-2xl border border-white/30"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-200/70">
-                    <h3 className="text-lg font-display font-semibold text-slate-950 truncate pr-4">
+                  <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/15">
+                    <h3 className="text-lg font-display font-semibold text-white truncate pr-4">
                       {selectedCertImage.title}
                     </h3>
                     <button
                       ref={closeButtonRef}
                       onClick={() => setSelectedCertImage(null)}
-                      className="p-2 rounded-full liquid-glass-pill text-slate-700 hover:text-slate-950 transition cursor-pointer"
+                      className="p-2 rounded-full liquid-glass-pill text-slate-200 hover:text-white transition cursor-pointer"
                       aria-label="Close certificate preview"
                     >
                       <X className="w-5 h-5" />
                     </button>
                   </div>
-                  <div className="overflow-hidden rounded-2xl bg-slate-100 flex items-center justify-center max-h-[75vh]">
+                  <div className="overflow-hidden rounded-2xl bg-black/40 flex items-center justify-center max-h-[75vh]">
                     <img
                       src={selectedCertImage.url}
                       alt={`Certificate for ${selectedCertImage.title}`}

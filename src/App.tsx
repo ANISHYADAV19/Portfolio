@@ -58,13 +58,14 @@ export default function App() {
 
   // Initialize WebGL Liquid Glass Shader Engine
   useLiquidGlass(appContainerRef, ".liquid-glass-refract", {
-    blurAmount: 0.25,
-    refraction: 0.75,
-    chromAberration: 0.08,
-    edgeHighlight: 0.12,
+    blurAmount: 0.15,
+    refraction: 0.85,
+    chromAberration: 0.1,
+    edgeHighlight: 0.2,
     cornerRadius: 32,
     zRadius: 36,
-    shadowOpacity: 0.25
+    shadowOpacity: 0.35,
+    brightness: -0.1
   });
 
   const handleOpenResume = () => {
@@ -196,16 +197,16 @@ export default function App() {
   return (
     <div
       ref={appContainerRef}
-      className="min-h-screen text-slate-900 selection:bg-blue-200 selection:text-blue-900 font-sans relative overflow-x-hidden"
+      className="min-h-screen text-slate-100 selection:bg-blue-600 selection:text-white font-sans relative overflow-x-hidden"
     >
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-full focus:bg-slate-900 focus:text-white focus:font-mono focus:text-sm focus:font-bold shadow-lg"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-full focus:bg-blue-600 focus:text-white focus:font-mono focus:text-sm focus:font-bold shadow-lg"
       >
         Skip to main content
       </a>
 
-      {/* Cinematic Loop Background Video - Persistently Visible Full Site */}
+      {/* Cinematic Loop Background Video - 100% Persistently Visible Across Entire Site */}
       <video
         autoPlay
         muted
@@ -215,34 +216,34 @@ export default function App() {
         src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_094145_4a271a6c-3869-4f1c-8aa7-aeb0cb227994.mp4"
       />
 
-      {/* Subtle Ambient Glass Tint Layer (Allows continuous video visibility) */}
-      <div className="fixed inset-0 w-full h-full bg-slate-950/10 pointer-events-none z-1" />
+      {/* Very Light Ambient Tint Layer (Keeps video bright & visible) */}
+      <div className="fixed inset-0 w-full h-full bg-slate-950/20 pointer-events-none z-1" />
 
       {/* Top Scroll Progress Indicator */}
       <div
         aria-hidden="true"
-        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-600 via-indigo-600 to-emerald-500 z-50 transition-all duration-100 shadow-xs"
+        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-emerald-400 z-50 transition-all duration-100 shadow-xs"
         style={{ width: `${scrollProgress}%` }}
       />
 
-      {/* Floating Liquid Glass Navbar */}
+      {/* Floating Crystal Transparent Glass Navbar */}
       <header className="fixed top-3 left-0 right-0 z-50 px-4 sm:px-6 md:px-12 flex justify-center">
         <nav
           aria-label="Main navigation"
-          className="w-full max-w-7xl h-16 md:h-18 liquid-glass-nav rounded-full px-5 sm:px-8 flex items-center justify-between shadow-lg border border-white/60"
+          className="w-full max-w-7xl h-16 md:h-18 liquid-glass-nav rounded-full px-5 sm:px-8 flex items-center justify-between shadow-2xl"
         >
           {/* Logo Brand */}
           <a
             href="#hero"
             onClick={(e) => handleNavClick(e, "hero")}
-            className="font-mono text-base md:text-lg font-extrabold tracking-wider text-slate-900 hover:text-blue-600 transition cursor-pointer select-none flex items-center space-x-2"
+            className="font-mono text-base md:text-lg font-extrabold tracking-wider text-white hover:text-cyan-400 transition cursor-pointer select-none flex items-center space-x-2"
           >
-            <span className="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse" />
+            <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
             <span>ANISH YADAV</span>
           </a>
 
           {/* Desktop Navigation Items */}
-          <div className="hidden lg:flex items-center space-x-2 bg-white/40 p-1.5 rounded-full border border-white/50 backdrop-blur-md">
+          <div className="hidden lg:flex items-center space-x-2 bg-white/5 p-1.5 rounded-full border border-white/10 backdrop-blur-md">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -251,8 +252,8 @@ export default function App() {
                 aria-current={activeSection === item.id ? "true" : undefined}
                 className={`text-xs font-mono tracking-wider px-4 py-1.5 rounded-full transition-all duration-200 cursor-pointer ${
                   activeSection === item.id
-                    ? "bg-white text-blue-600 font-bold shadow-xs scale-105"
-                    : "text-slate-700 hover:text-slate-950 hover:bg-white/50"
+                    ? "bg-white/20 text-cyan-300 font-bold shadow-xs border border-white/25 scale-105"
+                    : "text-slate-300 hover:text-white hover:bg-white/10"
                 }`}
               >
                 {item.label}
@@ -270,8 +271,8 @@ export default function App() {
               onClick={() => scrollToSection("skills")}
               title="Search Portfolio"
             >
-              <Search size={15} className="text-slate-700" />
-              <span className="text-xs font-mono font-semibold tracking-wide text-slate-800">Search</span>
+              <Search size={15} className="text-cyan-300" />
+              <span className="text-xs font-mono font-semibold tracking-wide text-slate-100">Search</span>
             </Button>
 
             {/* Profile Button */}
@@ -282,7 +283,7 @@ export default function App() {
               onClick={() => scrollToSection("contact")}
               title="View Profile & Contact"
             >
-              <User size={16} className="text-slate-700" />
+              <User size={16} className="text-cyan-300" />
             </Button>
           </div>
 
@@ -299,13 +300,13 @@ export default function App() {
             <div className="relative w-5 h-5 flex items-center justify-center">
               <X
                 size={18}
-                className={`absolute transition-all duration-300 ease-out text-slate-900 ${
+                className={`absolute transition-all duration-300 ease-out text-white ${
                   isMobileMenuOpen ? "rotate-0 opacity-100 scale-100" : "rotate-180 opacity-0 scale-50"
                 }`}
               />
               <Menu
                 size={18}
-                className={`absolute transition-all duration-300 ease-out text-slate-900 ${
+                className={`absolute transition-all duration-300 ease-out text-white ${
                   isMobileMenuOpen ? "-rotate-180 opacity-0 scale-50" : "rotate-0 opacity-100 scale-100"
                 }`}
               />
@@ -333,7 +334,7 @@ export default function App() {
                 handleNavClick(e, item.id);
                 setIsMobileMenuOpen(false);
               }}
-              className="py-3 px-4 rounded-2xl hover:bg-white/80 font-mono text-sm text-slate-800 hover:text-blue-600 transition-all duration-200 font-semibold"
+              className="py-3 px-4 rounded-2xl hover:bg-white/15 font-mono text-sm text-slate-200 hover:text-cyan-300 transition-all duration-200 font-semibold"
               style={{
                 transitionDelay: `${idx * 40}ms`,
                 transform: isMobileMenuOpen ? "translateX(0)" : "translateX(-12px)"
@@ -344,7 +345,7 @@ export default function App() {
           ))}
 
           {/* Mobile Buttons */}
-          <div className="sm:hidden pt-4 mt-2 border-t border-slate-200/80 flex items-center justify-between">
+          <div className="sm:hidden pt-4 mt-2 border-t border-white/15 flex items-center justify-between">
             <Button
               variant="glass"
               size="sm"
@@ -354,8 +355,8 @@ export default function App() {
                 scrollToSection("skills");
               }}
             >
-              <Search size={16} className="text-slate-700" />
-              <span className="text-xs font-mono font-semibold text-slate-800">Search Skills</span>
+              <Search size={16} className="text-cyan-300" />
+              <span className="text-xs font-mono font-semibold text-slate-100">Search Skills</span>
             </Button>
 
             <Button
@@ -367,7 +368,7 @@ export default function App() {
                 scrollToSection("contact");
               }}
             >
-              <User size={18} className="text-slate-700" />
+              <User size={18} className="text-cyan-300" />
             </Button>
           </div>
         </div>
@@ -386,22 +387,22 @@ export default function App() {
             {/* Left Column: Bio Details & Primary Actions */}
             <div className="flex-1 flex flex-col items-start text-left max-w-3xl">
               
-              {/* Metadata Liquid Glass Badges */}
+              {/* Metadata Crystal Glass Badges */}
               <div
                 className="flex flex-wrap items-center gap-2.5 sm:gap-3 mb-6 md:mb-8 text-xs font-mono animate-blur-fade-up"
                 style={{ animationDelay: "200ms" }}
               >
                 <div className="flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full shadow-xs">
-                  <GraduationCap size={15} className="text-blue-600" />
-                  <span className="font-semibold uppercase tracking-wider text-xs text-slate-800">VIT Bhopal University</span>
+                  <GraduationCap size={15} className="text-cyan-400" />
+                  <span className="font-semibold uppercase tracking-wider text-xs text-slate-200">VIT Bhopal University</span>
                 </div>
                 <div className="flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full shadow-xs">
-                  <MapPin size={15} className="text-emerald-600" />
-                  <span className="uppercase tracking-wider text-xs font-semibold text-slate-800">Haryana, India</span>
+                  <MapPin size={15} className="text-emerald-400" />
+                  <span className="uppercase tracking-wider text-xs font-semibold text-slate-200">Haryana, India</span>
                 </div>
                 <div className="flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full shadow-xs">
-                  <Database size={15} className="text-purple-600" />
-                  <span className="uppercase tracking-wider text-xs font-semibold text-slate-800">AI & ML Specialization</span>
+                  <Database size={15} className="text-purple-400" />
+                  <span className="uppercase tracking-wider text-xs font-semibold text-slate-200">AI & ML Specialization</span>
                 </div>
               </div>
 
@@ -415,7 +416,7 @@ export default function App() {
               >
                 <h1
                   aria-label="Anish Yadav"
-                  className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-light tracking-tight text-slate-950 leading-none select-none flex flex-wrap gap-x-4 sm:gap-x-6 drop-shadow-xs"
+                  className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-light tracking-tight text-white leading-none select-none flex flex-wrap gap-x-4 sm:gap-x-6 drop-shadow-md"
                 >
                   {/* First Name: Anish */}
                   <span className="inline-flex space-x-0.5 sm:space-x-1" aria-hidden="true">
@@ -426,7 +427,7 @@ export default function App() {
                         whileHover={{
                           y: -6,
                           scale: 1.12,
-                          color: "#2563eb",
+                          color: "#60a5fa",
                           transition: { duration: 0.15 }
                         }}
                         className="inline-block transform-gpu cursor-pointer transition-colors"
@@ -438,7 +439,7 @@ export default function App() {
 
                   {/* Last Name: Yadav */}
                   <span
-                    className="inline-flex space-x-0.5 sm:space-x-1 font-serif italic text-blue-600 font-medium"
+                    className="inline-flex space-x-0.5 sm:space-x-1 font-serif italic text-cyan-400 font-medium drop-shadow-[0_0_25px_rgba(6,182,212,0.4)]"
                     aria-hidden="true"
                   >
                     {lastName.map((char, index) => (
@@ -448,7 +449,7 @@ export default function App() {
                         whileHover={{
                           y: -6,
                           scale: 1.12,
-                          color: "#1d4ed8",
+                          color: "#38bdf8",
                           transition: { duration: 0.15 }
                         }}
                         className="inline-block transform-gpu cursor-pointer transition-colors"
@@ -460,12 +461,12 @@ export default function App() {
                 </h1>
               </motion.div>
 
-              {/* Tagline Bio Description in Translucent Liquid Card */}
+              {/* Tagline Bio Description in Crystal Transparent Glass Card */}
               <div
-                className="liquid-glass-card rounded-2xl p-5 sm:p-6 mb-6 md:mb-10 max-w-2xl animate-blur-fade-up shadow-md border border-white/70"
+                className="liquid-glass-card rounded-3xl p-5 sm:p-6 mb-6 md:mb-10 max-w-2xl animate-blur-fade-up shadow-xl"
                 style={{ animationDelay: "400ms" }}
               >
-                <p className="text-base sm:text-lg text-slate-800 font-sans leading-relaxed">
+                <p className="text-base sm:text-lg text-slate-200 font-sans leading-relaxed">
                   AI & Machine Learning engineer and web developer. Building intelligent computer-vision pipelines, high-accuracy deep neural architectures, and high-performance web applications.
                 </p>
               </div>
@@ -479,10 +480,10 @@ export default function App() {
                   onClick={handleOpenResume}
                   variant="primary"
                   size="lg"
-                  className="liquid-glass-refract rounded-full px-7 py-3.5 flex items-center space-x-2.5 text-xs font-mono font-bold tracking-wider shadow-lg hover:shadow-xl bg-slate-950/90 hover:bg-slate-900 border border-slate-700/80 text-white"
-                  data-config={JSON.stringify({ button: true, cornerRadius: 28, blurAmount: 0.2 })}
+                  className="liquid-glass-refract rounded-full px-7 py-3.5 flex items-center space-x-2.5 text-xs font-mono font-bold tracking-wider shadow-lg hover:shadow-2xl bg-blue-600/80 hover:bg-blue-500 border border-blue-400/50 text-white"
+                  data-config={JSON.stringify({ button: true, cornerRadius: 28, blurAmount: 0.15 })}
                 >
-                  <FileText className="w-4 h-4 text-blue-400" aria-hidden="true" />
+                  <FileText className="w-4 h-4 text-cyan-200" aria-hidden="true" />
                   <span>View Resume</span>
                   <ExternalLink className="w-4 h-4 text-white/80" aria-hidden="true" />
                   <span className="sr-only">(opens in new tab)</span>
@@ -492,50 +493,50 @@ export default function App() {
                   onClick={() => scrollToSection("contact")}
                   variant="glass"
                   size="lg"
-                  className="liquid-glass-refract rounded-full px-7 py-3.5 text-xs font-mono font-bold tracking-wider shadow-md hover:shadow-lg"
-                  data-config={JSON.stringify({ button: true, cornerRadius: 28, blurAmount: 0.25 })}
+                  className="liquid-glass-refract rounded-full px-7 py-3.5 text-xs font-mono font-bold tracking-wider shadow-md hover:shadow-xl"
+                  data-config={JSON.stringify({ button: true, cornerRadius: 28, blurAmount: 0.15 })}
                 >
                   <span>Contact Me</span>
                 </Button>
               </div>
             </div>
 
-            {/* Right Column: Interactive Liquid Glass Status Lens */}
+            {/* Right Column: Crystal Transparent Glass Status Lens */}
             <div
               className="hidden md:flex flex-col items-end animate-blur-fade-up"
               style={{ animationDelay: "600ms" }}
             >
               <div
-                className="liquid-glass-card liquid-glass-refract rounded-3xl p-6 flex flex-col space-y-3 max-w-xs shadow-xl border border-white/80"
+                className="liquid-glass-card liquid-glass-refract rounded-3xl p-6 flex flex-col space-y-3 max-w-xs shadow-2xl"
                 data-config={JSON.stringify({
                   cornerRadius: 32,
                   zRadius: 32,
-                  refraction: 0.9,
-                  blurAmount: 0.2,
-                  chromAberration: 0.1
+                  refraction: 0.95,
+                  blurAmount: 0.1,
+                  chromAberration: 0.12
                 })}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    <span className="w-3 h-3 rounded-full bg-emerald-500 animate-ping" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 absolute" />
-                    <span className="font-mono text-xs font-bold uppercase tracking-wider text-emerald-700">Available</span>
+                    <span className="w-3 h-3 rounded-full bg-emerald-400 animate-ping" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 absolute" />
+                    <span className="font-mono text-xs font-bold uppercase tracking-wider text-emerald-300">Available</span>
                   </div>
-                  <Sparkles size={16} className="text-blue-600" />
+                  <Sparkles size={16} className="text-cyan-400" />
                 </div>
-                <p className="text-xs text-slate-700 font-sans leading-relaxed">
+                <p className="text-xs text-slate-300 font-sans leading-relaxed">
                   Open for AI/ML engineering internships, research roles, and creative web development projects.
                 </p>
-                <div className="pt-2 border-t border-slate-200/80 flex items-center justify-between text-[11px] font-mono text-slate-500">
+                <div className="pt-2 border-t border-white/15 flex items-center justify-between text-[11px] font-mono text-slate-400">
                   <span>SPECIALTY</span>
-                  <span className="font-semibold text-slate-800">PyTorch & WebGL</span>
+                  <span className="font-semibold text-cyan-300">PyTorch & WebGL</span>
                 </div>
               </div>
 
               {/* Scroll down indicator */}
               <button
                 onClick={() => scrollToSection("skills")}
-                className="mt-6 flex items-center space-x-2 text-xs font-mono text-slate-600 hover:text-blue-600 transition cursor-pointer"
+                className="mt-6 flex items-center space-x-2 text-xs font-mono text-slate-300 hover:text-cyan-400 transition cursor-pointer"
               >
                 <span>Scroll to explore</span>
                 <ChevronDown size={14} className="animate-bounce" />
@@ -567,24 +568,24 @@ export default function App() {
         </RevealSection>
       </main>
 
-      {/* Floating Liquid Glass Footer */}
+      {/* Crystal Transparent Liquid Glass Footer */}
       <footer className="py-12 px-6 relative z-10">
-        <div className="max-w-6xl mx-auto liquid-glass-card rounded-3xl p-8 shadow-xl border border-white/80 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="max-w-6xl mx-auto liquid-glass-card rounded-3xl p-8 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left font-mono">
-            <p className="text-xs text-slate-700">
-              &copy; {new Date().getFullYear()} &mdash; Designed & Developed by <span className="text-slate-950 font-bold">Anish Yadav</span>
+            <p className="text-xs text-slate-300">
+              &copy; {new Date().getFullYear()} &mdash; Designed & Developed by <span className="text-white font-bold">Anish Yadav</span>
             </p>
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="text-xs text-slate-400 mt-1">
               B.Tech in Computer Science (Artificial Intelligence & Machine Learning) &bull; VIT Bhopal
             </p>
           </div>
 
-          <div className="flex space-x-6 text-xs font-mono text-slate-700">
-            <a href="mailto:anishyadav872004@gmail.com" className="hover:text-blue-600 transition font-semibold">Mail</a>
-            <a href="https://github.com/ANISHYADAV19" target="_blank" referrerPolicy="no-referrer" rel="noreferrer" className="hover:text-blue-600 transition font-semibold">
+          <div className="flex space-x-6 text-xs font-mono text-slate-300">
+            <a href="mailto:anishyadav872004@gmail.com" className="hover:text-cyan-400 transition font-semibold">Mail</a>
+            <a href="https://github.com/ANISHYADAV19" target="_blank" referrerPolicy="no-referrer" rel="noreferrer" className="hover:text-cyan-400 transition font-semibold">
               GitHub<span className="sr-only"> (opens in a new tab)</span>
             </a>
-            <a href="https://www.linkedin.com/in/anish-yadav-dev/" target="_blank" referrerPolicy="no-referrer" rel="noreferrer" className="hover:text-blue-600 transition font-semibold">
+            <a href="https://www.linkedin.com/in/anish-yadav-dev/" target="_blank" referrerPolicy="no-referrer" rel="noreferrer" className="hover:text-cyan-400 transition font-semibold">
               LinkedIn<span className="sr-only"> (opens in a new tab)</span>
             </a>
           </div>
