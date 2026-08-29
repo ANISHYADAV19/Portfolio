@@ -59,43 +59,63 @@ export default function Skills() {
         },
         { 
           name: "C++", 
-          level: 75, 
-          info: "Utilized for competitive coding, resource-constrained algorithmic tasks, and hardware-level performance engineering." 
+          level: 70, 
+          info: "Solid understanding of computational complexity, memory management, algorithms, and core procedural constructs." 
+        },
+        { 
+          name: "JavaScript", 
+          level: 80, 
+          info: "Modern ES6+ JavaScript, asynchronous operations, event-driven interfaces, and DOM manipulation for responsive web applications." 
         }
       ]
     },
     {
-      title: "Web Development",
+      title: "Frameworks & Web Stack",
       icon: <Server className="w-5 h-5 text-purple-600" />,
       skills: [
         { 
-          name: "React.js", 
-          level: 80, 
-          info: "Built complex single-page apps using modern states, standard Vite hooks, Tailwind responsive grids, and motion animations." 
-        },
-        { 
-          name: "Node.js & RESTful APIs", 
-          level: 75, 
-          info: "Engineered scalable backends and custom routing endpoints. Experienced in serving models and structured JSON payloads." 
-        },
-        { 
-          name: "HTML5 & CSS3", 
+          name: "TensorFlow & Keras", 
           level: 85, 
-          info: "Crafted accessible structures, fluid layouts, custom CSS animations, custom scrollbars, and modern responsive interfaces." 
+          info: "Extensive experience designing, training, pruning, and evaluating deep convolutional and recurrent networks." 
+        },
+        { 
+          name: "React & Vite", 
+          level: 85, 
+          info: "Building fast, dynamic single-page applications with TypeScript, reusable functional components, and custom hooks." 
+        },
+        { 
+          name: "Tailwind CSS", 
+          level: 90, 
+          info: "Crafting fluid, modern responsive layouts, custom design systems, liquid glass effects, and accessible UI components." 
+        },
+        { 
+          name: "Flask", 
+          level: 75, 
+          info: "Developing lightweight REST APIs, microservices, and serving machine learning inferences for real-time applications." 
         }
       ]
     },
     {
-      title: "Databases & Tools",
-      icon: <Database className="w-5 h-5 text-slate-600" />,
+      title: "Data & Developer Tools",
+      icon: <Database className="w-5 h-5 text-indigo-600" />,
       skills: [
         { 
-          name: "SQL & DB Management", 
-          level: 80, 
-          info: "Knowledgeable in relational queries, structured tables, database normalization, indexing, and persistent schema design." 
+          name: "MySQL & MongoDB", 
+          level: 75, 
+          info: "Designing relational database schemas, writing complex SQL queries, and handling unstructured document stores in MongoDB." 
         },
         { 
-          name: "Git & Version Control", 
+          name: "OpenCV", 
+          level: 85, 
+          info: "Real-time computer vision, webcam frame processing, barcode scanning, filtering, and bounding box detections." 
+        },
+        { 
+          name: "NumPy & Pandas", 
+          level: 90, 
+          info: "High-performance data manipulation, multidimensional array computing, dataset cleansing, and exploratory data analysis." 
+        },
+        { 
+          name: "Git & GitHub", 
           level: 85, 
           info: "Strong expertise in source control, branching, clean commits, rebasing, pull-requests, and collaborating on platforms like GitHub." 
         }
@@ -104,18 +124,21 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" aria-labelledby="skills-heading" className="py-24 px-6 bg-slate-50 border-t border-slate-200/80 relative">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-3xl -z-10" />
-
-      <div className="w-full max-w-6xl mx-auto">
+    <section id="skills" aria-labelledby="skills-heading" className="py-24 px-4 sm:px-6 md:px-12 relative">
+      <div className="w-full max-w-7xl mx-auto">
         
         {/* Section Header */}
-        <div className="mb-16 text-center lg:text-left">
-          <p className="text-xs font-mono text-blue-600 font-semibold tracking-wider uppercase mb-2">Technical Capabilities</p>
-          <h2 id="skills-heading" className="text-3xl md:text-5xl font-light text-slate-900 tracking-tight">
+        <div className="mb-14 text-center lg:text-left">
+          <div className="inline-flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full mb-3 shadow-xs">
+            <Sparkles size={14} className="text-blue-600" />
+            <span className="text-xs font-mono text-blue-700 font-bold tracking-wider uppercase">Technical Capabilities</span>
+          </div>
+          <h2 id="skills-heading" className="text-3xl md:text-5xl font-light text-slate-950 tracking-tight">
             Skills & <span className="font-serif italic text-blue-600 font-medium">Specializations</span>
           </h2>
-          <div className="h-0.5 w-16 bg-blue-600 mt-4 mx-auto lg:mx-0" />
+          <p className="text-sm text-slate-600 font-sans mt-2 max-w-xl">
+            Interactive skill matrix across Artificial Intelligence, Machine Learning, Web Engineering, and Core Technologies.
+          </p>
         </div>
 
         {/* Responsive Grid */}
@@ -126,11 +149,13 @@ export default function Skills() {
             {categories.map((category, catIdx) => (
               <div 
                 key={catIdx} 
-                className="liquid-glass rounded-2xl p-6 flex flex-col space-y-4 shadow-xs hover:shadow-md transition duration-300"
+                className="liquid-glass-card rounded-3xl p-6 flex flex-col space-y-4 shadow-lg border border-white/80"
               >
-                <div className="flex items-center space-x-2 pb-3 border-b border-slate-100">
-                  <span aria-hidden="true">{category.icon}</span>
-                  <h3 className="text-sm font-display font-semibold text-slate-900">{category.title}</h3>
+                <div className="flex items-center space-x-3 pb-3 border-b border-slate-200/70">
+                  <div className="p-2 rounded-xl bg-white/80 border border-white/90 shadow-xs">
+                    <span aria-hidden="true">{category.icon}</span>
+                  </div>
+                  <h3 className="text-base font-display font-semibold text-slate-900">{category.title}</h3>
                 </div>
 
                 <div className="space-y-3">
@@ -142,24 +167,24 @@ export default function Skills() {
                         onClick={() => setActiveSkill(skill)}
                         aria-pressed={isActive}
                         aria-label={`${skill.name}, ${skill.level} percent — show details`}
-                        className={`w-full text-left p-3 rounded-xl border transition-all duration-200 cursor-pointer flex flex-col space-y-2 ${
+                        className={`w-full text-left p-3.5 rounded-2xl border transition-all duration-250 cursor-pointer flex flex-col space-y-2 ${
                           isActive
-                            ? "bg-blue-50/90 border-blue-500 shadow-xs"
-                            : "bg-white/70 border-slate-200/80 hover:bg-slate-50 hover:border-slate-300"
+                            ? "bg-blue-50/95 border-blue-500 shadow-md scale-[1.02]"
+                            : "bg-white/60 border-white/80 hover:bg-white/90 hover:border-slate-300 shadow-xs"
                         }`}
                       >
                         <div className="flex justify-between items-center text-xs" aria-hidden="true">
-                          <span className={`font-mono font-medium ${isActive ? "text-blue-700 font-semibold" : "text-slate-800"}`}>
+                          <span className={`font-mono font-semibold ${isActive ? "text-blue-700 font-bold" : "text-slate-800"}`}>
                             {skill.name}
                           </span>
-                          <span className="text-xs text-slate-500 font-mono">{skill.level}%</span>
+                          <span className="text-xs text-slate-600 font-mono font-bold">{skill.level}%</span>
                         </div>
 
                         {/* Visual progress bar */}
-                        <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden" aria-hidden="true">
+                        <div className="w-full h-1.5 bg-slate-200/80 rounded-full overflow-hidden" aria-hidden="true">
                           <div
                             className={`h-full rounded-full transition-all duration-500 ${
-                              isActive ? "bg-blue-600" : "bg-slate-400/80"
+                              isActive ? "bg-blue-600" : "bg-slate-400"
                             }`}
                             style={{ width: `${skill.level}%` }}
                           />
@@ -174,63 +199,63 @@ export default function Skills() {
 
           {/* Interactive Skill Detail Card - Right Side (5 cols) */}
           <div className="lg:col-span-5 lg:sticky lg:top-24">
-            <div className="bg-white/90 backdrop-blur-md border border-slate-200/90 p-6 rounded-2xl shadow-xl relative overflow-hidden">
-              <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
-                <div className="flex items-center space-x-2">
-                  <div className={`w-2.5 h-2.5 rounded-full ${activeSkill ? "bg-blue-600 animate-pulse" : "bg-slate-400"}`} />
-                  <span className="text-xs font-mono text-blue-600 font-bold uppercase tracking-widest">Skill Analyzer</span>
+            <div className="liquid-glass-card rounded-3xl p-6 md:p-8 shadow-2xl border border-white/90 relative overflow-hidden">
+              <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-200/70">
+                <div className="flex items-center space-x-2.5">
+                  <div className={`w-2.5 h-2.5 rounded-full ${activeSkill ? "bg-blue-600 animate-ping" : "bg-slate-400"}`} />
+                  <span className="text-xs font-mono text-blue-700 font-extrabold uppercase tracking-widest">Skill Analyzer</span>
                 </div>
                 <HelpCircle className="w-4 h-4 text-slate-400" />
               </div>
 
               {!activeSkill ? (
-                <div className="py-6 px-2 flex flex-col items-center justify-center text-center space-y-4">
-                  <div className="w-12 h-12 rounded-full bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
-                    <MousePointerClick className="w-6 h-6" />
+                <div className="py-8 px-2 flex flex-col items-center justify-center text-center space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-blue-50/90 border border-blue-200 flex items-center justify-center text-blue-600 shadow-inner">
+                    <MousePointerClick className="w-7 h-7" />
                   </div>
                   <div className="space-y-1.5">
                     <h4 className="text-lg font-display font-semibold text-slate-900">
                       Click on a skill to analyze
                     </h4>
                     <p className="text-xs text-slate-600 max-w-xs font-sans leading-relaxed">
-                      Select any skill item from the categories on the left to inspect detailed expertise metrics and project context.
+                      Select any skill item on the left to inspect practical applications, specialized coursework, and technical proficiency.
                     </p>
                   </div>
-                  <div className="text-xs font-mono text-slate-400 border-t border-slate-100 pt-4 w-full flex justify-between">
-                    <span>SYSTEM: SKILL_MATRIX</span>
-                    <span>STATUS: READY</span>
+                  <div className="text-[11px] font-mono text-slate-500 border-t border-slate-200/70 pt-4 w-full flex justify-between">
+                    <span>ENGINE: LIQUID_ANALYSIS</span>
+                    <span className="text-emerald-700 font-bold">STATUS: READY</span>
                   </div>
                 </div>
               ) : (
                 <div className="space-y-4">
-                  <h4 className="text-2xl font-serif italic font-bold text-slate-900">
+                  <h4 className="text-2xl md:text-3xl font-serif italic font-bold text-slate-950">
                     {activeSkill.name}
                   </h4>
 
                   <div className="flex items-center space-x-2 font-mono text-xs">
-                    <span className="text-slate-500">Expertise Level:</span>
-                    <span className="text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded font-semibold">
-                      {activeSkill.level}% (Proficient)
+                    <span className="text-slate-600">Proficiency:</span>
+                    <span className="text-emerald-800 bg-emerald-100/90 border border-emerald-300 px-2.5 py-0.5 rounded-full font-bold">
+                      {activeSkill.level}% (High Mastery)
                     </span>
                   </div>
 
-                  <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl min-h-[120px] flex items-start space-x-3">
-                    <CheckCircle2 className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                    <p className="text-sm text-slate-700 font-sans leading-relaxed">
+                  <div className="p-4 bg-white/70 border border-white/90 rounded-2xl min-h-[120px] flex items-start space-x-3 shadow-inner">
+                    <CheckCircle2 className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                    <p className="text-sm text-slate-800 font-sans leading-relaxed">
                       {activeSkill.info}
                     </p>
                   </div>
 
-                  <div className="text-xs font-mono text-slate-400 border-t border-slate-100 pt-4 flex justify-between">
-                    <span>SYSTEM: SKILL_MATRIX</span>
-                    <span>STATUS: ACTIVE</span>
+                  <div className="text-[11px] font-mono text-slate-500 border-t border-slate-200/70 pt-4 flex justify-between">
+                    <span>ENGINE: LIQUID_ANALYSIS</span>
+                    <span className="text-blue-700 font-bold">STATUS: INSPECTING</span>
                   </div>
                 </div>
               )}
             </div>
             
             {/* Guide message */}
-            <p className="text-xs text-center text-slate-500 mt-4 font-mono">
+            <p className="text-xs text-center text-slate-600 mt-4 font-mono font-medium">
               💡 Select any skill item on the left to inspect professional context.
             </p>
           </div>
