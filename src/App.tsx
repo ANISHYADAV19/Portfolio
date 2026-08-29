@@ -6,9 +6,13 @@ import {
   ExternalLink,
   Search,
   User,
+  GraduationCap,
+  MapPin,
+  Database,
+  Sparkles,
+  ChevronDown
 } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import Hero from "./components/Hero";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Certifications from "./components/Certifications";
@@ -147,12 +151,48 @@ export default function App() {
   };
 
   const navItems = [
-    { id: "skills", label: "Skills" },
-    { id: "projects", label: "Projects" },
-    { id: "certifications", label: "Certificates" },
-    { id: "education", label: "Education" },
-    { id: "contact", label: "Contact" }
+    { id: "skills", label: "Skills", delay: "100ms" },
+    { id: "projects", label: "Projects", delay: "150ms" },
+    { id: "certifications", label: "Certificates", delay: "200ms" },
+    { id: "education", label: "Education", delay: "250ms" },
+    { id: "contact", label: "Contact", delay: "300ms" }
   ];
+
+  const firstName = "Anish".split("");
+  const lastName = "Yadav".split("");
+
+  const nameContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.07,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const letterVariants = {
+    hidden: {
+      opacity: 0,
+      y: 35,
+      rotateX: -60,
+      scale: 0.85,
+      filter: "blur(8px)"
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      scale: 1,
+      filter: "blur(0px)",
+      transition: {
+        type: "spring",
+        damping: 14,
+        stiffness: 120
+      }
+    }
+  };
 
   return (
     <div
@@ -245,19 +285,6 @@ export default function App() {
             >
               <User size={16} className="text-cyan-300" />
             </Button>
-
-            {/* Resume Button */}
-            <Button
-              onClick={handleOpenResume}
-              variant="primary"
-              size="sm"
-              className="liquid-glass-refract px-4 py-2 flex items-center space-x-1.5 shadow-xs"
-              title="View Resume"
-            >
-              <FileText className="w-3.5 h-3.5 text-cyan-200" />
-              <span>Resume</span>
-              <ExternalLink className="w-3 h-3 text-white/80" />
-            </Button>
           </div>
 
           {/* Mobile Menu Toggle Button */}
@@ -318,46 +345,30 @@ export default function App() {
           ))}
 
           {/* Mobile Buttons */}
-          <div className="sm:hidden pt-4 mt-2 border-t border-white/15 flex flex-col space-y-2">
-            <div className="flex items-center justify-between">
-              <Button
-                variant="glass"
-                size="sm"
-                className="px-4 py-2 flex items-center space-x-2"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  scrollToSection("skills");
-                }}
-              >
-                <Search size={16} className="text-cyan-300" />
-                <span className="text-xs font-mono font-semibold text-slate-100">Search</span>
-              </Button>
-
-              <Button
-                variant="glass"
-                size="sm"
-                className="w-10 h-10 rounded-full p-0 flex items-center justify-center"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  scrollToSection("contact");
-                }}
-              >
-                <User size={18} className="text-cyan-300" />
-              </Button>
-            </div>
-
+          <div className="sm:hidden pt-4 mt-2 border-t border-white/15 flex items-center justify-between">
             <Button
-              variant="primary"
-              size="md"
-              className="w-full flex items-center justify-center space-x-2"
+              variant="glass"
+              size="sm"
+              className="px-4 py-2 flex items-center space-x-2"
               onClick={() => {
                 setIsMobileMenuOpen(false);
-                handleOpenResume();
+                scrollToSection("skills");
               }}
             >
-              <FileText className="w-4 h-4 text-cyan-200" />
-              <span>Resume</span>
-              <ExternalLink className="w-4 h-4 text-white/80" />
+              <Search size={16} className="text-cyan-300" />
+              <span className="text-xs font-mono font-semibold text-slate-100">Search Skills</span>
+            </Button>
+
+            <Button
+              variant="glass"
+              size="sm"
+              className="w-10 h-10 rounded-full p-0 flex items-center justify-center"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                scrollToSection("contact");
+              }}
+            >
+              <User size={18} className="text-cyan-300" />
             </Button>
           </div>
         </div>
@@ -366,12 +377,174 @@ export default function App() {
       {/* Main Content Area */}
       <main id="main-content" className="relative z-10">
         
-        {/* Full Landing Hero Component with Exact Original Data */}
-        <Hero
-          onScrollToContact={() => scrollToSection("contact")}
-          onScrollToProjects={() => scrollToSection("projects")}
-          onOpenResume={handleOpenResume}
-        />
+        {/* Full-Viewport Landing Hero Section */}
+        <section
+          id="hero"
+          className="min-h-screen w-full relative flex flex-col justify-center sm:justify-end px-4 sm:px-6 md:px-12 pt-28 pb-12 md:pb-20"
+        >
+          <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
+            
+            {/* Left Column: Bio Details & Primary Actions */}
+            <div className="flex-1 flex flex-col items-start text-left max-w-3xl">
+              
+              {/* Metadata Crystal Glass Badges */}
+              <div
+                className="flex flex-wrap items-center gap-2.5 sm:gap-3 mb-6 md:mb-8 text-xs font-mono animate-blur-fade-up"
+                style={{ animationDelay: "200ms" }}
+              >
+                <div className="flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full shadow-xs">
+                  <GraduationCap size={15} className="text-cyan-400" />
+                  <span className="font-semibold uppercase tracking-wider text-xs text-slate-200">VIT Bhopal University</span>
+                </div>
+                <div className="flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full shadow-xs">
+                  <MapPin size={15} className="text-emerald-400" />
+                  <span className="uppercase tracking-wider text-xs font-semibold text-slate-200">Haryana, India</span>
+                </div>
+                <div className="flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full shadow-xs">
+                  <Database size={15} className="text-purple-400" />
+                  <span className="uppercase tracking-wider text-xs font-semibold text-slate-200">AI & ML Specialization</span>
+                </div>
+              </div>
+
+              {/* Title Header with Staggered Split Letters */}
+              <motion.div
+                className="mb-4 md:mb-6 perspective-1000 animate-blur-fade-up"
+                style={{ animationDelay: "300ms" }}
+                variants={nameContainerVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                <h1
+                  aria-label="Anish Yadav"
+                  className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-light tracking-tight text-white leading-none select-none flex flex-wrap gap-x-4 sm:gap-x-6 drop-shadow-md"
+                >
+                  {/* First Name: Anish */}
+                  <span className="inline-flex space-x-0.5 sm:space-x-1" aria-hidden="true">
+                    {firstName.map((char, index) => (
+                      <motion.span
+                        key={`first-${index}`}
+                        variants={letterVariants}
+                        whileHover={{
+                          y: -6,
+                          scale: 1.12,
+                          color: "#60a5fa",
+                          transition: { duration: 0.15 }
+                        }}
+                        className="inline-block transform-gpu cursor-pointer transition-colors"
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                  </span>
+
+                  {/* Last Name: Yadav */}
+                  <span
+                    className="inline-flex space-x-0.5 sm:space-x-1 font-serif italic text-cyan-400 font-medium drop-shadow-[0_0_25px_rgba(6,182,212,0.4)]"
+                    aria-hidden="true"
+                  >
+                    {lastName.map((char, index) => (
+                      <motion.span
+                        key={`last-${index}`}
+                        variants={letterVariants}
+                        whileHover={{
+                          y: -6,
+                          scale: 1.12,
+                          color: "#38bdf8",
+                          transition: { duration: 0.15 }
+                        }}
+                        className="inline-block transform-gpu cursor-pointer transition-colors"
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                  </span>
+                </h1>
+              </motion.div>
+
+              {/* Tagline Bio Description in Crystal Transparent Glass Card */}
+              <div
+                className="liquid-glass-card rounded-3xl p-5 sm:p-6 mb-6 md:mb-10 max-w-2xl animate-blur-fade-up shadow-xl"
+                style={{ animationDelay: "400ms" }}
+              >
+                <p className="text-base sm:text-lg text-slate-200 font-sans leading-relaxed">
+                  AI & Machine Learning engineer and web developer. Building intelligent computer-vision pipelines, high-accuracy deep neural architectures, and high-performance web applications.
+                </p>
+              </div>
+
+              {/* Call-to-Action Action Buttons */}
+              <div
+                className="flex flex-wrap items-center gap-3 sm:gap-4 animate-blur-fade-up"
+                style={{ animationDelay: "500ms" }}
+              >
+                <Button
+                  onClick={handleOpenResume}
+                  variant="primary"
+                  size="lg"
+                  className="liquid-glass-refract rounded-full px-7 py-3.5 flex items-center space-x-2.5 text-xs font-mono font-bold tracking-wider shadow-lg hover:shadow-2xl bg-blue-600/80 hover:bg-blue-500 border border-blue-400/50 text-white"
+                  data-config={JSON.stringify({ button: true, cornerRadius: 28, blurAmount: 0.15 })}
+                >
+                  <FileText className="w-4 h-4 text-cyan-200" aria-hidden="true" />
+                  <span>View Resume</span>
+                  <ExternalLink className="w-4 h-4 text-white/80" aria-hidden="true" />
+                  <span className="sr-only">(opens in new tab)</span>
+                </Button>
+
+                <Button
+                  onClick={() => scrollToSection("contact")}
+                  variant="glass"
+                  size="lg"
+                  className="liquid-glass-refract rounded-full px-7 py-3.5 text-xs font-mono font-bold tracking-wider shadow-md hover:shadow-xl"
+                  data-config={JSON.stringify({ button: true, cornerRadius: 28, blurAmount: 0.15 })}
+                >
+                  <span>Contact Me</span>
+                </Button>
+              </div>
+            </div>
+
+            {/* Right Column: Crystal Transparent Glass Status Lens */}
+            <div
+              className="hidden md:flex flex-col items-end animate-blur-fade-up"
+              style={{ animationDelay: "600ms" }}
+            >
+              <div
+                className="liquid-glass-card liquid-glass-refract rounded-3xl p-6 flex flex-col space-y-3 max-w-xs shadow-2xl"
+                data-config={JSON.stringify({
+                  cornerRadius: 32,
+                  zRadius: 32,
+                  refraction: 0.95,
+                  blurAmount: 0.1,
+                  chromAberration: 0.12
+                })}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <span className="w-3 h-3 rounded-full bg-emerald-400 animate-ping" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 absolute" />
+                    <span className="font-mono text-xs font-bold uppercase tracking-wider text-emerald-300">Available</span>
+                  </div>
+                  <Sparkles size={16} className="text-cyan-400" />
+                </div>
+                <p className="text-xs text-slate-300 font-sans leading-relaxed">
+                  Open for AI/ML engineering internships, research roles, and creative web development projects.
+                </p>
+                <div className="pt-2 border-t border-white/15 flex items-center justify-between text-[11px] font-mono text-slate-400">
+                  <span>SPECIALTY</span>
+                  <span className="font-semibold text-cyan-300">PyTorch & WebGL</span>
+                </div>
+              </div>
+
+              {/* Scroll down indicator */}
+              <button
+                onClick={() => scrollToSection("skills")}
+                className="mt-6 flex items-center space-x-2 text-xs font-mono text-slate-300 hover:text-cyan-400 transition cursor-pointer"
+              >
+                <span>Scroll to explore</span>
+                <ChevronDown size={14} className="animate-bounce" />
+              </button>
+            </div>
+
+          </div>
+        </section>
 
         {/* Scrollable Portfolio Subsections */}
         <RevealSection tilt={-4} reduceMotion={prefersReducedMotion}>
@@ -400,10 +573,10 @@ export default function App() {
         <div className="max-w-6xl mx-auto liquid-glass-card rounded-3xl p-8 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left font-mono">
             <p className="text-xs text-slate-300">
-              &copy; {new Date().getFullYear()} &mdash; Developed by <span className="text-white font-bold">Anish Yadav</span>
+              &copy; {new Date().getFullYear()} &mdash; Designed & Developed by <span className="text-white font-bold">Anish Yadav</span>
             </p>
             <p className="text-xs text-slate-400 mt-1">
-              B.Tech in Computer Science (Artificial Intelligence & Machine Learning)
+              B.Tech in Computer Science (Artificial Intelligence & Machine Learning) &bull; VIT Bhopal
             </p>
           </div>
 
