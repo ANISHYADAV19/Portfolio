@@ -164,8 +164,8 @@ export default function App() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.07,
-        delayChildren: 0.2
+        staggerChildren: 0.04,
+        delayChildren: 0.1
       }
     }
   };
@@ -173,21 +173,16 @@ export default function App() {
   const letterVariants = {
     hidden: {
       opacity: 0,
-      y: 35,
-      rotateX: -60,
-      scale: 0.85,
-      filter: "blur(8px)"
+      y: 24,
+      scale: 0.96
     },
     visible: {
       opacity: 1,
       y: 0,
-      rotateX: 0,
       scale: 1,
-      filter: "blur(0px)",
       transition: {
-        type: "spring",
-        damping: 14,
-        stiffness: 120
+        duration: 0.45,
+        ease: [0.16, 1, 0.3, 1]
       }
     }
   };
@@ -377,8 +372,7 @@ export default function App() {
               
               {/* Title Header with Staggered Split Letters */}
               <motion.div
-                className="mb-4 md:mb-6 perspective-1000 animate-blur-fade-up"
-                style={{ animationDelay: "200ms" }}
+                className="mb-4 md:mb-6"
                 variants={nameContainerVariants}
                 initial="hidden"
                 animate="visible"
