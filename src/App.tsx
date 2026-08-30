@@ -375,29 +375,10 @@ export default function App() {
             {/* Left Column: Bio Details & Primary Actions */}
             <div className="flex-1 flex flex-col items-start text-left max-w-3xl">
               
-              {/* Metadata Crystal Glass Badges */}
-              <div
-                className="flex flex-wrap items-center gap-2.5 sm:gap-3 mb-6 md:mb-8 text-xs font-mono animate-blur-fade-up"
-                style={{ animationDelay: "200ms" }}
-              >
-                <div className="flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full shadow-xs">
-                  <GraduationCap size={15} className="text-cyan-400" />
-                  <span className="font-semibold uppercase tracking-wider text-xs text-slate-200">VIT Bhopal University</span>
-                </div>
-                <div className="flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full shadow-xs">
-                  <MapPin size={15} className="text-emerald-400" />
-                  <span className="uppercase tracking-wider text-xs font-semibold text-slate-200">Haryana, India</span>
-                </div>
-                <div className="flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full shadow-xs">
-                  <Database size={15} className="text-purple-400" />
-                  <span className="uppercase tracking-wider text-xs font-semibold text-slate-200">AI & ML Specialization</span>
-                </div>
-              </div>
-
               {/* Title Header with Staggered Split Letters */}
               <motion.div
                 className="mb-4 md:mb-6 perspective-1000 animate-blur-fade-up"
-                style={{ animationDelay: "300ms" }}
+                style={{ animationDelay: "200ms" }}
                 variants={nameContainerVariants}
                 initial="hidden"
                 animate="visible"
@@ -451,12 +432,31 @@ export default function App() {
 
               {/* Tagline Bio Description in Crystal Transparent Glass Card */}
               <div
-                className="liquid-glass-card rounded-3xl p-5 sm:p-6 mb-6 md:mb-10 max-w-2xl animate-blur-fade-up shadow-xl"
-                style={{ animationDelay: "400ms" }}
+                className="liquid-glass-card rounded-3xl p-5 sm:p-6 mb-6 max-w-2xl animate-blur-fade-up shadow-xl"
+                style={{ animationDelay: "300ms" }}
               >
                 <p className="text-base sm:text-lg text-slate-200 font-sans leading-relaxed">
                   AI & Machine Learning engineer and web developer. Building intelligent computer-vision pipelines, high-accuracy deep neural architectures, and high-performance web applications.
                 </p>
+              </div>
+
+              {/* Metadata Crystal Glass Badges - Below the Card */}
+              <div
+                className="flex flex-wrap items-center gap-2.5 sm:gap-3 mb-6 md:mb-8 text-xs font-mono animate-blur-fade-up"
+                style={{ animationDelay: "400ms" }}
+              >
+                <div className="flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full shadow-xs">
+                  <GraduationCap size={15} className="text-cyan-400" />
+                  <span className="font-semibold uppercase tracking-wider text-xs text-slate-200">VIT Bhopal University</span>
+                </div>
+                <div className="flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full shadow-xs">
+                  <MapPin size={15} className="text-emerald-400" />
+                  <span className="uppercase tracking-wider text-xs font-semibold text-slate-200">Haryana, India</span>
+                </div>
+                <div className="flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full shadow-xs">
+                  <Database size={15} className="text-purple-400" />
+                  <span className="uppercase tracking-wider text-xs font-semibold text-slate-200">AI & ML Specialization</span>
+                </div>
               </div>
 
               {/* Call-to-Action Action Buttons */}

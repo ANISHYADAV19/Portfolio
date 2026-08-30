@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence } from "motion/react";
-import { Sparkles, Cpu, Calendar, Award, Wifi, Brain, Eye, X, ShieldCheck } from "lucide-react";
+import { Sparkles, Cpu, Calendar, Award, Wifi, Brain, Eye, X, ShieldCheck, AlertCircle, ExternalLink } from "lucide-react";
 import Button from "./Button";
 
 interface CertificateItem {
@@ -11,21 +11,24 @@ interface CertificateItem {
   year: number;
   bullets: string[];
   imageUrl?: string;
+  verifyUrl?: string;
 }
 
 export default function Certifications() {
-  const [selectedCertImage, setSelectedCertImage] = useState<{ title: string; url: string } | null>(null);
+  const [selectedCert, setSelectedCert] = useState<CertificateItem | null>(null);
+  const [imgHasError, setImgHasError] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (selectedCertImage) {
+    if (selectedCert) {
+      setImgHasError(false);
       const previouslyFocused = document.activeElement as HTMLElement | null;
       document.body.style.overflow = "hidden";
       closeButtonRef.current?.focus();
 
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === "Escape") {
-          setSelectedCertImage(null);
+          setSelectedCert(null);
         }
       };
       window.addEventListener("keydown", handleKeyDown);
@@ -35,7 +38,7 @@ export default function Certifications() {
         previouslyFocused?.focus();
       };
     }
-  }, [selectedCertImage]);
+  }, [selectedCert]);
 
   const certificates: CertificateItem[] = [
     {
@@ -58,7 +61,8 @@ export default function Certifications() {
         "Authorized online course certification by the University of Michigan covering supervised & unsupervised learning, model evaluation, and feature engineering.",
         "Applied scikit-learn, decision trees, support vector machines, and neural networks to practical Python machine learning challenges (Verify Code: TJ0LEUE5XU3L)."
       ],
-      imageUrl: "https://res.cloudinary.com/mjob3d9y/image/upload/v1784737466/Coursera_TJ0LEUE5XU3L_page-0001_1_h5j9t7.jpg"
+      imageUrl: "https://res.cloudinary.com/mjob3d9y/image/upload/v1784829072/Coursera_certificate__page-0001_ummtux.jpg",
+      verifyUrl: "https://coursera.org/verify/TJ0LEUE5XU3L"
     },
     {
       id: "lt-edge",
@@ -69,7 +73,7 @@ export default function Certifications() {
         "Hands-on industrial engineering on sensor telemetry collection, edge inference acceleration, and microcontroller integration.",
         "Designed edge pipelines connecting edge intelligence with central telemetry dashboards."
       ],
-      imageUrl: "https://res.cloudinary.com/mjob3d9y/image/upload/v1784737458/L_T_INTERNSHIP_CERTIFICATE_page-0001_c5fuxl.jpg"
+      imageUrl: "https://res.cloudinary.com/mjob3d9y/image/upload/v1784737468/L_T_Certificate_page-0001_tbjvib.jpg"
     }
   ];
 
@@ -146,7 +150,7 @@ export default function Certifications() {
                 {cert.imageUrl ? (
                   <Button
                     id={`view-cert-${cert.id}`}
-                    onClick={() => setSelectedCertImage({ title: cert.title, url: cert.imageUrl! })}
+                    onClick={() => setSelectedCert(cert)}
                     variant="glass"
                     size="sm"
                     className="shadow-2xs"
@@ -168,13 +172,13 @@ export default function Certifications() {
       {typeof document !== "undefined" &&
         createPortal(
           <AnimatePresence>
-            {selectedCertImage && (
+            {selectedCert && (
               <div
                 role="dialog"
                 aria-modal="true"
-                aria-label={`Certificate preview: ${selectedCertImage.title}`}
+                aria-label={`Certificate preview: ${selectedCert.title}`}
                 className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-2xl animate-fade-in"
-                onClick={() => setSelectedCertImage(null)}
+                onClick={() => setSelectedCert(null)}
               >
                 <div
                   className="relative max-w-4xl w-full liquid-glass-card rounded-3xl p-4 sm:p-6 shadow-2xl border border-white/30"
@@ -182,23 +186,52 @@ export default function Certifications() {
                 >
                   <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/15">
                     <h3 className="text-lg font-display font-semibold text-white truncate pr-4">
-                      {selectedCertImage.title}
+                      {selectedCert.title}
                     </h3>
                     <button
                       ref={closeButtonRef}
-                      onClick={() => setSelectedCertImage(null)}
+                      onClick={() => setSelectedCert(null)}
                       className="p-2 rounded-full liquid-glass-pill text-slate-200 hover:text-white transition cursor-pointer"
                       aria-label="Close certificate preview"
                     >
                       <X className="w-5 h-5" />
                     </button>
                   </div>
-                  <div className="overflow-hidden rounded-2xl bg-black/40 flex items-center justify-center max-h-[75vh]">
-                    <img
-                      src={selectedCertImage.url}
-                      alt={`Certificate for ${selectedCertImage.title}`}
-                      className="max-h-[75vh] w-auto object-contain rounded-2xl"
-                    />
+
+                  <div className="overflow-hidden rounded-2xl bg-black/40 flex items-center justify-center min-h-[300px] max-h-[75vh] p-4">
+                    {imgHasError ? (
+                      <div className="flex flex-col items-center justify-center text-center p-8 space-y-4 max-w-md">
+                        <div className="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400">
+                          <AlertCircle className="w-6 h-6" />
+                        </div>
+                        <div className="space-y-1">
+                          <h4 className="text-base font-display font-semibold text-white">
+                            Image Document Unavailable
+                          </h4>
+                          <p className="text-xs text-slate-300 font-sans leading-relaxed">
+                            The cloud host returned 404 for this image file. Please place the image in the <code className="text-cyan-300 font-mono">public/</code> folder or update the link.
+                          </p>
+                        </div>
+                        {selectedCert.verifyUrl && (
+                          <a
+                            href={selectedCert.verifyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center space-x-2 px-5 py-2 rounded-full bg-blue-600/80 hover:bg-blue-500 text-white text-xs font-mono font-bold transition shadow-lg"
+                          >
+                            <span>Verify on Coursera</span>
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
+                        )}
+                      </div>
+                    ) : (
+                      <img
+                        src={selectedCert.imageUrl}
+                        alt={`Certificate for ${selectedCert.title}`}
+                        onError={() => setImgHasError(true)}
+                        className="max-h-[75vh] w-auto object-contain rounded-2xl"
+                      />
+                    )}
                   </div>
                 </div>
               </div>
