@@ -4,7 +4,6 @@ import {
   X,
   FileText,
   ExternalLink,
-  Search,
   User,
   GraduationCap,
   MapPin,
@@ -246,18 +245,6 @@ export default function App() {
 
           {/* Top Actions Section */}
           <div className="hidden sm:flex items-center space-x-3">
-            {/* Search Pill */}
-            <Button
-              variant="glass"
-              size="sm"
-              className="liquid-glass-refract px-4 py-2 flex items-center space-x-2 shadow-xs"
-              onClick={() => scrollToSection("skills")}
-              title="Search Portfolio"
-            >
-              <Search size={15} className="text-cyan-300" />
-              <span className="text-xs font-mono font-semibold tracking-wide text-slate-100">Search</span>
-            </Button>
-
             {/* Profile Button */}
             <Button
               variant="glass"
@@ -327,21 +314,8 @@ export default function App() {
             </a>
           ))}
 
-          {/* Mobile Buttons */}
-          <div className="sm:hidden pt-4 mt-2 border-t border-white/15 flex items-center justify-between">
-            <Button
-              variant="glass"
-              size="sm"
-              className="px-4 py-2 flex items-center space-x-2"
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                scrollToSection("skills");
-              }}
-            >
-              <Search size={16} className="text-cyan-300" />
-              <span className="text-xs font-mono font-semibold text-slate-100">Search Skills</span>
-            </Button>
-
+          {/* Mobile Profile Button */}
+          <div className="sm:hidden pt-4 mt-2 border-t border-white/15 flex items-center justify-end">
             <Button
               variant="glass"
               size="sm"
