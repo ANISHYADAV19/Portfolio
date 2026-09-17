@@ -13,10 +13,10 @@ export default function Skills() {
       title: "AI & ML Specializations",
       icon: <Sparkles className="w-5 h-5 text-emerald-400" />,
       skills: [
-        "Edge Computing (L&T Industrial Training)",
-        "Data Visualization & Model Metrics",
-        "Neural Networks (CNNs & CIFAR-10)",
-        "Generative AI & Prompt Engineering"
+        "Agentic AI & Autonomous Workflows",
+        "Generative AI & Prompt Engineering",
+        "Neural Networks (CNNs & Deep Learning)",
+        "Edge Computing (L&T Industrial Training)"
       ]
     },
     {
