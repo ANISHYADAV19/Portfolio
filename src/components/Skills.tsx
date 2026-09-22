@@ -43,9 +43,9 @@ export default function Skills() {
       title: "Data & Developer Tools",
       icon: <Database className="w-5 h-5 text-blue-400" />,
       skills: [
+        "AWS Cloud & AI Services",
         "MySQL & MongoDB",
         "OpenCV & Computer Vision",
-        "NumPy & Pandas",
         "Git & GitHub Version Control"
       ]
     }

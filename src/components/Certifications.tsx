@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence } from "motion/react";
-import { Sparkles, Cpu, Calendar, Award, Wifi, Brain, Eye, X, ShieldCheck, AlertCircle, ExternalLink, Bot } from "lucide-react";
+import { Sparkles, Cpu, Calendar, Award, Wifi, Brain, Eye, X, ShieldCheck, AlertCircle, ExternalLink, Bot, Cloud } from "lucide-react";
 import Button from "./Button";
 
 interface CertificateItem {
@@ -41,6 +41,18 @@ export default function Certifications() {
   }, [selectedCert]);
 
   const certificates: CertificateItem[] = [
+    {
+      id: "aws-ai-practitioner",
+      title: "AWS Certified AI Practitioner",
+      issuer: "Amazon Web Services (AWS)",
+      year: 2026,
+      bullets: [
+        "Official AWS certification validating core artificial intelligence, machine learning concepts, and AWS cloud AI service deployments.",
+        "Demonstrated proficiency in foundation models, generative AI architectures, prompt techniques, and responsible AI governance (Validation No: 16de5c230de4498db2eb3446c53ed75d)."
+      ],
+      imageUrl: "/aws-ai-practitioner-cert.jpg",
+      verifyUrl: "https://aws.amazon.com/verification"
+    },
     {
       id: "oracle-agentic-ai",
       title: "Agentic AI Certified Foundations Associate",
@@ -102,12 +114,12 @@ export default function Certifications() {
             Verified <span className="font-serif italic text-cyan-400 font-medium drop-shadow-[0_0_20px_rgba(6,182,212,0.35)]">Certifications</span>
           </h2>
           <p className="text-sm text-slate-300 font-sans mt-2 max-w-xl">
-            Formal technical certifications issued by Oracle, IBM, University of Michigan, and Larsen & Toubro.
+            Formal technical certifications issued by AWS, Oracle, IBM, University of Michigan, and Larsen & Toubro.
           </p>
         </div>
 
         {/* Certifications Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {certificates.map((cert) => (
             <div 
               key={cert.id}
@@ -117,7 +129,9 @@ export default function Certifications() {
                 <div className="flex items-start justify-between gap-4 mb-5 pb-4 border-b border-white/10">
                   <div className="flex items-start space-x-3.5">
                     <div className="p-2.5 rounded-2xl bg-white/10 border border-white/15 text-cyan-400 group-hover:bg-blue-600 group-hover:text-white transition duration-300 shadow-2xs" aria-hidden="true">
-                      {cert.id.startsWith("oracle") ? (
+                      {cert.id.startsWith("aws") ? (
+                        <Cloud className="w-5 h-5" />
+                      ) : cert.id.startsWith("oracle") ? (
                         <Bot className="w-5 h-5" />
                       ) : cert.id.startsWith("ibm") ? (
                         <Sparkles className="w-5 h-5" />
