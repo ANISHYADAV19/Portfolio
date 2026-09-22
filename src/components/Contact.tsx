@@ -1,13 +1,39 @@
 import { useState, useEffect, type FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Send, CheckCircle2, ShieldAlert, Mail, MapPin, Github, Linkedin, MessageSquare } from "lucide-react";
+import { Send, CheckCircle2, ShieldAlert, Mail, MapPin, Github, Linkedin, MessageSquare, ShieldCheck, RefreshCw } from "lucide-react";
 import Button from "./Button";
+
+interface MathChallenge {
+  num1: number;
+  num2: number;
+  operator: "+" | "-";
+  answer: number;
+}
+
+const generateChallenge = (): MathChallenge => {
+  const isAddition = Math.random() > 0.35;
+  if (isAddition) {
+    const num1 = Math.floor(Math.random() * 8) + 2;
+    const num2 = Math.floor(Math.random() * 8) + 1;
+    return { num1, num2, operator: "+", answer: num1 + num2 };
+  } else {
+    const num2 = Math.floor(Math.random() * 6) + 1;
+    const num1 = num2 + Math.floor(Math.random() * 8) + 1;
+    return { num1, num2, operator: "-", answer: num1 - num2 };
+  }
+};
 
 export default function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [honeypot, setHoneypot] = useState("");
+
+  // Human verification challenge state
+  const [mathChallenge, setMathChallenge] = useState<MathChallenge>(generateChallenge);
+  const [userCaptchaAnswer, setUserCaptchaAnswer] = useState("");
+  const [captchaError, setCaptchaError] = useState<string | null>(null);
 
   const [isSending, setIsSending] = useState(false);
   const [sendStatus, setSendStatus] = useState<
@@ -20,10 +46,44 @@ export default function Contact() {
     return () => clearTimeout(timer);
   }, [sendStatus]);
 
+  const handleRefreshChallenge = () => {
+    setMathChallenge(generateChallenge());
+    setUserCaptchaAnswer("");
+    setCaptchaError(null);
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!name || !email || !message) {
+    setCaptchaError(null);
+
+    // 1. Silent Honeypot Bot Trap Check
+    if (honeypot) {
+      setIsSending(true);
+      setTimeout(() => {
+        setIsSending(false);
+        setName("");
+        setEmail("");
+        setSubject("");
+        setMessage("");
+        setUserCaptchaAnswer("");
+        setMathChallenge(generateChallenge());
+        setSendStatus("success");
+      }, 500);
+      return;
+    }
+
+    // 2. Form completeness check
+    if (!name.trim() || !email.trim() || !message.trim()) {
       setSendStatus("error");
+      return;
+    }
+
+    // 3. Human Verification Math Validation
+    const parsedAnswer = parseInt(userCaptchaAnswer.trim(), 10);
+    if (!userCaptchaAnswer.trim() || isNaN(parsedAnswer) || parsedAnswer !== mathChallenge.answer) {
+      setCaptchaError("Incorrect answer. Please solve the security check to confirm you are human.");
+      setMathChallenge(generateChallenge());
+      setUserCaptchaAnswer("");
       return;
     }
 
@@ -55,6 +115,8 @@ export default function Contact() {
         setEmail("");
         setSubject("");
         setMessage("");
+        setUserCaptchaAnswer("");
+        setMathChallenge(generateChallenge());
         setSendStatus("success");
       } else {
         setSendStatus("network_error");
@@ -226,8 +288,90 @@ export default function Contact() {
                 />
               </div>
 
+              {/* Hidden Honeypot Bot Trap */}
+              <div className="sr-only" aria-hidden="true" style={{ display: "none" }}>
+                <label htmlFor="contact-honey">Leave this field blank</label>
+                <input
+                  id="contact-honey"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                />
+              </div>
+
+              {/* Interactive Human Verification / Anti-Bot Security Check */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-400/40 transition duration-200 space-y-3 shadow-xs">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <ShieldCheck className="w-4 h-4 text-cyan-400" />
+                    <span className="text-xs font-mono font-bold text-cyan-300 uppercase tracking-wider">
+                      Human Verification
+                    </span>
+                  </div>
+                  <span className="text-[11px] font-mono text-slate-400">Security Check</span>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-white/10 border border-white/15 text-white font-mono text-sm font-semibold select-none shadow-2xs">
+                    <span className="text-cyan-300">Solve:</span>
+                    <span>
+                      {mathChallenge.num1} {mathChallenge.operator} {mathChallenge.num2} = ?
+                    </span>
+                  </div>
+
+                  <div className="flex items-center space-x-2 flex-1 min-w-[140px]">
+                    <input
+                      id="contact-captcha"
+                      type="number"
+                      required
+                      value={userCaptchaAnswer}
+                      onChange={(e) => {
+                        setUserCaptchaAnswer(e.target.value);
+                        if (captchaError) setCaptchaError(null);
+                      }}
+                      placeholder="Answer"
+                      className="w-full liquid-glass-input rounded-xl px-3 py-2 text-sm font-mono text-white placeholder:text-slate-400 focus:outline-none text-center"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleRefreshChallenge}
+                      className="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition duration-200 cursor-pointer shadow-2xs shrink-0"
+                      title="Generate new question"
+                      aria-label="Generate new math challenge"
+                    >
+                      <RefreshCw size={14} className="hover:rotate-180 transition-transform duration-300" />
+                    </button>
+                  </div>
+                </div>
+
+                {captchaError && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-xs font-mono text-amber-300 flex items-center space-x-1.5 pt-1"
+                  >
+                    <ShieldAlert size={13} className="shrink-0 text-amber-400" />
+                    <span>{captchaError}</span>
+                  </motion.p>
+                )}
+              </div>
+
               {/* Status alerts */}
               <AnimatePresence>
+                {sendStatus === "error" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    className="p-4 rounded-2xl bg-red-500/20 border border-red-400 text-red-200 text-xs font-mono flex items-center space-x-2.5"
+                  >
+                    <ShieldAlert size={16} className="text-red-400 flex-shrink-0" />
+                    <span>Please fill out all required fields before transmitting.</span>
+                  </motion.div>
+                )}
+
                 {sendStatus === "success" && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
