@@ -7,7 +7,9 @@ import {
   User,
   GraduationCap,
   MapPin,
-  Database
+  Database,
+  Github,
+  Linkedin
 } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import Skills from "./components/Skills";
@@ -244,7 +246,37 @@ export default function App() {
           </div>
 
           {/* Top Actions Section */}
-          <div className="hidden sm:flex items-center space-x-3">
+          <div className="flex items-center space-x-2 sm:space-x-2.5">
+            {/* LinkedIn Button */}
+            <Button
+              variant="glass"
+              size="sm"
+              href="https://www.linkedin.com/in/anish-yadav-dev/"
+              target="_blank"
+              rel="noreferrer"
+              referrerPolicy="no-referrer"
+              className="w-9 h-9 rounded-full liquid-glass-refract p-0 flex items-center justify-center shadow-xs text-cyan-400 hover:text-cyan-300"
+              title="LinkedIn Profile"
+              aria-label="LinkedIn Profile"
+            >
+              <Linkedin size={16} />
+            </Button>
+
+            {/* GitHub Button */}
+            <Button
+              variant="glass"
+              size="sm"
+              href="https://github.com/ANISHYADAV19"
+              target="_blank"
+              rel="noreferrer"
+              referrerPolicy="no-referrer"
+              className="w-9 h-9 rounded-full liquid-glass-refract p-0 flex items-center justify-center shadow-xs text-slate-300 hover:text-white"
+              title="GitHub Profile"
+              aria-label="GitHub Profile"
+            >
+              <Github size={16} />
+            </Button>
+
             {/* Profile Button */}
             <Button
               variant="glass"
@@ -252,36 +284,37 @@ export default function App() {
               className="w-9 h-9 rounded-full liquid-glass-refract p-0 flex items-center justify-center shadow-xs"
               onClick={() => scrollToSection("contact")}
               title="View Profile & Contact"
+              aria-label="View Profile & Contact"
             >
               <User size={16} className="text-cyan-300" />
             </Button>
-          </div>
 
-          {/* Mobile Menu Toggle Button */}
-          <Button
-            ref={menuToggleRef}
-            variant="glass"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden w-10 h-10 rounded-full p-0 flex items-center justify-center shadow-xs"
-            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-menu"
-          >
-            <div className="relative w-5 h-5 flex items-center justify-center">
-              <X
-                size={18}
-                className={`absolute transition-all duration-300 ease-out text-white ${
-                  isMobileMenuOpen ? "rotate-0 opacity-100 scale-100" : "rotate-180 opacity-0 scale-50"
-                }`}
-              />
-              <Menu
-                size={18}
-                className={`absolute transition-all duration-300 ease-out text-white ${
-                  isMobileMenuOpen ? "-rotate-180 opacity-0 scale-50" : "rotate-0 opacity-100 scale-100"
-                }`}
-              />
-            </div>
-          </Button>
+            {/* Mobile Menu Toggle Button */}
+            <Button
+              ref={menuToggleRef}
+              variant="glass"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="lg:hidden w-9 h-9 rounded-full p-0 flex items-center justify-center shadow-xs ml-1"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
+            >
+              <div className="relative w-5 h-5 flex items-center justify-center">
+                <X
+                  size={18}
+                  className={`absolute transition-all duration-300 ease-out text-white ${
+                    isMobileMenuOpen ? "rotate-0 opacity-100 scale-100" : "rotate-180 opacity-0 scale-50"
+                  }`}
+                />
+                <Menu
+                  size={18}
+                  className={`absolute transition-all duration-300 ease-out text-white ${
+                    isMobileMenuOpen ? "-rotate-180 opacity-0 scale-50" : "rotate-0 opacity-100 scale-100"
+                  }`}
+                />
+              </div>
+            </Button>
+          </div>
         </nav>
       </header>
 
@@ -314,8 +347,30 @@ export default function App() {
             </a>
           ))}
 
-          {/* Mobile Profile Button */}
-          <div className="sm:hidden pt-4 mt-2 border-t border-white/15 flex items-center justify-end">
+          {/* Mobile Profile & Social Links */}
+          <div className="pt-4 mt-2 border-t border-white/15 flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <a
+                href="https://www.linkedin.com/in/anish-yadav-dev/"
+                target="_blank"
+                rel="noreferrer"
+                referrerPolicy="no-referrer"
+                className="w-10 h-10 rounded-full liquid-glass-pill flex items-center justify-center text-cyan-400 hover:text-cyan-300 transition-colors"
+                aria-label="LinkedIn Profile"
+              >
+                <Linkedin size={18} />
+              </a>
+              <a
+                href="https://github.com/ANISHYADAV19"
+                target="_blank"
+                rel="noreferrer"
+                referrerPolicy="no-referrer"
+                className="w-10 h-10 rounded-full liquid-glass-pill flex items-center justify-center text-slate-300 hover:text-white transition-colors"
+                aria-label="GitHub Profile"
+              >
+                <Github size={18} />
+              </a>
+            </div>
             <Button
               variant="glass"
               size="sm"
@@ -324,6 +379,8 @@ export default function App() {
                 setIsMobileMenuOpen(false);
                 scrollToSection("contact");
               }}
+              title="View Profile & Contact"
+              aria-label="View Profile & Contact"
             >
               <User size={18} className="text-cyan-300" />
             </Button>
