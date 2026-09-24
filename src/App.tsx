@@ -9,7 +9,8 @@ import {
   MapPin,
   Database,
   Github,
-  Linkedin
+  Linkedin,
+  Mail
 } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import Skills from "./components/Skills";
@@ -277,14 +278,26 @@ export default function App() {
               <Github size={16} />
             </Button>
 
+            {/* Gmail / Mail Contact Button */}
+            <Button
+              variant="glass"
+              size="sm"
+              href="mailto:anishyadav872004@gmail.com"
+              className="w-9 h-9 rounded-full liquid-glass-refract p-0 flex items-center justify-center shadow-xs text-emerald-400 hover:text-emerald-300"
+              title="Email (anishyadav872004@gmail.com)"
+              aria-label="Email Anish Yadav"
+            >
+              <Mail size={16} />
+            </Button>
+
             {/* Profile Button */}
             <Button
               variant="glass"
               size="sm"
               className="w-9 h-9 rounded-full liquid-glass-refract p-0 flex items-center justify-center shadow-xs"
               onClick={() => scrollToSection("contact")}
-              title="View Profile & Contact"
-              aria-label="View Profile & Contact"
+              title="View Profile & Contact Form"
+              aria-label="View Profile & Contact Form"
             >
               <User size={16} className="text-cyan-300" />
             </Button>
@@ -369,6 +382,13 @@ export default function App() {
                 aria-label="GitHub Profile"
               >
                 <Github size={18} />
+              </a>
+              <a
+                href="mailto:anishyadav872004@gmail.com"
+                className="w-10 h-10 rounded-full liquid-glass-pill flex items-center justify-center text-emerald-400 hover:text-emerald-300 transition-colors"
+                aria-label="Send Email"
+              >
+                <Mail size={18} />
               </a>
             </div>
             <Button
