@@ -17,8 +17,8 @@ export default function Education() {
       degree: "B.Tech in Computer Science Engineering (Specializing in AI & ML)",
       duration: "2023 – 2027 (Ongoing)",
       gradeLabel: "CGPA",
-      gradeValue: "8.23 / 10.0",
-      percentageProgress: 82.3,
+      gradeValue: "8.25 / 10.0",
+      percentageProgress: 82.5,
       bullets: [
         "Focused heavily on Core Algorithms, Machine Learning Architectures, Deep Learning Layers, and Web Application design.",
         "Active member of the technical computing societies, organizing and building deep learning pipelines."
