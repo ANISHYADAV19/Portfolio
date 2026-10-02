@@ -1,92 +1,57 @@
-import { useEffect, useRef, useState, useTransition, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from "react";
 import {
   Menu,
   X,
+  FileText,
+  ExternalLink,
   User,
+  GraduationCap,
+  MapPin,
+  Database,
   Github,
   Linkedin,
-  Mail,
-  Home as HomeIcon
+  Mail
 } from "lucide-react";
-import { motion, AnimatePresence, useReducedMotion } from "motion/react";
-import Home from "./components/Home";
+import { motion, useReducedMotion } from "motion/react";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Certifications from "./components/Certifications";
 import Education from "./components/Education";
 import Contact from "./components/Contact";
 import Button from "./components/Button";
-import PageNavigation, { PAGES } from "./components/PageNavigation";
 import { useLiquidGlass } from "./hooks/useLiquidGlass";
 
 const RESUME_URL = "https://drive.google.com/file/d/1-1WU6cFsLirmsw_ofJd9caE2BrMiznUI/view?usp=sharing";
 
-// Helper to normalize path from window.location
-const normalizePath = (pathname: string, hash: string): string => {
-  if (hash && hash.startsWith("#/")) {
-    return hash.slice(1);
-  }
-  if (hash && hash.startsWith("#")) {
-    const hashClean = hash.slice(1);
-    if (PAGES.some((p) => p.id === hashClean)) {
-      return `/${hashClean}`;
-    }
-  }
-  const cleanPath = pathname.replace(/\/+$/, "") || "/";
-  if (PAGES.some((p) => p.path === cleanPath)) {
-    return cleanPath;
-  }
-  return "/";
-};
+function RevealSection({
+  tilt,
+  reduceMotion,
+  children
+}: {
+  tilt: number;
+  reduceMotion: boolean | null;
+  children: ReactNode;
+}) {
+  if (reduceMotion) return <div>{children}</div>;
 
-// 3D Perspective Depth Transition Variants
-const perspective3DVariants = {
-  initial: (direction: number) => ({
-    opacity: 0,
-    rotateY: direction >= 0 ? 12 : -12,
-    rotateX: 4,
-    scale: 0.94,
-    z: -100,
-    y: direction >= 0 ? 25 : -25,
-    filter: "blur(6px)",
-  }),
-  animate: {
-    opacity: 1,
-    rotateY: 0,
-    rotateX: 0,
-    scale: 1,
-    z: 0,
-    y: 0,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.5,
-      ease: [0.16, 1, 0.3, 1], // snappy cubic bezier
-    },
-  },
-  exit: (direction: number) => ({
-    opacity: 0,
-    rotateY: direction >= 0 ? -12 : 12,
-    rotateX: -4,
-    scale: 0.94,
-    z: -100,
-    y: direction >= 0 ? -25 : 25,
-    filter: "blur(6px)",
-    transition: {
-      duration: 0.35,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  }),
-};
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 35, rotateX: tilt }}
+      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      style={{ perspective: "1000px" }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default function App() {
-  const [currentPath, setCurrentPath] = useState(() => 
-    normalizePath(window.location.pathname, window.location.hash)
-  );
-  const [direction, setDirection] = useState<number>(1);
+  const [activeSection, setActiveSection] = useState("hero");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const prefersReducedMotion = useReducedMotion();
-  const [, startTransition] = useTransition();
-
   const menuToggleRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
   const appContainerRef = useRef<HTMLDivElement>(null);
@@ -103,69 +68,50 @@ export default function App() {
     brightness: -0.1
   });
 
-  // Calculate current page index
-  const getCurrentIndex = (path: string) => {
-    const idx = PAGES.findIndex((p) => p.path === path || (path === "" && p.path === "/"));
-    return idx === -1 ? 0 : idx;
-  };
-
   const handleOpenResume = () => {
     window.open(RESUME_URL, "_blank", "noopener,noreferrer");
   };
 
-  // Navigate to a new page with 3D direction calculation
-  const navigateTo = (targetPath: string) => {
-    const cleanTarget = normalizePath(targetPath, "");
-    if (cleanTarget === currentPath) return;
-
-    const oldIndex = getCurrentIndex(currentPath);
-    const newIndex = getCurrentIndex(cleanTarget);
-    const newDirection = newIndex >= oldIndex ? 1 : -1;
-
-    setDirection(newDirection);
-    setIsMobileMenuOpen(false);
-
-    // Update browser history URL
-    try {
-      window.history.pushState({ path: cleanTarget }, "", cleanTarget);
-    } catch {
-      window.location.hash = `#${cleanTarget}`;
-    }
-
-    startTransition(() => {
-      setCurrentPath(cleanTarget);
-    });
-
-    // Reset scroll smoothly to top
-    window.scrollTo({ top: 0, behavior: "instant" });
-  };
-
-  // Sync with browser back/forward buttons
+  // Reset scroll to top on initial mount & page refresh
   useEffect(() => {
-    const handlePopState = () => {
-      const target = normalizePath(window.location.pathname, window.location.hash);
-      const oldIndex = getCurrentIndex(currentPath);
-      const newIndex = getCurrentIndex(target);
-      setDirection(newIndex >= oldIndex ? 1 : -1);
-      setCurrentPath(target);
-      window.scrollTo({ top: 0, behavior: "instant" });
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
+    const handleBeforeUnload = () => {
+      window.scrollTo(0, 0);
     };
 
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, [currentPath]);
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, []);
 
-  // Update document title based on active page
   useEffect(() => {
-    const activePage = PAGES.find((p) => p.path === currentPath);
-    if (activePage && activePage.path !== "/") {
-      document.title = `${activePage.label} | Anish Yadav Portfolio`;
-    } else {
-      document.title = "Anish Yadav | AI & ML Engineer | Portfolio";
-    }
-  }, [currentPath]);
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        setScrollProgress((window.scrollY / totalScroll) * 100);
+      }
 
-  // Mobile drawer keyboard & accessibility handling
+      const sections = ["hero", "skills", "projects", "certifications", "education", "contact"];
+      const current = sections.find((section) => {
+        const el = document.getElementById(section);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          return rect.top <= 200 && rect.bottom >= 200;
+        }
+        return false;
+      });
+      if (current) {
+        setActiveSection(current);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   useEffect(() => {
     if (!isMobileMenuOpen) return;
 
@@ -204,36 +150,64 @@ export default function App() {
     };
   }, [isMobileMenuOpen]);
 
-  const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, path: string) => {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-    e.preventDefault();
-    navigateTo(path);
-  };
-
-  // Render the active page component
-  const renderActivePage = () => {
-    switch (currentPath) {
-      case "/skills":
-        return <Skills />;
-      case "/projects":
-        return <Projects />;
-      case "/certifications":
-        return <Certifications />;
-      case "/education":
-        return <Education />;
-      case "/contact":
-        return <Contact />;
-      case "/":
-      default:
-        return <Home onNavigate={navigateTo} onOpenResume={handleOpenResume} />;
+  const scrollToSection = (id: string) => {
+    setIsMobileMenuOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
     }
   };
 
+  const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
+    scrollToSection(id);
+    history.replaceState(null, "", `#${id}`);
+  };
+
+  const navItems = [
+    { id: "skills", label: "Skills", delay: "100ms" },
+    { id: "projects", label: "Projects", delay: "150ms" },
+    { id: "certifications", label: "Certificates", delay: "200ms" },
+    { id: "education", label: "Education", delay: "250ms" },
+    { id: "contact", label: "Contact", delay: "300ms" }
+  ];
+
+  const firstName = "Anish".split("");
+  const lastName = "Yadav".split("");
+
+  const nameContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.04,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const letterVariants = {
+    hidden: {
+      opacity: 0,
+      y: 24,
+      scale: 0.96
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.45,
+        ease: [0.16, 1, 0.3, 1]
+      }
+    }
+  };
 
   return (
     <div
       ref={appContainerRef}
-      className="min-h-screen text-slate-100 selection:bg-blue-600 selection:text-white font-sans relative overflow-x-hidden flex flex-col justify-between"
+      className="min-h-screen text-slate-100 selection:bg-blue-600 selection:text-white font-sans relative overflow-x-hidden"
     >
       <a
         href="#main-content"
@@ -242,7 +216,7 @@ export default function App() {
         Skip to main content
       </a>
 
-      {/* Cinematic Persistent Loop Background Video - 100% visible across page transitions */}
+      {/* Cinematic Loop Background Video - 100% Persistently Visible Across Entire Site */}
       <video
         autoPlay
         muted
@@ -252,56 +226,39 @@ export default function App() {
         src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_094145_4a271a6c-3869-4f1c-8aa7-aeb0cb227994.mp4"
       />
 
-      {/* Ambient Tint Layer */}
+      {/* Very Light Ambient Tint Layer (Keeps video bright & visible) */}
       <div className="fixed inset-0 w-full h-full bg-slate-950/20 pointer-events-none z-1" />
+
+      {/* Top Scroll Progress Indicator */}
+      <div
+        aria-hidden="true"
+        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-emerald-400 z-50 transition-all duration-100 shadow-xs"
+        style={{ width: `${scrollProgress}%` }}
+      />
 
       {/* Floating Crystal Transparent Glass Navbar */}
       <header className="fixed top-3 left-0 right-0 z-50 px-4 sm:px-6 md:px-12 flex justify-center">
         <nav
           aria-label="Main navigation"
-          className="w-full max-w-7xl h-16 md:h-18 liquid-glass-nav rounded-full px-4 sm:px-6 md:px-8 flex items-center justify-between shadow-2xl"
+          className="w-full max-w-7xl h-16 md:h-18 liquid-glass-nav rounded-full px-5 sm:px-8 flex items-center justify-between shadow-2xl"
         >
-          {/* Brand Logo / Home link */}
-          <a
-            href="/"
-            onClick={(e) => handleNavClick(e, "/")}
-            className="flex items-center space-x-2 text-white font-semibold group cursor-pointer"
-          >
-            <div className="w-8 h-8 rounded-full bg-white/10 border border-white/15 flex items-center justify-center group-hover:bg-cyan-500/20 group-hover:border-cyan-400/50 transition-all">
-              <HomeIcon className="w-4 h-4 text-cyan-300 group-hover:scale-110 transition-transform" />
-            </div>
-            <span className="font-mono text-sm tracking-wider font-bold hidden sm:inline text-white">
-              AY<span className="text-cyan-400">.</span>
-            </span>
-          </a>
-
           {/* Desktop Navigation Items */}
-          <div className="hidden lg:flex items-center space-x-1.5 bg-white/5 p-1.5 rounded-full border border-white/10 backdrop-blur-md">
-            {PAGES.map((item) => {
-              const isActive = currentPath === item.path || (currentPath === "" && item.path === "/");
-              return (
-                <a
-                  key={item.id}
-                  href={item.path}
-                  onClick={(e) => handleNavClick(e, item.path)}
-                  aria-current={isActive ? "page" : undefined}
-                  className={`text-xs font-mono tracking-wider px-3.5 py-1.5 rounded-full transition-all duration-200 cursor-pointer relative ${
-                    isActive
-                      ? "text-cyan-300 font-bold scale-105"
-                      : "text-slate-300 hover:text-white hover:bg-white/10"
-                  }`}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activePill"
-                      className="absolute inset-0 bg-white/20 rounded-full border border-white/25 shadow-xs"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                  <span className="relative z-10">{item.label}</span>
-                </a>
-              );
-            })}
+          <div className="hidden lg:flex items-center space-x-2 bg-white/5 p-1.5 rounded-full border border-white/10 backdrop-blur-md">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={(e) => handleNavClick(e, item.id)}
+                aria-current={activeSection === item.id ? "true" : undefined}
+                className={`text-xs font-mono tracking-wider px-4 py-1.5 rounded-full transition-all duration-200 cursor-pointer ${
+                  activeSection === item.id
+                    ? "bg-white/20 text-cyan-300 font-bold shadow-xs border border-white/25 scale-105"
+                    : "text-slate-300 hover:text-white hover:bg-white/10"
+                }`}
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
 
           {/* Top Actions Section */}
@@ -348,16 +305,14 @@ export default function App() {
               <Mail size={16} />
             </Button>
 
-            {/* Profile / Contact Page Button */}
+            {/* Profile Button */}
             <Button
               variant="glass"
               size="sm"
-              className={`w-9 h-9 rounded-full liquid-glass-refract p-0 flex items-center justify-center shadow-xs cursor-pointer ${
-                currentPath === "/contact" ? "border-cyan-400 bg-white/20" : ""
-              }`}
-              onClick={() => navigateTo("/contact")}
-              title="View Contact Page"
-              aria-label="View Contact Page"
+              className="w-9 h-9 rounded-full liquid-glass-refract p-0 flex items-center justify-center shadow-xs"
+              onClick={() => scrollToSection("contact")}
+              title="View Profile & Contact Form"
+              aria-label="View Profile & Contact Form"
             >
               <User size={16} className="text-cyan-300" />
             </Button>
@@ -401,34 +356,24 @@ export default function App() {
             : "-translate-y-6 opacity-0 pointer-events-none"
         }`}
       >
-        <div className="flex flex-col space-y-1.5">
-          {PAGES.map((item, idx) => {
-            const isActive = currentPath === item.path || (currentPath === "" && item.path === "/");
-            return (
-              <a
-                key={item.id}
-                href={item.path}
-                onClick={(e) => {
-                  handleNavClick(e, item.path);
-                  setIsMobileMenuOpen(false);
-                }}
-                className={`py-3 px-4 rounded-2xl font-mono text-sm transition-all duration-200 font-semibold flex items-center justify-between ${
-                  isActive
-                    ? "bg-white/20 text-cyan-300 border border-white/20 shadow-xs"
-                    : "text-slate-200 hover:text-white hover:bg-white/10"
-                }`}
-                style={{
-                  transitionDelay: `${idx * 30}ms`,
-                  transform: isMobileMenuOpen ? "translateX(0)" : "translateX(-12px)"
-                }}
-              >
-                <span>{item.label}</span>
-                {item.subtitle && (
-                  <span className="text-[11px] text-slate-400 font-normal">{item.subtitle}</span>
-                )}
-              </a>
-            );
-          })}
+        <div className="flex flex-col space-y-2">
+          {navItems.map((item, idx) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              onClick={(e) => {
+                handleNavClick(e, item.id);
+                setIsMobileMenuOpen(false);
+              }}
+              className="py-3 px-4 rounded-2xl hover:bg-white/15 font-mono text-sm text-slate-200 hover:text-cyan-300 transition-all duration-200 font-semibold"
+              style={{
+                transitionDelay: `${idx * 40}ms`,
+                transform: isMobileMenuOpen ? "translateX(0)" : "translateX(-12px)"
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
 
           {/* Mobile Profile & Social Links */}
           <div className="pt-4 mt-2 border-t border-white/15 flex items-center justify-between">
@@ -464,13 +409,13 @@ export default function App() {
             <Button
               variant="glass"
               size="sm"
-              className="w-10 h-10 rounded-full p-0 flex items-center justify-center cursor-pointer"
+              className="w-10 h-10 rounded-full p-0 flex items-center justify-center"
               onClick={() => {
                 setIsMobileMenuOpen(false);
-                navigateTo("/contact");
+                scrollToSection("contact");
               }}
-              title="View Contact Page"
-              aria-label="View Contact Page"
+              title="View Profile & Contact"
+              aria-label="View Profile & Contact"
             >
               <User size={18} className="text-cyan-300" />
             </Button>
@@ -478,56 +423,171 @@ export default function App() {
         </div>
       </div>
 
-      {/* Main Content Area with 3D Perspective Transitions */}
-      <main
-        id="main-content"
-        className="relative z-10 flex-1 flex flex-col justify-between"
-        style={{ perspective: "1400px" }}
-      >
-        <AnimatePresence mode="wait" custom={direction}>
-          <motion.div
-            key={currentPath}
-            custom={direction}
-            variants={prefersReducedMotion ? undefined : perspective3DVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className="w-full flex-1 flex flex-col justify-between transform-gpu"
-            style={{ transformStyle: "preserve-3d" }}
-          >
-            {/* Page Sub-component */}
-            <div className="flex-1">
-              {renderActivePage()}
+      {/* Main Content Area */}
+      <main id="main-content" className="relative z-10">
+        
+        {/* Full-Viewport Landing Hero Section */}
+        <section
+          id="hero"
+          className="min-h-screen w-full relative flex flex-col justify-center sm:justify-end px-4 sm:px-6 md:px-12 pt-28 pb-12 md:pb-20"
+        >
+          <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
+            
+            {/* Left Column: Bio Details & Primary Actions */}
+            <div className="flex-1 flex flex-col items-start text-left max-w-3xl">
+              
+              {/* Title Header with Staggered Split Letters */}
+              <motion.div
+                className="mb-4 md:mb-6"
+                variants={nameContainerVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                <h1
+                  aria-label="Anish Yadav"
+                  className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-light tracking-tight text-white leading-none select-none flex flex-wrap gap-x-4 sm:gap-x-6 drop-shadow-md"
+                >
+                  {/* First Name: Anish */}
+                  <span className="inline-flex space-x-0.5 sm:space-x-1" aria-hidden="true">
+                    {firstName.map((char, index) => (
+                      <motion.span
+                        key={`first-${index}`}
+                        variants={letterVariants}
+                        whileHover={{
+                          y: -6,
+                          scale: 1.12,
+                          color: "#60a5fa",
+                          transition: { duration: 0.15 }
+                        }}
+                        className="inline-block transform-gpu cursor-pointer transition-colors"
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                  </span>
+
+                  {/* Last Name: Yadav */}
+                  <span
+                    className="inline-flex space-x-0.5 sm:space-x-1 font-serif italic text-cyan-400 font-medium drop-shadow-[0_0_25px_rgba(6,182,212,0.4)]"
+                    aria-hidden="true"
+                  >
+                    {lastName.map((char, index) => (
+                      <motion.span
+                        key={`last-${index}`}
+                        variants={letterVariants}
+                        whileHover={{
+                          y: -6,
+                          scale: 1.12,
+                          color: "#38bdf8",
+                          transition: { duration: 0.15 }
+                        }}
+                        className="inline-block transform-gpu cursor-pointer transition-colors"
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                  </span>
+                </h1>
+              </motion.div>
+
+              {/* Tagline Bio Description in Crystal Transparent Glass Card */}
+              <div
+                className="liquid-glass-card rounded-3xl p-5 sm:p-6 mb-6 max-w-2xl animate-blur-fade-up shadow-xl"
+                style={{ animationDelay: "300ms" }}
+              >
+                <p className="text-base sm:text-lg text-slate-200 font-sans leading-relaxed">
+                  AI & Machine Learning engineer and web developer. Building intelligent computer-vision pipelines, high-accuracy deep neural architectures, and high-performance web applications.
+                </p>
+              </div>
+
+              {/* Metadata Crystal Glass Badges - Below the Card */}
+              <div
+                className="flex flex-wrap items-center gap-2.5 sm:gap-3 mb-6 md:mb-8 text-xs font-mono animate-blur-fade-up"
+                style={{ animationDelay: "400ms" }}
+              >
+                <div className="flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full shadow-xs">
+                  <GraduationCap size={15} className="text-cyan-400" />
+                  <span className="font-semibold uppercase tracking-wider text-xs text-slate-200">VIT Bhopal University</span>
+                </div>
+                <div className="flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full shadow-xs">
+                  <MapPin size={15} className="text-emerald-400" />
+                  <span className="uppercase tracking-wider text-xs font-semibold text-slate-200">Haryana, India</span>
+                </div>
+                <div className="flex items-center space-x-2 liquid-glass-pill px-4 py-1.5 rounded-full shadow-xs">
+                  <Database size={15} className="text-purple-400" />
+                  <span className="uppercase tracking-wider text-xs font-semibold text-slate-200">AI & ML Specialization</span>
+                </div>
+              </div>
+
+              {/* Call-to-Action Action Buttons */}
+              <div
+                className="flex flex-wrap items-center gap-3 sm:gap-4 animate-blur-fade-up"
+                style={{ animationDelay: "500ms" }}
+              >
+                <Button
+                  onClick={handleOpenResume}
+                  variant="primary"
+                  size="lg"
+                  className="liquid-glass-refract rounded-full px-7 py-3.5 flex items-center space-x-2.5 text-xs font-mono font-bold tracking-wider shadow-lg hover:shadow-2xl bg-blue-600/80 hover:bg-blue-500 border border-blue-400/50 text-white"
+                  data-config={JSON.stringify({ button: true, cornerRadius: 28, blurAmount: 0.15 })}
+                >
+                  <FileText className="w-4 h-4 text-cyan-200" aria-hidden="true" />
+                  <span>View Resume</span>
+                  <ExternalLink className="w-4 h-4 text-white/80" aria-hidden="true" />
+                  <span className="sr-only">(opens in new tab)</span>
+                </Button>
+
+                <Button
+                  onClick={() => scrollToSection("contact")}
+                  variant="glass"
+                  size="lg"
+                  className="liquid-glass-refract rounded-full px-7 py-3.5 text-xs font-mono font-bold tracking-wider shadow-md hover:shadow-xl"
+                  data-config={JSON.stringify({ button: true, cornerRadius: 28, blurAmount: 0.15 })}
+                >
+                  <span>Contact Me</span>
+                </Button>
+              </div>
             </div>
 
-            {/* Bottom Page Navigation (Previous / Next / Page Indicator) */}
-            <PageNavigation currentPath={currentPath} onNavigate={navigateTo} />
-          </motion.div>
-        </AnimatePresence>
+          </div>
+        </section>
+
+        {/* Scrollable Portfolio Subsections */}
+        <RevealSection tilt={-4} reduceMotion={prefersReducedMotion}>
+          <Skills />
+        </RevealSection>
+
+        <RevealSection tilt={4} reduceMotion={prefersReducedMotion}>
+          <Projects />
+        </RevealSection>
+
+        <RevealSection tilt={-4} reduceMotion={prefersReducedMotion}>
+          <Certifications />
+        </RevealSection>
+
+        <RevealSection tilt={4} reduceMotion={prefersReducedMotion}>
+          <Education />
+        </RevealSection>
+
+        <RevealSection tilt={-4} reduceMotion={prefersReducedMotion}>
+          <Contact />
+        </RevealSection>
       </main>
 
       {/* Crystal Transparent Liquid Glass Footer */}
-      <footer className="py-8 px-6 relative z-10">
-        <div className="max-w-7xl mx-auto liquid-glass-card rounded-2xl p-6 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4 border border-white/10">
+      <footer className="py-12 px-6 relative z-10">
+        <div className="max-w-6xl mx-auto liquid-glass-card rounded-3xl p-8 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left font-mono">
             <p className="text-xs text-slate-300">
               &copy; {new Date().getFullYear()} &mdash; Designed & Developed by <span className="text-white font-bold">Anish Yadav</span>
             </p>
-            <p className="text-xs text-slate-400 mt-0.5">
-              B.Tech Computer Science (AI & ML) &bull; VIT Bhopal University
+            <p className="text-xs text-slate-400 mt-1">
+              B.Tech in Computer Science (Artificial Intelligence & Machine Learning) &bull; VIT Bhopal
             </p>
           </div>
 
-          <div className="flex items-center space-x-6 text-xs font-mono text-slate-300">
-            <button
-              onClick={() => navigateTo("/")}
-              className="hover:text-cyan-400 transition font-semibold cursor-pointer"
-            >
-              Home
-            </button>
-            <a href="mailto:anishyadav872004@gmail.com" className="hover:text-cyan-400 transition font-semibold">
-              Email
-            </a>
+          <div className="flex space-x-6 text-xs font-mono text-slate-300">
+            <a href="mailto:anishyadav872004@gmail.com" className="hover:text-cyan-400 transition font-semibold">Mail</a>
             <a href="https://github.com/ANISHYADAV19" target="_blank" referrerPolicy="no-referrer" rel="noreferrer" className="hover:text-cyan-400 transition font-semibold">
               GitHub<span className="sr-only"> (opens in a new tab)</span>
             </a>
