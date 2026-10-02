@@ -113,7 +113,7 @@ export default function Certifications() {
   ];
 
   return (
-    <section id="certifications" aria-labelledby="certifications-heading" className="py-24 px-4 sm:px-6 md:px-12 relative">
+    <section id="certifications" aria-labelledby="certifications-heading" className="pt-28 pb-12 px-4 sm:px-6 md:px-12 relative">
       <div className="w-full max-w-7xl mx-auto">
         
         {/* Section Header */}

@@ -52,7 +52,7 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" aria-labelledby="skills-heading" className="py-24 px-4 sm:px-6 md:px-12 relative">
+    <section id="skills" aria-labelledby="skills-heading" className="pt-28 pb-12 px-4 sm:px-6 md:px-12 relative">
       <div className="w-full max-w-7xl mx-auto">
         
         {/* Section Header */}
