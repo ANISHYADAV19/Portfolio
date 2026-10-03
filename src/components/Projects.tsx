@@ -23,7 +23,8 @@ export default function Projects() {
         "Designed the system to be secure by design with server-side LLM key hosting and client-side command contract validation"
       ],
       technologies: ["React", "Gemini API", "Web Speech API", "Natural Language Processing", "Local Storage"],
-      githubUrl: "https://github.com/ANISHYADAV19/Say-Pay"
+      githubUrl: "https://github.com/ANISHYADAV19/Say-Pay",
+      liveUrl: "https://say-pay.anishyadav.dev/"
     },
     {
       id: "nutriscan",
