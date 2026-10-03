@@ -7,6 +7,7 @@ interface ProjectItem {
   bullets: string[];
   technologies: string[];
   githubUrl: string;
+  liveUrl?: string;
 }
 
 export default function Projects() {
@@ -34,7 +35,8 @@ export default function Projects() {
         "Designed a focused scanning viewport with live sizing controls and dual-engine fallback (pyzbar and OpenCV) for high accuracy"
       ],
       technologies: ["Python", "OpenCV", "Pyzbar", "APIs", "Multithreading"],
-      githubUrl: "https://github.com/ANISHYADAV19/NutriScan"
+      githubUrl: "https://github.com/ANISHYADAV19/NutriScan",
+      liveUrl: "https://nutri.anishyadav.dev/"
     },
     {
       id: "story-gen",
@@ -74,6 +76,31 @@ export default function Projects() {
     }
   ];
 
+  const handleCardClick = (e: React.MouseEvent, project: ProjectItem) => {
+    const target = e.target as HTMLElement;
+    if (target.closest("a, button")) {
+      return;
+    }
+    const targetUrl = project.liveUrl || project.githubUrl;
+    if (targetUrl) {
+      window.open(targetUrl, "_blank", "noopener,noreferrer");
+    }
+  };
+
+  const handleCardKeyDown = (e: React.KeyboardEvent, project: ProjectItem) => {
+    if (e.key === "Enter" || e.key === " ") {
+      const target = e.target as HTMLElement;
+      if (target.closest("a, button") && target !== e.currentTarget) {
+        return;
+      }
+      e.preventDefault();
+      const targetUrl = project.liveUrl || project.githubUrl;
+      if (targetUrl) {
+        window.open(targetUrl, "_blank", "noopener,noreferrer");
+      }
+    }
+  };
+
   return (
     <section id="projects" aria-labelledby="projects-heading" className="py-24 px-4 sm:px-6 md:px-12 relative">
       <div className="w-full max-w-7xl mx-auto">
@@ -97,30 +124,67 @@ export default function Projects() {
           {projects.map((project) => (
             <article 
               key={project.id}
-              className="liquid-glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl border border-white/20 group"
+              onClick={(e) => handleCardClick(e, project)}
+              onKeyDown={(e) => handleCardKeyDown(e, project)}
+              tabIndex={0}
+              role="region"
+              aria-label={`${project.title} project card`}
+              className="liquid-glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl border border-white/20 group cursor-pointer hover:border-cyan-400/50 transition-all duration-300 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-cyan-400"
             >
               <div>
                 {/* Header */}
                 <div className="flex items-start justify-between gap-4 mb-4 pb-4 border-b border-white/10">
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-display font-semibold text-white group-hover:text-cyan-300 transition duration-250">
-                      {project.title}
-                    </h3>
-                    <p className="text-xs font-mono text-cyan-400 font-bold mt-1 uppercase tracking-wider">
-                      Repository &bull; Open Source
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-xl sm:text-2xl font-display font-semibold text-white group-hover:text-cyan-300 transition duration-250">
+                        {project.title}
+                      </h3>
+                      {project.liveUrl && (
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                          Live
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs font-mono text-cyan-400 font-bold mt-1 uppercase tracking-wider flex items-center gap-1.5">
+                      {project.liveUrl ? (
+                        <>
+                          <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                          <span>Live Deployment &bull; Open Source</span>
+                        </>
+                      ) : (
+                        <span>Repository &bull; Open Source</span>
+                      )}
                     </p>
                   </div>
 
-                  <a 
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    referrerPolicy="no-referrer"
-                    aria-label={`View ${project.title} on GitHub (opens in new tab)`}
-                    className="p-3 rounded-full liquid-glass-pill text-slate-200 hover:text-white hover:border-cyan-400 transition-all duration-300 shadow-xs group-hover:scale-110 shrink-0"
-                  >
-                    <Github className="w-5 h-5" aria-hidden="true" />
-                  </a>
+                  <div className="flex items-center gap-2 shrink-0">
+                    {project.liveUrl && (
+                      <a 
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        referrerPolicy="no-referrer"
+                        aria-label={`Open live demo of ${project.title} at ${project.liveUrl} (opens in new tab)`}
+                        title="Open Live Deployment"
+                        className="p-3 rounded-full liquid-glass-pill text-cyan-300 hover:text-white hover:border-cyan-400 transition-all duration-300 shadow-xs hover:scale-110 shrink-0"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <ExternalLink className="w-5 h-5" aria-hidden="true" />
+                      </a>
+                    )}
+                    <a 
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      referrerPolicy="no-referrer"
+                      aria-label={`View ${project.title} on GitHub (opens in new tab)`}
+                      title="GitHub Repository"
+                      className="p-3 rounded-full liquid-glass-pill text-slate-200 hover:text-white hover:border-cyan-400 transition-all duration-300 shadow-xs hover:scale-110 shrink-0"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <Github className="w-5 h-5" aria-hidden="true" />
+                    </a>
+                  </div>
                 </div>
 
                 {/* Description */}
@@ -152,16 +216,32 @@ export default function Projects() {
                   ))}
                 </div>
 
-                <a 
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  referrerPolicy="no-referrer"
-                  className="inline-flex items-center space-x-1 text-xs font-mono font-bold text-cyan-300 hover:text-cyan-200 transition whitespace-nowrap"
-                >
-                  <span>Source Code</span>
-                  <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
-                </a>
+                <div className="flex items-center gap-4 shrink-0">
+                  {project.liveUrl && (
+                    <a 
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      referrerPolicy="no-referrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center space-x-1.5 text-xs font-mono font-bold text-emerald-400 hover:text-emerald-300 transition whitespace-nowrap"
+                    >
+                      <span>Live Demo</span>
+                      <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                    </a>
+                  )}
+                  <a 
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    referrerPolicy="no-referrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center space-x-1 text-xs font-mono font-bold text-cyan-300 hover:text-cyan-200 transition whitespace-nowrap"
+                  >
+                    <span>Source Code</span>
+                    <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                  </a>
+                </div>
               </div>
             </article>
           ))}

@@ -5,6 +5,7 @@ export interface Project {
   bullets: string[];
   technologies: string[];
   githubUrl?: string;
+  liveUrl?: string;
   category: 'AI' | 'Web' | 'Edge';
 }
 
