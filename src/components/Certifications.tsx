@@ -42,6 +42,18 @@ export default function Certifications() {
 
   const certificates: CertificateItem[] = [
     {
+      id: "aws-cloud-practitioner",
+      title: "AWS Certified Cloud Practitioner",
+      issuer: "Amazon Web Services (AWS)",
+      year: 2026,
+      bullets: [
+        "Official AWS certification validating comprehensive understanding of AWS Cloud infrastructure, security, architecture, and pricing models.",
+        "Demonstrated proficiency in core cloud computing concepts, AWS services, and enterprise compliance standards (Validation No: 0ddbc5d1297b4cef98e3b78b0b044cc3)."
+      ],
+      imageUrl: "/aws-cloud-practitioner-cert.jpg",
+      verifyUrl: "https://aws.amazon.com/verification"
+    },
+    {
       id: "aws-ai-practitioner",
       title: "AWS Certified AI Practitioner",
       issuer: "Amazon Web Services (AWS)",
@@ -215,14 +227,27 @@ export default function Certifications() {
                     <h3 className="text-lg font-display font-semibold text-white truncate pr-4">
                       {selectedCert.title}
                     </h3>
-                    <button
-                      ref={closeButtonRef}
-                      onClick={() => setSelectedCert(null)}
-                      className="p-2 rounded-full liquid-glass-pill text-slate-200 hover:text-white transition cursor-pointer"
-                      aria-label="Close certificate preview"
-                    >
-                      <X className="w-5 h-5" />
-                    </button>
+                    <div className="flex items-center space-x-2 shrink-0">
+                      {selectedCert.verifyUrl && (
+                        <a
+                          href={selectedCert.verifyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full liquid-glass-pill text-cyan-300 hover:text-white hover:bg-cyan-500/20 text-xs font-mono font-medium transition cursor-pointer"
+                        >
+                          <span>Verify</span>
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                      <button
+                        ref={closeButtonRef}
+                        onClick={() => setSelectedCert(null)}
+                        className="p-2 rounded-full liquid-glass-pill text-slate-200 hover:text-white transition cursor-pointer"
+                        aria-label="Close certificate preview"
+                      >
+                        <X className="w-5 h-5" />
+                      </button>
+                    </div>
                   </div>
 
                   <div className="overflow-hidden rounded-2xl bg-black/40 flex items-center justify-center min-h-[300px] max-h-[75vh] p-4">
@@ -246,7 +271,7 @@ export default function Certifications() {
                             rel="noopener noreferrer"
                             className="inline-flex items-center space-x-2 px-5 py-2 rounded-full bg-blue-600/80 hover:bg-blue-500 text-white text-xs font-mono font-bold transition shadow-lg"
                           >
-                            <span>Verify on Coursera</span>
+                            <span>Verify Credential</span>
                             <ExternalLink className="w-3.5 h-3.5" />
                           </a>
                         )}

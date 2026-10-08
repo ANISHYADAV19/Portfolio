@@ -1,3 +1,4 @@
+import type { MouseEvent, KeyboardEvent } from "react";
 import { Github, ExternalLink, FolderGit2 } from "lucide-react";
 
 interface ProjectItem {
@@ -77,7 +78,7 @@ export default function Projects() {
     }
   ];
 
-  const handleCardClick = (e: React.MouseEvent, project: ProjectItem) => {
+  const handleCardClick = (e: MouseEvent, project: ProjectItem) => {
     const target = e.target as HTMLElement;
     if (target.closest("a, button")) {
       return;
@@ -88,7 +89,7 @@ export default function Projects() {
     }
   };
 
-  const handleCardKeyDown = (e: React.KeyboardEvent, project: ProjectItem) => {
+  const handleCardKeyDown = (e: KeyboardEvent, project: ProjectItem) => {
     if (e.key === "Enter" || e.key === " ") {
       const target = e.target as HTMLElement;
       if (target.closest("a, button") && target !== e.currentTarget) {
